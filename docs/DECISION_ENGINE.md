@@ -1,7 +1,7 @@
 # Decision Engine
 
-> Status: **implemented (Phase 1)** · Version `1.0.0` (`ENGINE_VERSION` in
-> `lib/agriculture/recommend.ts`) · Sensitivity analysis arrives in Phase 3.
+> Status: **implemented (Phases 1–3)** · Version `1.0.0` (`ENGINE_VERSION` in
+> `lib/agriculture/recommend.ts`) · Sensitivity analysis: implemented (Phase 3).
 
 ## Purpose
 
@@ -128,6 +128,22 @@ not a bug.
 - `warnings`: human-readable constraint warnings.
 - `economics`: range-based estimate (min/max) over dataset economics, always
   labelled `estimated`.
+
+## Sensitivity analysis (`lib/agriculture/sensitivity.ts`, Phase 3)
+
+Scenarios are **input projections**, not engine forks:
+
+| Override | Effect |
+| --- | --- |
+| `rainfallScale` | scales the zone annual-rainfall band before constraint/climate checks |
+| `waterOverride` | substitutes water availability (one-level downgrade preset) |
+| `priceFactor` / `costFactor` / `yieldFactor` | scale the crop's economics ranges |
+
+Default stress set: Base · Rainfall −20% · −40% · Price −15% · Cost +10% · Water ↓1.
+Each scenario re-runs the full pipeline and reports top-5 ranking, primary score,
+mid net return, resilience, risk penalty, plus deltas vs base and the base pick's
+new rank. `stableScenarioCount` records how often the base recommendation survives
+as #1. Exposed via `POST /api/simulate`.
 
 ## Standing invariant
 

@@ -46,7 +46,12 @@ function contextSummary(context: FarmerContext): string {
 
 export function generateRecommendations(
   rawContext: unknown,
-  options: { weights?: SuitabilityWeights; market?: MarketDataset; now?: string } = {},
+  options: {
+    weights?: SuitabilityWeights;
+    market?: MarketDataset;
+    now?: string;
+    weatherAvailable?: boolean;
+  } = {},
 ): RecommendationOutput {
   const parsed = farmerContextSchema.safeParse(rawContext);
   if (!parsed.success) {
@@ -160,7 +165,7 @@ export function generateRecommendations(
         candidate === top
           ? (runnerUp?.recommendation.suitability.overallScore ?? null)
           : (top?.recommendation.suitability.overallScore ?? null),
-      hasLiveWeather: false,
+      hasLiveWeather: options.weatherAvailable ?? false,
       marketDataClass,
     });
     candidate.recommendation.confidence = confidence;
