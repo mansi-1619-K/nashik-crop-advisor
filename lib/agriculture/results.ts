@@ -86,9 +86,11 @@ export interface Recommendation {
 }
 
 export interface RecommendationOutput {
+  engineVersion: string;
   generatedAt: string;
   contextSummary: string;
-  primary: Recommendation;
+  weightsUsed: Record<string, number>;
+  primary: Recommendation | null;
   secondary: Recommendation | null;
   resilientAlternative: Recommendation | null;
   rejected: Array<{ cropId: string; violations: ConstraintMessage[] }>;

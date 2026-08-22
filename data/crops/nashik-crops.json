@@ -91,7 +91,7 @@
       "droughtTolerance": 65,
       "floodTolerance": 20,
       "temperatureRangeC": { "min": 18, "max": 32 },
-      "rainfallRangeMm": { "min": 600, "max": 1200 },
+      "rainfallRangeMm": { "min": 900, "max": 2200 },
       "growthDurationDays": { "min": 100, "max": 125 },
       "growthStages": [
         { "name": "Sowing to emergence", "approxStartDay": 0, "approxEndDay": 15 },
@@ -114,7 +114,8 @@
         "dataQuality": "assumed"
       },
       "notes": [
-        "ASSUMED values. Nutritious millet with growing market demand; price band includes potential premium channels."
+        "ASSUMED values. Nutritious millet with growing market demand; price band includes potential premium channels.",
+        "Rainfall window expressed as annual-equivalent to zone bands; hill-grown ragi tolerates high-rainfall tracts on drained slopes."
       ]
     },
     {
@@ -137,7 +138,7 @@
       "droughtTolerance": 80,
       "floodTolerance": 25,
       "temperatureRangeC": { "min": 20, "max": 35 },
-      "rainfallRangeMm": { "min": 450, "max": 900 },
+      "rainfallRangeMm": { "min": 600, "max": 2000 },
       "growthDurationDays": { "min": 85, "max": 105 },
       "growthStages": [
         { "name": "Sowing to emergence", "approxStartDay": 0, "approxEndDay": 12 },
