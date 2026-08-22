@@ -1,21 +1,54 @@
 # Economic Model
 
-> Status: skeleton — implemented in Phase 2.
+> Status: **implemented (Phase 2)** · Market data: static sample provider
 
 ## Purpose
 
-Define the transparent per-acre economic calculation and its honesty labels.
+Transparent per-acre economics with honest source labels — never disguising
+estimates as measurements.
 
-## Planned contents
+## Formulas (per acre, INR)
 
-- Formulas: gross revenue = expected yield × expected price;
-  net return = gross − input cost; break-even price = input cost ÷ expected yield; ROI
-- Range propagation from crop yield/price ranges
-- Market abstraction interface (`lib/market`) and provider roadmap
-  (static sample → AGMARKNET/APMC feeds)
-- Labelling rules: nothing estimated may render as live
+```
+Gross Revenue      = Expected Yield × Expected Price
+Net Return         = Gross Revenue − Input Cost
+Break-even Price   = Input Cost ÷ Expected Yield
+ROI %              = Net Return ÷ Input Cost × 100
+```
 
-## Current state (Phase 0)
+Range view (`estimateEconomicsFromCrop`): min/max propagation of dataset ranges
+(e.g. gross.min = yield.min × price.min). Point view (`computeEconomics`):
+midpoints or overrides.
 
-Contracts sketched in `lib/agriculture/results.ts`; sample quotes in
-`data/markets/sample-quotes.json` explicitly marked STATIC SAMPLE.
+## Source priority for each input (`lib/agriculture/economics.ts`)
+
+| Input | Priority chain |
+| --- | --- |
+| Yield | farmer override (`user_provided`) → dataset midpoint (`estimated`) |
+| Price | farmer override (`user_provided`) → market quote modal (`live`/`static` by provider class) → dataset midpoint (`estimated`) |
+| Input cost | dataset midpoint (`estimated`) |
+
+Every number in the output carries `{value, sourceClass, basis}` so the UI can
+render exact provenance badges. Totals scale by `areaAcres` when provided.
+
+## Market abstraction (`lib/market/provider.ts`)
+
+```ts
+interface MarketProvider {
+  kind: "static-sample" | "live";
+  label: string;
+  getQuote(cropId: string): Promise<MarketQuote | null>;
+}
+```
+
+- `StaticSampleMarketProvider` — reads `data/markets/sample-quotes.json`
+  (explicitly labelled STATIC SAMPLE; never presented as live).
+- `setMarketProvider()` allows future AGMARKNET/APMC/other integrations without
+  touching engine code.
+
+## Honesty rules
+
+- Sample quotes are labelled "not a live observation" inside their basis strings.
+- All economics remain `estimated` until a genuinely live provider exists.
+- No guarantee of yield, price, or profit is ever implied; break-even is always
+  shown alongside optimistic figures.
