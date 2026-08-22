@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "id": "sample-market-quotes",
+    "name": "Sample Market Price Quotes (Illustrative)",
+    "version": "0.1.0",
+    "updated": "2026-08-22",
+    "quality": "sample",
+    "disclaimer": "STATIC SAMPLE DATA - NOT LIVE MARKET PRICES. These figures are illustrative placeholders to exercise the economic engine until a real market data source (e.g., AGMARKNET/APMC feeds) is integrated. Never treat them as current prices.",
+    "sources": [
+      {
+        "label": "Illustrative placeholder values consistent with the assumed crop economics ranges (Phase 0)",
+        "retrievedAt": "2026-08-22"
+      }
+    ]
+  },
+  "quotes": [
+    {
+      "cropId": "paddy",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Paddy (common)",
+      "unit": "INR/quintal",
+      "priceMinInr": 1950,
+      "priceMaxInr": 2600,
+      "modalPriceInr": 2200,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    },
+    {
+      "cropId": "finger-millet",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Finger millet (nachni)",
+      "unit": "INR/quintal",
+      "priceMinInr": 2900,
+      "priceMaxInr": 3800,
+      "modalPriceInr": 3300,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    },
+    {
+      "cropId": "little-millet",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Little millet (vari)",
+      "unit": "INR/quintal",
+      "priceMinInr": 3100,
+      "priceMaxInr": 4200,
+      "modalPriceInr": 3600,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    },
+    {
+      "cropId": "grape",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Table grape (Thompson Seedless)",
+      "unit": "INR/quintal",
+      "priceMinInr": 4200,
+      "priceMaxInr": 8500,
+      "modalPriceInr": 6000,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder spanning domestic to export grades."
+    },
+    {
+      "cropId": "onion",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Onion (red, medium)",
+      "unit": "INR/quintal",
+      "priceMinInr": 700,
+      "priceMaxInr": 2400,
+      "modalPriceInr": 1400,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder; onion prices are highly volatile."
+    },
+    {
+      "cropId": "tomato",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Tomato (hybrid)",
+      "unit": "INR/quintal",
+      "priceMinInr": 500,
+      "priceMaxInr": 2800,
+      "modalPriceInr": 1200,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder; tomato prices are highly volatile."
+    },
+    {
+      "cropId": "pomegranate",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Pomegranate (Bhagwa)",
+      "unit": "INR/quintal",
+      "priceMinInr": 5500,
+      "priceMaxInr": 11000,
+      "modalPriceInr": 8000,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder spanning domestic to export grades."
+    },
+    {
+      "cropId": "guava",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Guava (white flesh)",
+      "unit": "INR/quintal",
+      "priceMinInr": 3200,
+      "priceMaxInr": 5800,
+      "modalPriceInr": 4200,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    },
+    {
+      "cropId": "pearl-millet",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Pearl millet (bajra)",
+      "unit": "INR/quintal",
+      "priceMinInr": 2250,
+      "priceMaxInr": 2850,
+      "modalPriceInr": 2550,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    },
+    {
+      "cropId": "soybean",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Soybean",
+      "unit": "INR/quintal",
+      "priceMinInr": 4300,
+      "priceMaxInr": 5100,
+      "modalPriceInr": 4700,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    },
+    {
+      "cropId": "pigeon-pea",
+      "marketLabel": "Sample APMC (illustrative)",
+      "commodityName": "Pigeon pea (tur)",
+      "unit": "INR/quintal",
+      "priceMinInr": 6600,
+      "priceMaxInr": 8400,
+      "modalPriceInr": 7500,
+      "observedOn": "2026-08-01",
+      "valueClass": "static",
+      "note": "Illustrative placeholder, not a real observation."
+    }
+  ]
+}

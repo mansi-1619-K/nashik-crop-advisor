@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "id": "nashik-soils",
+    "name": "Nashik District Soil Types",
+    "version": "0.1.0",
+    "updated": "2026-08-22",
+    "quality": "assumed",
+    "disclaimer": "Soil taxonomy simplified to six practical classes for decision support. Real farm decisions require soil testing; these classes are INITIAL ASSUMPTIONS pending validation against NBSS&LUP / Maharashtra land resource maps.",
+    "sources": [
+      {
+        "label": "Initial domain assumption (Phase 0) - pending NBSS&LUP soil map validation",
+        "retrievedAt": "2026-08-22"
+      }
+    ]
+  },
+  "soils": [
+    {
+      "id": "deep-black",
+      "name": "Deep Black Soil",
+      "localName": "काळी जमीन (Regur)",
+      "description": "Deep clayey black cotton soil with high water retention and slow drainage.",
+      "drainage": "poor",
+      "waterRetention": "high",
+      "fertility": "high",
+      "typicalZones": ["central-irrigated", "arid-eastern"],
+      "notes": ["Can become waterlogged in high-rainfall years; difficult to work when wet."]
+    },
+    {
+      "id": "medium-black",
+      "name": "Medium Black Soil",
+      "description": "Moderately deep black soil, the workhorse of central Nashik agriculture.",
+      "drainage": "moderate",
+      "waterRetention": "medium",
+      "fertility": "medium",
+      "typicalZones": ["central-irrigated", "arid-eastern"],
+      "notes": ["Widely used for onion, grapes, pomegranate under irrigation."]
+    },
+    {
+      "id": "shallow-black",
+      "name": "Shallow Black Soil",
+      "description": "Thin black soil over weathered basalt, low moisture holding capacity.",
+      "drainage": "moderate",
+      "waterRetention": "low",
+      "fertility": "low",
+      "typicalZones": ["arid-eastern", "central-irrigated"],
+      "notes": ["Best suited to hardy rainfed crops such as bajra."]
+    },
+    {
+      "id": "alluvial-loam",
+      "name": "Alluvial Loam",
+      "description": "Fine loamy river-basin soil along Godavari and tributaries, naturally fertile.",
+      "drainage": "good",
+      "waterRetention": "medium",
+      "fertility": "high",
+      "typicalZones": ["central-irrigated"],
+      "notes": ["Premium horticulture belts (grapes, vegetables) cluster on these soils."]
+    },
+    {
+      "id": "laterite",
+      "name": "Laterite / Reddish Hill Soil",
+      "description": "Reddish, iron-rich, well-drained soil of the western hilly belt.",
+      "drainage": "excessive",
+      "waterRetention": "low",
+      "fertility": "low",
+      "typicalZones": ["heavy-rainfall"],
+      "notes": ["Terraced paddy and millets dominate; fertility depends heavily on organic matter."]
+    },
+    {
+      "id": "sandy-loam",
+      "name": "Sandy Loam",
+      "description": "Light-textured, fast-draining soil found in drier eastern tracts.",
+      "drainage": "excessive",
+      "waterRetention": "low",
+      "fertility": "low",
+      "typicalZones": ["arid-eastern"],
+      "notes": ["Requires careful water management; suits hardy crops."]
+    }
+  ]
+}

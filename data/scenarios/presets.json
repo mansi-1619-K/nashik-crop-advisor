@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "id": "quick-presets",
+    "name": "Predefined Scenario Presets",
+    "version": "0.1.0",
+    "updated": "2026-08-22",
+    "quality": "sample",
+    "disclaimer": "These are PREDEFINED DEMONSTRATION SCENARIOS for quick-start purposes, not personalized advice. They encode plausible typical configurations for each belt.",
+    "sources": [
+      {
+        "label": "Initial scenario definitions (Phase 0)",
+        "retrievedAt": "2026-08-22"
+      }
+    ]
+  },
+  "presets": [
+    {
+      "id": "igatpuri-monsoon-paddy",
+      "name": "Igatpuri Monsoon Paddy",
+      "description": "Rainfed hill paddy on terraced lateritic land in the western belt.",
+      "context": {
+        "zoneId": "heavy-rainfall",
+        "seasonId": "kharif",
+        "soilId": "laterite",
+        "waterAvailability": "rainfed",
+        "talukaId": "igatpuri",
+        "irrigationMethod": "none"
+      }
+    },
+    {
+      "id": "niphad-irrigated-onion",
+      "name": "Niphad Irrigated Onion",
+      "description": "Rabi onion on medium black soil with assured drip irrigation in the Godavari basin.",
+      "context": {
+        "zoneId": "central-irrigated",
+        "seasonId": "rabi",
+        "soilId": "medium-black",
+        "waterAvailability": "assured",
+        "talukaId": "niphad",
+        "irrigationMethod": "drip"
+      }
+    },
+    {
+      "id": "niphad-export-grapes",
+      "name": "Niphad Export Grapes",
+      "description": "Export-oriented table grape vineyard on deep alluvial-influenced soils with full drip infrastructure.",
+      "context": {
+        "zoneId": "central-irrigated",
+        "seasonId": "perennial",
+        "soilId": "deep-black",
+        "waterAvailability": "assured",
+        "talukaId": "niphad",
+        "irrigationMethod": "drip",
+        "riskPreference": "growth"
+      }
+    },
+    {
+      "id": "malegaon-drought-bajra",
+      "name": "Malegaon Drought Bajra",
+      "description": "Low-input rainfed pearl millet on shallow black soil in the dry eastern belt.",
+      "context": {
+        "zoneId": "arid-eastern",
+        "seasonId": "kharif",
+        "soilId": "shallow-black",
+        "waterAvailability": "rainfed",
+        "talukaId": "malegaon",
+        "irrigationMethod": "none",
+        "riskPreference": "conservative"
+      }
+    },
+    {
+      "id": "sinnar-pomegranate",
+      "name": "Sinnar Pomegranate",
+      "description": "Drip-irrigated pomegranate orchard on medium black soil with moderate water availability.",
+      "context": {
+        "zoneId": "central-irrigated",
+        "seasonId": "perennial",
+        "soilId": "medium-black",
+        "waterAvailability": "moderate",
+        "talukaId": "sinnar",
+        "irrigationMethod": "drip",
+        "riskPreference": "balanced"
+      }
+    }
+  ]
+}

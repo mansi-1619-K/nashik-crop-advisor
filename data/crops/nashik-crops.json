@@ -1,0 +1,602 @@
+{
+  "meta": {
+    "id": "nashik-crops",
+    "name": "Nashik Crop Knowledge Base",
+    "version": "0.1.0",
+    "updated": "2026-08-22",
+    "quality": "assumed",
+    "disclaimer": "ALL agronomic and economic values in this dataset are INITIAL ESTIMATES for prototyping. They are not sourced from validated ICAR/university crop guides yet. Every crop carries notes describing assumption quality. Do not treat any value as agronomic advice.",
+    "sources": [
+      {
+        "label": "Initial domain assumptions (Phase 0) - pending validation against ICAR crop guides and Maharashtra agriculture department packages of practice",
+        "retrievedAt": "2026-08-22"
+      }
+    ]
+  },
+  "crops": [
+    {
+      "id": "paddy",
+      "name": "Paddy (Rice)",
+      "scientificName": "Oryza sativa",
+      "marathiName": "भात",
+      "category": "cereal",
+      "zones": ["heavy-rainfall"],
+      "seasons": ["kharif"],
+      "soilCompatibility": [
+        { "soilId": "alluvial-loam", "level": "excellent" },
+        { "soilId": "laterite", "level": "good" },
+        { "soilId": "deep-black", "level": "good" },
+        { "soilId": "medium-black", "level": "moderate" },
+        { "soilId": "shallow-black", "level": "poor" },
+        { "soilId": "sandy-loam", "level": "poor" }
+      ],
+      "waterDemand": "high",
+      "droughtTolerance": 10,
+      "floodTolerance": 80,
+      "temperatureRangeC": { "min": 20, "max": 37 },
+      "rainfallRangeMm": { "min": 1000, "max": 2500 },
+      "growthDurationDays": { "min": 120, "max": 150 },
+      "growthStages": [
+        { "name": "Nursery & transplanting", "approxStartDay": 0, "approxEndDay": 25 },
+        { "name": "Tillering", "approxStartDay": 25, "approxEndDay": 60 },
+        { "name": "Panicle initiation", "approxStartDay": 60, "approxEndDay": 90 },
+        { "name": "Flowering", "approxStartDay": 90, "approxEndDay": 110 },
+        { "name": "Ripening", "approxStartDay": 110, "approxEndDay": 140 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Blast",
+          "favouredConditions": "High humidity with prolonged cloudy spells, especially at panicle initiation and flowering",
+          "typicalSeverity": "high"
+        },
+        {
+          "name": "Bacterial leaf blight",
+          "favouredConditions": "Warm humid weather with wind-driven rain",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Brown spot",
+          "favouredConditions": "Moisture stress combined with humid nights",
+          "typicalSeverity": "low"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 15000, "max": 25000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 15, "max": 30 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 2000, "max": 2600 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Rainfed hill paddy in the western belt typically sits near the low end of the yield range.",
+        "Suited to terraced valley lands of Igatpuri/Trimbakeshwar/Surgana; needs standing water for most of the cycle."
+      ]
+    },
+    {
+      "id": "finger-millet",
+      "name": "Finger Millet",
+      "scientificName": "Eleusine coracana",
+      "marathiName": "नाचणी",
+      "category": "millet",
+      "zones": ["heavy-rainfall"],
+      "seasons": ["kharif"],
+      "soilCompatibility": [
+        { "soilId": "laterite", "level": "good" },
+        { "soilId": "medium-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "deep-black", "level": "moderate" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "poor" }
+      ],
+      "waterDemand": "medium",
+      "droughtTolerance": 65,
+      "floodTolerance": 20,
+      "temperatureRangeC": { "min": 18, "max": 32 },
+      "rainfallRangeMm": { "min": 600, "max": 1200 },
+      "growthDurationDays": { "min": 100, "max": 125 },
+      "growthStages": [
+        { "name": "Sowing to emergence", "approxStartDay": 0, "approxEndDay": 15 },
+        { "name": "Tillering", "approxStartDay": 15, "approxEndDay": 45 },
+        { "name": "Flowering", "approxStartDay": 45, "approxEndDay": 75 },
+        { "name": "Grain filling", "approxStartDay": 75, "approxEndDay": 100 },
+        { "name": "Maturity", "approxStartDay": 100, "approxEndDay": 120 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Blast",
+          "favouredConditions": "Extended cloudy humid spells during tillering and earhead emergence",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 8000, "max": 14000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 6, "max": 12 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 2800, "max": 3800 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Nutritious millet with growing market demand; price band includes potential premium channels."
+      ]
+    },
+    {
+      "id": "little-millet",
+      "name": "Little Millet",
+      "scientificName": "Panicum sumatrense",
+      "marathiName": "वरी",
+      "category": "millet",
+      "zones": ["heavy-rainfall", "arid-eastern"],
+      "seasons": ["kharif"],
+      "soilCompatibility": [
+        { "soilId": "laterite", "level": "good" },
+        { "soilId": "shallow-black", "level": "good" },
+        { "soilId": "medium-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "moderate" },
+        { "soilId": "alluvial-loam", "level": "moderate" },
+        { "soilId": "deep-black", "level": "poor" }
+      ],
+      "waterDemand": "low",
+      "droughtTolerance": 80,
+      "floodTolerance": 25,
+      "temperatureRangeC": { "min": 20, "max": 35 },
+      "rainfallRangeMm": { "min": 450, "max": 900 },
+      "growthDurationDays": { "min": 85, "max": 105 },
+      "growthStages": [
+        { "name": "Sowing to emergence", "approxStartDay": 0, "approxEndDay": 12 },
+        { "name": "Vegetative growth", "approxStartDay": 12, "approxEndDay": 50 },
+        { "name": "Flowering", "approxStartDay": 50, "approxEndDay": 70 },
+        { "name": "Maturity", "approxStartDay": 70, "approxEndDay": 95 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Rust",
+          "favouredConditions": "Humid spells during late vegetative stage",
+          "typicalSeverity": "low"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 6000, "max": 10000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 4, "max": 9 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 3000, "max": 4200 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Hardy short-duration millet suited to both hill tracts and drier eastern pockets.",
+        "Strong candidate as climate-resilient fallback option."
+      ]
+    },
+    {
+      "id": "grape",
+      "name": "Table Grape",
+      "scientificName": "Vitis vinifera",
+      "marathiName": "द्राक्षे",
+      "category": "fruit",
+      "zones": ["central-irrigated"],
+      "seasons": ["perennial", "rabi"],
+      "soilCompatibility": [
+        { "soilId": "alluvial-loam", "level": "excellent" },
+        { "soilId": "medium-black", "level": "good" },
+        { "soilId": "sandy-loam", "level": "good" },
+        { "soilId": "deep-black", "level": "moderate" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "laterite", "level": "unsuitable" }
+      ],
+      "waterDemand": "high",
+      "droughtTolerance": 20,
+      "floodTolerance": 10,
+      "temperatureRangeC": { "min": 15, "max": 38 },
+      "rainfallRangeMm": { "min": 500, "max": 700 },
+      "growthDurationDays": { "min": 150, "max": 180 },
+      "growthStages": [
+        { "name": "Pruning & budbreak", "approxStartDay": 0, "approxEndDay": 20 },
+        { "name": "Shoot growth", "approxStartDay": 20, "approxEndDay": 60 },
+        { "name": "Flowering & fruit set", "approxStartDay": 60, "approxEndDay": 80 },
+        { "name": "Berry development", "approxStartDay": 80, "approxEndDay": 130 },
+        { "name": "Ripening & harvest", "approxStartDay": 130, "approxEndDay": 170 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Downy mildew",
+          "favouredConditions": "Rain showers and high humidity during canopy development",
+          "typicalSeverity": "high"
+        },
+        {
+          "name": "Powdery mildew",
+          "favouredConditions": "Warm days with cool humid nights during berry development",
+          "typicalSeverity": "high"
+        },
+        {
+          "name": "Anthracnose",
+          "favouredConditions": "Frequent rainfall on young shoots and clusters",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 90000, "max": 150000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 90, "max": 160 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 4000, "max": 9000 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values per pruning cycle. High-value export-oriented crop requiring skilled management and drip irrigation.",
+        "Multi-year establishment investment before full bearing; economics modeled per production cycle.",
+        "Quality premiums depend heavily on weather management; price range spans domestic to export grades."
+      ]
+    },
+    {
+      "id": "onion",
+      "name": "Onion",
+      "scientificName": "Allium cepa",
+      "marathiName": "कांदा",
+      "category": "vegetable",
+      "zones": ["central-irrigated", "arid-eastern"],
+      "seasons": ["kharif", "rabi"],
+      "soilCompatibility": [
+        { "soilId": "medium-black", "level": "excellent" },
+        { "soilId": "deep-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "moderate" },
+        { "soilId": "laterite", "level": "poor" }
+      ],
+      "waterDemand": "medium",
+      "droughtTolerance": 35,
+      "floodTolerance": 15,
+      "temperatureRangeC": { "min": 13, "max": 30 },
+      "rainfallRangeMm": { "min": 350, "max": 650 },
+      "growthDurationDays": { "min": 110, "max": 150 },
+      "growthStages": [
+        { "name": "Transplanting & establishment", "approxStartDay": 0, "approxEndDay": 20 },
+        { "name": "Vegetative growth", "approxStartDay": 20, "approxEndDay": 55 },
+        { "name": "Bulb initiation", "approxStartDay": 55, "approxEndDay": 85 },
+        { "name": "Bulbing & maturation", "approxStartDay": 85, "approxEndDay": 135 },
+        { "name": "Curing & harvest", "approxStartDay": 135, "approxEndDay": 150 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Purple blotch",
+          "favouredConditions": "Humid cloudy weather with leaf wetness",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Stemphylium blight",
+          "favouredConditions": "Warm humid spells with intermittent rain",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Basal rot",
+          "favouredConditions": "Waterlogged or poorly drained soils",
+          "typicalSeverity": "low"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 30000, "max": 50000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 100, "max": 220 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 800, "max": 2500 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Nashik is India's major onion belt; Lasalgaon market influences national prices.",
+        "Price volatility is extreme; break-even analysis should always be shown alongside recommendations.",
+        "Thrips pressure is a major recurring field issue (pest, not modeled under diseases)."
+      ]
+    },
+    {
+      "id": "tomato",
+      "name": "Tomato",
+      "scientificName": "Solanum lycopersicum",
+      "marathiName": "टोमॅटो",
+      "category": "vegetable",
+      "zones": ["central-irrigated", "arid-eastern"],
+      "seasons": ["kharif", "rabi", "summer"],
+      "soilCompatibility": [
+        { "soilId": "alluvial-loam", "level": "excellent" },
+        { "soilId": "medium-black", "level": "good" },
+        { "soilId": "sandy-loam", "level": "good" },
+        { "soilId": "deep-black", "level": "moderate" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "laterite", "level": "poor" }
+      ],
+      "waterDemand": "medium",
+      "droughtTolerance": 30,
+      "floodTolerance": 10,
+      "temperatureRangeC": { "min": 18, "max": 32 },
+      "rainfallRangeMm": { "min": 400, "max": 700 },
+      "growthDurationDays": { "min": 120, "max": 150 },
+      "growthStages": [
+        { "name": "Establishment after transplanting", "approxStartDay": 0, "approxEndDay": 20 },
+        { "name": "Vegetative growth", "approxStartDay": 20, "approxEndDay": 50 },
+        { "name": "Flowering", "approxStartDay": 50, "approxEndDay": 75 },
+        { "name": "Fruit development", "approxStartDay": 75, "approxEndDay": 115 },
+        { "name": "Harvest window", "approxStartDay": 115, "approxEndDay": 145 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Early blight",
+          "favouredConditions": "Warm humid weather with alternating wet-dry cycles",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Leaf curl virus",
+          "favouredConditions": "High whitefly pressure, especially in warm dry seasons",
+          "typicalSeverity": "high"
+        },
+        {
+          "name": "Fusarium wilt",
+          "favouredConditions": "Infested soil with warm temperatures",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 35000, "max": 60000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 120, "max": 250 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 500, "max": 3000 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. High-risk high-reward vegetable with severe price crashes in glut seasons.",
+        "Summer crops need assured irrigation and face elevated virus pressure."
+      ]
+    },
+    {
+      "id": "pomegranate",
+      "name": "Pomegranate",
+      "scientificName": "Punica granatum",
+      "marathiName": "डाळिंब",
+      "category": "fruit",
+      "zones": ["central-irrigated", "arid-eastern"],
+      "seasons": ["perennial"],
+      "soilCompatibility": [
+        { "soilId": "medium-black", "level": "excellent" },
+        { "soilId": "deep-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "moderate" },
+        { "soilId": "laterite", "level": "poor" }
+      ],
+      "waterDemand": "low",
+      "droughtTolerance": 70,
+      "floodTolerance": 10,
+      "temperatureRangeC": { "min": 20, "max": 40 },
+      "rainfallRangeMm": { "min": 400, "max": 800 },
+      "growthDurationDays": { "min": 150, "max": 180 },
+      "growthStages": [
+        { "name": "Bahar treatment", "approxStartDay": 0, "approxEndDay": 30 },
+        { "name": "Flowering", "approxStartDay": 30, "approxEndDay": 60 },
+        { "name": "Fruit set & development", "approxStartDay": 60, "approxEndDay": 120 },
+        { "name": "Ripening & harvest", "approxStartDay": 120, "approxEndDay": 175 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Bacterial blight (telyas)",
+          "favouredConditions": "Rain or humidity during fruit development",
+          "typicalSeverity": "high"
+        },
+        {
+          "name": "Wilt complex",
+          "favouredConditions": "Soil-borne pathogens aggravated by water stress or waterlogging",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 40000, "max": 70000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 80, "max": 120 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 5000, "max": 12000 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values per bahar cycle on a mature orchard (typically from year 3 onward).",
+        "Drought-hardy commercial horticulture option for water-constrained eastern tracts.",
+        "Bacterial blight can cause severe losses if humidity coincides with fruiting; orchard siting matters."
+      ]
+    },
+    {
+      "id": "guava",
+      "name": "Guava",
+      "scientificName": "Psidium guajava",
+      "marathiName": "पेरू",
+      "category": "fruit",
+      "zones": ["arid-eastern", "central-irrigated"],
+      "seasons": ["perennial"],
+      "soilCompatibility": [
+        { "soilId": "medium-black", "level": "good" },
+        { "soilId": "deep-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "moderate" },
+        { "soilId": "laterite", "level": "poor" }
+      ],
+      "waterDemand": "low",
+      "droughtTolerance": 75,
+      "floodTolerance": 30,
+      "temperatureRangeC": { "min": 20, "max": 42 },
+      "rainfallRangeMm": { "min": 400, "max": 1000 },
+      "growthDurationDays": { "min": 150, "max": 180 },
+      "growthStages": [
+        { "name": "Bahar pruning", "approxStartDay": 0, "approxEndDay": 30 },
+        { "name": "Flowering", "approxStartDay": 30, "approxEndDay": 55 },
+        { "name": "Fruit development", "approxStartDay": 55, "approxEndDay": 125 },
+        { "name": "Ripening & harvest", "approxStartDay": 125, "approxEndDay": 170 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Wilt complex",
+          "favouredConditions": "Soil-borne pathogens under stress conditions",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Anthracnose",
+          "favouredConditions": "Humid weather during fruit development",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 25000, "max": 45000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 60, "max": 100 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 3000, "max": 6000 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values per bahar cycle on mature trees. Low-input hardy fruit option for drier belts."
+      ]
+    },
+    {
+      "id": "pearl-millet",
+      "name": "Pearl Millet",
+      "scientificName": "Pennisetum glaucum",
+      "marathiName": "बाजरी",
+      "category": "millet",
+      "zones": ["arid-eastern"],
+      "seasons": ["kharif", "summer"],
+      "soilCompatibility": [
+        { "soilId": "shallow-black", "level": "excellent" },
+        { "soilId": "sandy-loam", "level": "excellent" },
+        { "soilId": "medium-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "deep-black", "level": "moderate" },
+        { "soilId": "laterite", "level": "moderate" }
+      ],
+      "waterDemand": "low",
+      "droughtTolerance": 85,
+      "floodTolerance": 30,
+      "temperatureRangeC": { "min": 25, "max": 42 },
+      "rainfallRangeMm": { "min": 300, "max": 600 },
+      "growthDurationDays": { "min": 75, "max": 90 },
+      "growthStages": [
+        { "name": "Emergence", "approxStartDay": 0, "approxEndDay": 10 },
+        { "name": "Tillering", "approxStartDay": 10, "approxEndDay": 30 },
+        { "name": "Booting & flowering", "approxStartDay": 30, "approxEndDay": 50 },
+        { "name": "Grain filling", "approxStartDay": 50, "approxEndDay": 70 },
+        { "name": "Maturity", "approxStartDay": 70, "approxEndDay": 88 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Downy mildew",
+          "favouredConditions": "Humid weather around flowering; infected seed lots",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Ergot",
+          "favouredConditions": "Cloudy wet weather exactly at anthesis",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 7000, "max": 12000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 8, "max": 16 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 2200, "max": 2900 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Primary drought-security cereal for the arid eastern belt; short duration escapes mid-season droughts.",
+        "Summer cultivation requires assured irrigation."
+      ]
+    },
+    {
+      "id": "soybean",
+      "name": "Soybean",
+      "scientificName": "Glycine max",
+      "marathiName": "सोयाबीन",
+      "category": "oilseed",
+      "zones": ["arid-eastern"],
+      "seasons": ["kharif"],
+      "soilCompatibility": [
+        { "soilId": "medium-black", "level": "good" },
+        { "soilId": "deep-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "moderate" },
+        { "soilId": "laterite", "level": "moderate" }
+      ],
+      "waterDemand": "medium",
+      "droughtTolerance": 50,
+      "floodTolerance": 20,
+      "temperatureRangeC": { "min": 20, "max": 35 },
+      "rainfallRangeMm": { "min": 550, "max": 900 },
+      "growthDurationDays": { "min": 95, "max": 110 },
+      "growthStages": [
+        { "name": "Emergence", "approxStartDay": 0, "approxEndDay": 12 },
+        { "name": "Vegetative growth", "approxStartDay": 12, "approxEndDay": 45 },
+        { "name": "Flowering & podding", "approxStartDay": 45, "approxEndDay": 70 },
+        { "name": "Seed fill", "approxStartDay": 70, "approxEndDay": 95 },
+        { "name": "Maturity", "approxStartDay": 95, "approxEndDay": 108 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Yellow mosaic virus",
+          "favouredConditions": "Whitefly pressure in warm dry spells within monsoon season",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Rust",
+          "favouredConditions": "Prolonged humidity and moderate temperatures",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 12000, "max": 20000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 8, "max": 15 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 4200, "max": 5200 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Kharif oilseed option for eastern tracts; sensitive to both excess rain and moisture stress at podding."
+      ]
+    },
+    {
+      "id": "pigeon-pea",
+      "name": "Pigeon Pea",
+      "scientificName": "Cajanus cajan",
+      "marathiName": "तूर",
+      "category": "pulse",
+      "zones": ["arid-eastern", "central-irrigated"],
+      "seasons": ["kharif"],
+      "soilCompatibility": [
+        { "soilId": "medium-black", "level": "excellent" },
+        { "soilId": "deep-black", "level": "good" },
+        { "soilId": "alluvial-loam", "level": "good" },
+        { "soilId": "shallow-black", "level": "moderate" },
+        { "soilId": "sandy-loam", "level": "poor" },
+        { "soilId": "laterite", "level": "poor" }
+      ],
+      "waterDemand": "low",
+      "droughtTolerance": 75,
+      "floodTolerance": 20,
+      "temperatureRangeC": { "min": 20, "max": 35 },
+      "rainfallRangeMm": { "min": 500, "max": 800 },
+      "growthDurationDays": { "min": 150, "max": 190 },
+      "growthStages": [
+        { "name": "Emergence", "approxStartDay": 0, "approxEndDay": 15 },
+        { "name": "Vegetative growth", "approxStartDay": 15, "approxEndDay": 70 },
+        { "name": "Flowering", "approxStartDay": 70, "approxEndDay": 110 },
+        { "name": "Podding", "approxStartDay": 110, "approxEndDay": 150 },
+        { "name": "Maturity", "approxStartDay": 150, "approxEndDay": 185 }
+      ],
+      "diseaseRisks": [
+        {
+          "name": "Fusarium wilt",
+          "favouredConditions": "Infested soil; aggravated by continuous cropping",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Sterility mosaic",
+          "favouredConditions": "Mite-transmitted in susceptible varieties",
+          "typicalSeverity": "moderate"
+        },
+        {
+          "name": "Phytophthora blight",
+          "favouredConditions": "Waterlogging and heavy rain at seedling stage",
+          "typicalSeverity": "moderate"
+        }
+      ],
+      "economics": {
+        "inputCostPerAcreInr": { "min": 10000, "max": 16000 },
+        "yieldPerAcre": { "unit": "quintal/acre", "typicalRange": { "min": 5, "max": 10 } },
+        "pricePerUnitInr": { "unit": "INR/quintal", "typicalRange": { "min": 6500, "max": 8500 } },
+        "dataQuality": "assumed"
+      },
+      "notes": [
+        "ASSUMED values. Long-duration kharif pulse that rides residual soil moisture into winter; fixes nitrogen for the following crop.",
+        "Deep root system gives good drought resilience on medium-deep black soils."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "id": "maharashtra-seasons",
+    "name": "Maharashtra Cropping Seasons",
+    "version": "0.1.0",
+    "updated": "2026-08-22",
+    "quality": "assumed",
+    "disclaimer": "Season month windows are conventional Maharashtra definitions used as engine inputs; exact sowing windows shift yearly with monsoon onset.",
+    "sources": [
+      {
+        "label": "Standard kharif/rabi/summer convention (Phase 0 assumption)",
+        "retrievedAt": "2026-08-22"
+      }
+    ]
+  },
+  "seasons": [
+    {
+      "id": "kharif",
+      "name": "Kharif (Monsoon)",
+      "months": [6, 7, 8, 9, 10],
+      "description": "Sown with the southwest monsoon onset (June), harvested around October.",
+      "rainfedViability": "high",
+      "notes": ["Onset date varies yearly; engine should eventually use live rainfall signals."]
+    },
+    {
+      "id": "rabi",
+      "name": "Rabi (Post-Monsoon)",
+      "months": [10, 11, 12, 1, 2, 3],
+      "description": "Sown October-November on residual moisture or irrigation, harvested February-March.",
+      "rainfedViability": "low",
+      "notes": ["In Nashik this season depends heavily on irrigation infrastructure."]
+    },
+    {
+      "id": "summer",
+      "name": "Summer",
+      "months": [2, 3, 4, 5],
+      "description": "Irrigated hot-season cropping between rabi harvest and monsoon onset.",
+      "rainfedViability": "low",
+      "notes": ["High heat stress risk; viable only with assured water."]
+    },
+    {
+      "id": "perennial",
+      "name": "Perennial / Orchard Cycle",
+      "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "description": "Multi-year horticulture cycles (grapes, pomegranate, guava) managed through bahar treatments and pruning calendars.",
+      "rainfedViability": "medium",
+      "notes": ["Annual economics modeled per production cycle, not calendar year."]
+    }
+  ]
+}
