@@ -10,6 +10,8 @@ import {
   cropName,
 } from "@/components/dashboard/recommendation-card";
 import { WhatIfSimulator } from "@/components/simulator/what-if-simulator";
+import { AiAdvisorPanel } from "@/components/dashboard/ai-advisor";
+import type { AdvisoryResult } from "@/lib/ai/advisory";
 import type { RecommendationOutput } from "@/lib/agriculture/results";
 import type { SensitivityReport } from "@/lib/agriculture/sensitivity";
 
@@ -27,6 +29,7 @@ export function Workspace() {
   const [recs, setRecs] = useState<RecommendResponse | null>(null);
   const [weather, setWeather] = useState<WeatherResponse | null>(null);
   const [sim, setSim] = useState<SensitivityReport | null>(null);
+  const [advisory, setAdvisory] = useState<AdvisoryResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -62,6 +65,18 @@ export function Workspace() {
         body: JSON.stringify({ context: payloadContext }),
       });
       if (simRes.ok) setSim(await simRes.json());
+
+      const advisoryRes = await fetch("/api/advisory", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ context: payloadContext }),
+      });
+      if (advisoryRes.ok) {
+        const json = await advisoryRes.json();
+        setAdvisory(json.advisory as AdvisoryResult);
+      } else {
+        setAdvisory(null);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong.");
     } finally {
@@ -130,6 +145,16 @@ export function Workspace() {
 
       {recs && (
         <>
+          <AiAdvisorPanel
+            context={{
+              zoneId: form.zoneId,
+              seasonId: form.seasonId,
+              soilId: form.soilId,
+              waterAvailability: form.waterAvailability,
+              talukaId: form.talukaId || undefined,
+            }}
+            advisory={advisory}
+          />
           {recs.primary ? (
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
               <Card><RecommendationCard rec={recs.primary} /></Card>

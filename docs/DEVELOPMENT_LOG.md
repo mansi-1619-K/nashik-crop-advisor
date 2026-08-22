@@ -1,5 +1,15 @@
 # Development Log
 
+## Phase 4 — Gemini Reasoning Layer (2026-08-22)
+
+- `@google/genai` 2.18 behind a DI `JsonGenerator` seam: JSON mode, Zod-validated
+  structured output, transient/permanent error classification, retry ladder
+- Grounding-rule prompt builders; privacy assertions on payloads
+- Deterministic fallback narrative + intent-routed keyless chat responder
+- `POST /api/advisory` + `POST /api/chat` with sanitised history
+- UI: AI advisory card with source badges, follow-up chips, threaded chat
+- 25 new tests → **127 total**; keyless live smoke shows honest static fallback
+
 ## Phase 3 — Explainability + Sensitivity (2026-08-22)
 
 - `lib/agriculture/sensitivity.ts`: input-projection scenarios (rainfall/water/
