@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Play, Loader2, Sprout } from "lucide-react";
+import { Play, Loader2, Sprout, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ContextSelects, type FormState, PRESET_DEMOS } from "@/components/dashboard/context-selects";
 import { WeatherStrip, type WeatherResponse } from "@/components/dashboard/weather-strip";
@@ -85,14 +85,13 @@ export function Workspace() {
   }
 
   return (
-    <div className="space-y-8">
-      <Card className="p-5">
-        <h2 className="mb-4 font-semibold text-zinc-900">Your farm context</h2>
+    <div className="space-y-6">
+      <Card label="Input parameters" index="FORM-01">
         <ContextSelects form={form} onChange={setForm} disabled={loading} />
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium uppercase tracking-wide text-zinc-400">
-            Predefined demo scenarios:
+          <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
+            Preset scenarios:
           </span>
           {PRESET_DEMOS.map((p) => (
             <button
@@ -101,44 +100,52 @@ export function Workspace() {
                 setForm({ ...p.context, talukaId: p.context.talukaId ?? "" });
                 void analyze(p.context as FormState);
               }}
-              className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-600 transition-colors hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800"
+              className="border border-ink bg-white px-2 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors duration-75 hover:bg-ink hover:text-paper"
             >
               {p.name}
             </button>
           ))}
         </div>
 
-        <div className="mt-5 flex items-center gap-3">
+        <div className="mt-5 flex flex-wrap items-center gap-3">
           <button
             onClick={() => void analyze()}
             disabled={loading}
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 disabled:opacity-60"
+            className="group inline-flex items-center gap-2 border-2 border-ink bg-acid px-6 py-3 font-display text-sm uppercase tracking-wide transition-all duration-75 hover:bg-ink hover:text-acid disabled:opacity-50"
           >
-            {loading ? <Loader2 size={16} className="animate-spin" aria-hidden /> : <Play size={16} aria-hidden />}
+            {loading ? (
+              <Loader2 size={16} className="animate-spin" aria-hidden />
+            ) : (
+              <Play size={16} aria-hidden />
+            )}
             {loading ? "Analyzing…" : "Analyze my farm"}
+            <ArrowRight size={16} aria-hidden className="transition-transform duration-75 group-hover:translate-x-1" />
           </button>
           {recs && !loading && (
-            <span className="text-xs text-zinc-400">
+            <span className="font-mono text-[10px] uppercase tracking-wider text-ink-soft">
               engine v{recs.engineVersion} · deterministic output
             </span>
           )}
         </div>
 
         {error && (
-          <p className="mt-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-            {error}
+          <p className="mt-3 border-l-8 border-alarm bg-white px-3 py-2 font-mono text-xs uppercase text-alarm">
+            ERROR // {error}
           </p>
         )}
       </Card>
 
       {!recs && !loading && (
-        <Card className="p-8 text-center">
-          <Sprout size={28} className="mx-auto mb-3 text-emerald-600" aria-hidden />
-          <p className="font-medium text-zinc-700">Configure your context and press “Analyze my farm”.</p>
-          <p className="mt-1 text-sm text-zinc-500">
-            The deterministic engine ranks all 11 crops against hard agronomic constraints — no AI involved.
+        <div className="dotgrid border-2 border-ink p-10 text-center md:p-14">
+          <Sprout size={28} aria-hidden className="mx-auto mb-4" />
+          <p className="font-display text-3xl uppercase leading-none md:text-5xl">
+            Awaiting input<span className="text-acid-deep">_</span>
           </p>
-        </Card>
+          <p className="mx-auto mt-3 max-w-md font-mono text-xs uppercase leading-relaxed text-ink-soft">
+            Configure your context and press “analyze my farm”. The deterministic
+            engine ranks all 11 crops against hard constraints — no AI involved.
+          </p>
+        </div>
       )}
 
       {weather && <WeatherStrip data={weather} />}
@@ -155,36 +162,39 @@ export function Workspace() {
             }}
             advisory={advisory}
           />
+
           {recs.primary ? (
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-              <Card><RecommendationCard rec={recs.primary} /></Card>
-              <div className="flex flex-col gap-5">
-                {recs.secondary && <Card><RecommendationCard rec={recs.secondary} /></Card>}
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <RecommendationCard rec={recs.primary} featured />
+              <div className="flex flex-col gap-6">
+                {recs.secondary && <RecommendationCard rec={recs.secondary} />}
                 {recs.resilientAlternative && (
-                  <Card><RecommendationCard rec={recs.resilientAlternative} /></Card>
+                  <RecommendationCard rec={recs.resilientAlternative} />
                 )}
               </div>
             </div>
           ) : (
-            <Card className="border-amber-200 bg-amber-50 p-6">
-              <p className="font-medium text-amber-900">
-                No crops are eligible under this combination of constraints.
+            <div className="border-l-8 border-caution bg-white p-5">
+              <p className="font-display text-xl uppercase md:text-2xl">
+                Zero eligible crops.
               </p>
-              <p className="mt-1 text-sm text-amber-700">Check the rejections below for the exact reasons.</p>
-            </Card>
+              <p className="mt-1 font-mono text-xs uppercase text-ink-soft">
+                No crop survives this combination of constraints. Check the
+                rejections below for exact reasons.
+              </p>
+            </div>
           )}
 
           {recs.rejected.length > 0 && (
-            <Card className="p-5">
-              <h3 className="mb-1 font-semibold text-zinc-900">Why other crops were excluded</h3>
-              <p className="mb-3 text-xs text-zinc-500">
-                Hard-constraint violations from the deterministic engine ({recs.rejected.length} crops).
-              </p>
-              <ul className="max-h-56 space-y-1.5 overflow-y-auto pr-1 text-sm">
-                {recs.rejected.map((r) => (
-                  <li key={r.cropId} className="flex flex-wrap items-baseline gap-x-2 rounded-lg bg-zinc-50 px-3 py-1.5">
-                    <span className="font-medium text-zinc-800">{cropName(r.cropId)}</span>
-                    <span className="text-xs text-red-600">
+            <Card label="Exclusion ledger" index={`REJ-${String(recs.rejected.length).padStart(2, "0")}`}>
+              <ul className="divide-y divide-line">
+                {recs.rejected.map((r, i) => (
+                  <li key={r.cropId} className="flex flex-wrap items-baseline gap-x-3 py-2 first:pt-0 last:pb-0">
+                    <span className="font-mono text-xs font-bold text-ink-soft">
+                      X{String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-bold uppercase">{cropName(r.cropId)}</span>
+                    <span className="w-full font-mono text-[11px] leading-relaxed text-alarm sm:w-auto">
                       {r.violations.map((v) => v.message).join(" · ")}
                     </span>
                   </li>

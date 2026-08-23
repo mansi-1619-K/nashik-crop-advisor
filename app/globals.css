@@ -1,12 +1,76 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-anton);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-space-mono);
 }
 
+@theme {
+  --color-paper: #f2efe6;
+  --color-paper-dim: #e7e3d5;
+  --color-ink: #16150f;
+  --color-ink-soft: #55534a;
+  --color-line: #c9c4b2;
+  --color-acid: #c7f32e;
+  --color-acid-deep: #8fbe00;
+  --color-alarm: #e23b22;
+  --color-caution: #f2b90c;
+}
+
+/* ————————————————— base ————————————————— */
+
 body {
-  background-color: var(--color-zinc-50);
-  color: var(--color-zinc-900);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-acid);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+input[type="range"] {
+  accent-color: var(--color-ink);
+}
+
+/* ————————————————— brutalist utilities ————————————————— */
+
+.hard-shadow {
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+.hard-shadow-sm {
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 2px var(--color-ink);
+  color: transparent;
+}
+
+.text-stroke-thin {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
+.stripes-acid {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-ink) 0,
+    var(--color-ink) 1.5px,
+    transparent 1.5px,
+    transparent 6px
+  );
+}
+
+.dotgrid {
+  background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+  background-size: 14px 14px;
 }

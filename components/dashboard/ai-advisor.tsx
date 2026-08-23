@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, Loader2, MessageCircleQuestion, Send, Sparkles } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { AdvisoryResult } from "@/lib/ai/advisory";
 import type { ChatResult } from "@/lib/ai/chat";
@@ -31,7 +31,6 @@ const SOURCE_BADGE = {
 function CitationChips({ citations }: { citations: Citation[] }) {
   return (
     <div className="mt-2 flex flex-wrap items-center gap-1.5">
-      <BookOpen size={12} className="text-sky-600" aria-hidden />
       {citations.map((c) =>
         c.sourceUrl ? (
           <a
@@ -39,17 +38,17 @@ function CitationChips({ citations }: { citations: Citation[] }) {
             href={c.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[11px] text-sky-700 hover:bg-sky-100"
+            className="border border-ink bg-paper px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider transition-colors duration-75 hover:bg-ink hover:text-paper"
           >
-            {c.title} · {c.organization} · {c.credibility.toUpperCase()}
+            ↗ {c.title} · {c.credibility.toUpperCase()}
           </a>
         ) : (
           <span
             key={c.chunkId}
             title={`${c.sectionHeading} (updated ${c.updated})`}
-            className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[11px] text-sky-700"
+            className="border border-ink bg-paper px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
           >
-            {c.title} · {c.organization} · {c.credibility.toUpperCase()}
+            {c.title} · {c.credibility.toUpperCase()}
           </span>
         ),
       )}
@@ -108,133 +107,154 @@ export function AiAdvisorPanel({
   const badge = advisory ? SOURCE_BADGE[advisory.source] : null;
 
   return (
-    <div className="rounded-xl border border-violet-200 bg-violet-50/40 p-5 shadow-sm">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="flex items-center gap-2 font-semibold text-zinc-900">
-          <Sparkles size={18} className="text-violet-600" aria-hidden />
+    <section className="border-2 border-ink bg-white">
+      <header className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink bg-ink px-4 py-1.5">
+        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-acid">
           AI Advisory Assistant
-        </h3>
+        </span>
         {badge && (
-          <div className="flex items-center gap-2">
+          <span className="flex items-center gap-2">
             <Badge variant={badge.variant}>{badge.label}</Badge>
-            {advisory?.model && <span className="text-[11px] text-zinc-400">{advisory.model}</span>}
-          </div>
+            {advisory?.model && (
+              <span className="font-mono text-[9px] uppercase text-paper/60">{advisory.model}</span>
+            )}
+          </span>
         )}
-      </div>
+      </header>
 
-      {!advisory ? (
-        <p className="mt-3 text-sm text-zinc-500">Run an analysis to generate the advisory narration.</p>
-      ) : (
-        <>
-          {advisory.error && (
-            <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs text-amber-800">
-              {advisory.error}
+      <div className="p-4 md:p-5">
+        {!advisory ? (
+          <p className="font-mono text-xs uppercase leading-relaxed text-ink-soft">
+            Run an analysis to generate the advisory narration.
+          </p>
+        ) : (
+          <>
+            {advisory.error && (
+              <p className="mb-3 border-l-8 border-caution bg-white px-3 py-1.5 font-mono text-[10px] uppercase leading-relaxed text-ink-soft">
+                {advisory.error}
+              </p>
+            )}
+            <p className="text-base font-medium leading-relaxed md:text-lg">
+              {advisory.narrative.summary}
+            </p>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink-soft">
+              {advisory.narrative.recommendationExplanation}
+            </p>
+
+            {advisory.narrative.actions.length > 0 && (
+              <ul className="mt-4 divide-y divide-line border-y border-line">
+                {advisory.narrative.actions.map((a, i) => (
+                  <li key={a} className="flex gap-3 py-1.5 text-sm first:pt-0 last:pb-0">
+                    <span aria-hidden className="font-mono text-xs font-bold text-acid-deep">
+                      A{String(i + 1).padStart(2, "0")}
+                    </span>
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {advisory.narrative.warnings.length > 0 && (
+              <ul className="mt-4 space-y-0.5 border-l-8 border-caution py-1 pl-3 font-mono text-[11px] uppercase leading-relaxed">
+                {advisory.narrative.warnings.map((w) => (
+                  <li key={w}>{w}</li>
+                ))}
+              </ul>
+            )}
+
+            {advisory.citations && advisory.citations.length > 0 && (
+              <div className="mt-4">
+                <p className="mb-1 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
+                  Grounded reading
+                </p>
+                <CitationChips citations={advisory.citations} />
+              </div>
+            )}
+
+            {messages.length === 0 && advisory.narrative.followUpQuestions.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {advisory.narrative.followUpQuestions.map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => void ask(q)}
+                    disabled={sending}
+                    className="border border-ink px-2 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors duration-75 hover:bg-ink hover:text-paper disabled:opacity-50"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        <div className="mt-6 border-t-2 border-ink pt-4">
+          {messages.length > 0 && (
+            <ul className="mb-3 max-h-80 space-y-3 overflow-y-auto pr-1">
+              {messages.map((m, i) =>
+                m.role === "user" ? (
+                  <li
+                    key={i}
+                    className="ml-auto w-fit max-w-[85%] border-2 border-ink bg-ink px-3 py-1.5 font-mono text-sm text-paper"
+                  >
+                    {m.content}
+                  </li>
+                ) : (
+                  <li key={i} className="mr-auto max-w-[92%] border-2 border-ink bg-white px-3 py-2">
+                    <p className="whitespace-pre-wrap text-sm leading-relaxed">{m.content}</p>
+                    {m.caveats && m.caveats.length > 0 && (
+                      <p className="mt-1 font-mono text-[9px] uppercase leading-relaxed text-ink-soft">
+                        ⚠ {m.caveats.join(" · ")}
+                      </p>
+                    )}
+                    {m.citations && m.citations.length > 0 && (
+                      <CitationChips citations={m.citations} />
+                    )}
+                    {m.source && (
+                      <Badge variant={SOURCE_BADGE[m.source].variant} className="mt-1.5">
+                        {SOURCE_BADGE[m.source].label}
+                      </Badge>
+                    )}
+                  </li>
+                ),
+              )}
+            </ul>
+          )}
+
+          <form
+            className="flex items-stretch gap-0"
+            onSubmit={(e) => {
+              e.preventDefault();
+              void ask(input);
+            }}
+          >
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder='Ask about this analysis — e.g. "why onion?" or "what if prices fall?"'
+              maxLength={500}
+              className="min-w-0 flex-1 border-2 border-r-0 border-ink bg-white px-3 py-2 font-mono text-sm focus:border-acid-deep focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={sending || input.trim().length === 0}
+              className="inline-flex shrink-0 items-center gap-1.5 border-2 border-ink bg-acid px-4 font-display text-sm uppercase transition-colors duration-75 hover:bg-ink hover:text-acid disabled:opacity-50"
+            >
+              {sending ? (
+                <Loader2 size={14} className="animate-spin" aria-hidden />
+              ) : (
+                <Send size={14} aria-hidden />
+              )}
+              Send →
+            </button>
+          </form>
+          {error && (
+            <p className="mt-2 border-l-8 border-alarm pl-2 font-mono text-[11px] uppercase text-alarm">
+              ERROR // {error}
             </p>
           )}
-          <p className="mt-3 text-sm leading-relaxed text-zinc-800">{advisory.narrative.summary}</p>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-600">
-            {advisory.narrative.recommendationExplanation}
-          </p>
-
-          {advisory.narrative.actions.length > 0 && (
-            <ul className="mt-3 space-y-1.5 text-sm text-zinc-700">
-              {advisory.narrative.actions.map((a) => (
-                <li key={a} className="flex gap-2">
-                  <span aria-hidden>▸</span>
-                  {a}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {advisory.narrative.warnings.length > 0 && (
-            <ul className="mt-3 space-y-1 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900">
-              {advisory.narrative.warnings.map((w) => (
-                <li key={w}>{w}</li>
-              ))}
-            </ul>
-          )}
-
-          {advisory.citations && advisory.citations.length > 0 && (
-            <div className="mt-3">
-              <p className="text-[11px] font-medium uppercase tracking-wide text-zinc-400">
-                Grounded reading
-              </p>
-              <CitationChips citations={advisory.citations} />
-            </div>
-          )}
-
-          {messages.length === 0 && advisory.narrative.followUpQuestions.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {advisory.narrative.followUpQuestions.map((q) => (
-                <button
-                  key={q}
-                  onClick={() => void ask(q)}
-                  disabled={sending}
-                  className="rounded-full border border-violet-300 bg-white px-3 py-1 text-xs text-violet-700 transition-colors hover:bg-violet-100 disabled:opacity-50"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          )}
-        </>
-      )}
-
-      <div className="mt-5 border-t border-violet-200 pt-4">
-        {messages.length > 0 && (
-          <ul className="mb-3 max-h-72 space-y-2 overflow-y-auto pr-1">
-            {messages.map((m, i) =>
-              m.role === "user" ? (
-                <li key={i} className="ml-auto w-fit max-w-[85%] rounded-lg rounded-br-sm bg-emerald-600 px-3 py-1.5 text-sm text-white">
-                  {m.content}
-                </li>
-              ) : (
-                <li key={i} className="mr-auto max-w-[90%] rounded-lg rounded-bl-sm bg-white px-3 py-2 shadow-sm">
-                  <p className="whitespace-pre-wrap text-sm text-zinc-800">{m.content}</p>
-                  {m.caveats && m.caveats.length > 0 && (
-                    <p className="mt-1 text-[11px] text-zinc-400">⚠ {m.caveats.join(" · ")}</p>
-                  )}
-                  {m.citations && m.citations.length > 0 && (
-                    <CitationChips citations={m.citations} />
-                  )}
-                  {m.source && (
-                    <Badge variant={SOURCE_BADGE[m.source].variant} className="mt-1">
-                      {SOURCE_BADGE[m.source].label}
-                    </Badge>
-                  )}
-                </li>
-              ),
-            )}
-          </ul>
-        )}
-
-        <form
-          className="flex items-center gap-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            void ask(input);
-          }}
-        >
-          <MessageCircleQuestion size={16} className="shrink-0 text-zinc-400" aria-hidden />
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder='Ask about this analysis — e.g. "why onion?" or "what if prices fall?"'
-            maxLength={500}
-            className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm focus:border-violet-400 focus:outline-none focus:ring-2 focus:ring-violet-100"
-          />
-          <button
-            type="submit"
-            disabled={sending || input.trim().length === 0}
-            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-violet-600 px-3 py-2 text-sm font-medium text-white hover:bg-violet-700 disabled:opacity-50"
-          >
-            {sending ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <Send size={14} aria-hidden />}
-            Ask
-          </button>
-        </form>
-        {error && <p className="mt-2 text-xs text-red-600">{error}</p>}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -13,17 +13,25 @@ export function ScoreBar({
 }) {
   const pct = Math.max(0, Math.min(100, (value / max) * 100));
   const tones = {
-    emerald: "bg-emerald-500",
-    amber: "bg-amber-500",
-    red: "bg-red-500",
-    zinc: "bg-zinc-400",
-  };
+    emerald: "bg-acid-deep",
+    amber: "bg-caution",
+    red: "bg-alarm",
+    zinc: "bg-ink-soft",
+  } as const;
   return (
     <div
-      className={cn("h-2 w-full overflow-hidden rounded-full bg-zinc-100", className)}
+      className={cn("relative h-3 w-full border border-ink bg-white", className)}
       role="presentation"
     >
-      <div className={cn("h-full rounded-full transition-all", tones[tone])} style={{ width: `${pct}%` }} />
+      <div
+        className={cn("h-full transition-none", tones[tone])}
+        style={{ width: `${pct}%` }}
+      />
+      {/* quarter rules over the fill — reads like a measuring instrument */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 stripes-acid opacity-[0.07]"
+      />
     </div>
   );
 }

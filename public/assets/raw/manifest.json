@@ -1,0 +1,58 @@
+{
+  "retrievedAt": "2026-08-23T05:56:23.365Z",
+  "source": "Wikimedia Commons",
+  "images": [
+    {
+      "id": "boston-city-hall",
+      "file": "/assets/raw/boston-city-hall.jpg",
+      "bytes": 546418,
+      "title": "File:Boston City Hall - Boston, MA - DSC04704 (cropped).JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Boston_City_Hall_-_Boston%2C_MA_-_DSC04704_%28cropped%29.JPG/1920px-Boston_City_Hall_-_Boston%2C_MA_-_DSC04704_%28cropped%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 1600,
+      "height": 1029,
+      "license": "CC0",
+      "artist": "Daderot",
+      "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Boston_City_Hall_-_Boston,_MA_-_DSC04704_(cropped).JPG",
+      "credit": "Own work"
+    },
+    {
+      "id": "habitat-67",
+      "file": "/assets/raw/habitat-67.jpg",
+      "bytes": 96275,
+      "title": "File:Habitat 67 in winter.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Habitat_67_in_winter.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "width": 1600,
+      "height": 1055,
+      "license": "Public domain",
+      "artist": "AlainV at English Wikipedia",
+      "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Habitat_67_in_winter.jpg",
+      "credit": "Transferred from en.wikipedia to Commons."
+    },
+    {
+      "id": "trellick-tower",
+      "file": "/assets/raw/trellick-tower.jpg",
+      "bytes": 679139,
+      "title": "File:Trellick Tower 10.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Trellick_Tower_10.jpg/1920px-Trellick_Tower_10.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 1600,
+      "height": 2133,
+      "license": "CC0",
+      "artist": "Rc1959",
+      "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Trellick_Tower_10.jpg",
+      "credit": "Own work"
+    },
+    {
+      "id": "geisel-library",
+      "file": "/assets/raw/geisel-library.jpg",
+      "bytes": 498244,
+      "title": "File:Geisel Library at Night.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Geisel_Library_at_Night.jpg/1920px-Geisel_Library_at_Night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "width": 1600,
+      "height": 1973,
+      "license": "CC0",
+      "artist": "Gankbank789",
+      "descriptionUrl": "https://commons.wikimedia.org/wiki/File:Geisel_Library_at_Night.jpg",
+      "credit": "Own work"
+    }
+  ]
+}

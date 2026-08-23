@@ -1,6 +1,5 @@
 "use client";
 
-import { CalendarDays, Layers, MapPin, Droplets } from "lucide-react";
 import { ZONE_IDS } from "@/lib/agriculture/zone";
 import { SOIL_IDS } from "@/lib/agriculture/soil";
 import { SEASON_IDS } from "@/lib/agriculture/season";
@@ -69,31 +68,31 @@ export const TALUKAS_BY_ZONE: Record<string, Array<{ id: string; name: string }>
 };
 
 function Select({
-  icon: Icon,
   label,
+  index,
   value,
   options,
   onChange,
   disabled,
 }: {
-  icon: typeof MapPin;
   label: string;
+  index: string;
   value: string;
   options: Array<{ value: string; label: string }>;
   onChange: (v: string) => void;
   disabled?: boolean;
 }) {
   return (
-    <label className="flex flex-col gap-1.5">
-      <span className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-zinc-500">
-        <Icon size={13} aria-hidden />
+    <label className="flex flex-col gap-1">
+      <span className="flex items-baseline gap-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
+        <span className="text-acid-deep">{index}</span>
         {label}
       </span>
       <select
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+        className="border-[1.5px] border-ink bg-white px-2 py-2 text-sm font-medium transition-colors duration-75 focus:border-acid-deep focus:outline-none disabled:opacity-50"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -117,9 +116,9 @@ export function ContextSelects({
   const talukas = TALUKAS_BY_ZONE[form.zoneId] ?? [];
   const validTaluka = talukas.some((t) => t.id === form.talukaId);
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
       <Select
-        icon={MapPin}
+        index="01"
         label="Zone"
         value={form.zoneId}
         options={ZONE_IDS.map((z) => ({ value: z, label: zoneLabels[z] ?? z }))}
@@ -133,7 +132,7 @@ export function ContextSelects({
         disabled={disabled}
       />
       <Select
-        icon={MapPin}
+        index="02"
         label="Taluka"
         value={validTaluka ? form.talukaId : ""}
         options={[{ value: "", label: "District-level" }, ...talukas.map((t) => ({ value: t.id, label: t.name }))]}
@@ -141,7 +140,7 @@ export function ContextSelects({
         disabled={disabled}
       />
       <Select
-        icon={CalendarDays}
+        index="03"
         label="Season"
         value={form.seasonId}
         options={SEASON_IDS.map((s) => ({ value: s, label: seasonLabels[s] ?? s }))}
@@ -149,7 +148,7 @@ export function ContextSelects({
         disabled={disabled}
       />
       <Select
-        icon={Layers}
+        index="04"
         label="Soil"
         value={form.soilId}
         options={SOIL_IDS.map((s) => ({ value: s, label: soilLabels[s] ?? s }))}
@@ -157,7 +156,7 @@ export function ContextSelects({
         disabled={disabled}
       />
       <Select
-        icon={Droplets}
+        index="05"
         label="Water"
         value={form.waterAvailability}
         options={WATER_AVAILABILITY_LEVELS.map((w) => ({ value: w, label: waterLabels[w] }))}

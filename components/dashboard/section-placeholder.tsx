@@ -1,29 +1,37 @@
-import type { LucideIcon } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-
-export function SectionPlaceholder({
-  icon: Icon,
+export function IndexEntry({
+  no,
   title,
   description,
-  phase,
+  stat,
+  wide,
 }: {
-  icon: LucideIcon;
+  no: string;
   title: string;
   description: string;
-  phase: string;
+  stat: string;
+  wide?: boolean;
 }) {
   return (
-    <div className="flex h-full flex-col gap-3 p-5">
+    <article
+      className={`group relative flex flex-col bg-paper p-4 transition-colors duration-75 hover:bg-acid md:p-5 ${
+        wide ? "md:col-span-2" : ""
+      }`}
+    >
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
-            <Icon size={18} aria-hidden />
-          </span>
-          <h2 className="font-semibold text-zinc-900">{title}</h2>
-        </div>
-        <Badge variant="phase">{phase}</Badge>
+        <h3 className="font-display text-xl uppercase leading-tight md:text-2xl">{title}</h3>
+        <span
+          aria-hidden
+          className="text-stroke-thin select-none font-display text-4xl leading-none md:text-6xl"
+        >
+          {no}
+        </span>
       </div>
-      <p className="text-sm leading-relaxed text-zinc-500">{description}</p>
-    </div>
+      <p className="mt-2 max-w-prose text-sm leading-relaxed text-ink-soft group-hover:text-ink">
+        {description}
+      </p>
+      <p className="mt-auto pt-3 font-mono text-[10px] font-bold uppercase tracking-wider">
+        → {stat}
+      </p>
+    </article>
   );
 }

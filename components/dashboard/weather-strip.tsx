@@ -1,6 +1,5 @@
 "use client";
 
-import { CloudSun, Droplets, Thermometer, Wind, AlertTriangle, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { WeatherBundle } from "@/lib/weather/types";
 import type { WeatherSignal } from "@/lib/agriculture/weatherRisk";
@@ -19,10 +18,10 @@ export interface WeatherResponse {
   };
 }
 
-const severityStyles: Record<WeatherSignal["severity"], string> = {
-  high: "border-red-200 bg-red-50 text-red-800",
-  moderate: "border-amber-200 bg-amber-50 text-amber-800",
-  low: "border-sky-200 bg-sky-50 text-sky-800",
+const severityBar: Record<WeatherSignal["severity"], string> = {
+  high: "border-l-8 border-l-alarm",
+  moderate: "border-l-8 border-l-caution",
+  low: "border-l-8 border-l-ink-soft",
 };
 
 const freshnessBadge = (freshness: WeatherResponse["freshness"]) => {
@@ -33,74 +32,64 @@ const freshnessBadge = (freshness: WeatherResponse["freshness"]) => {
 
 export function WeatherStrip({ data }: { data: WeatherResponse }) {
   const w = data.weather;
-  return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h3 className="flex items-center gap-2 font-semibold text-zinc-900">
-          <CloudSun size={18} className="text-emerald-700" aria-hidden />
-          Current Weather — {w.location.talukaName}
-        </h3>
-        <div className="flex items-center gap-2">
-          {freshnessBadge(data.freshness)}
-          <span className="text-xs text-zinc-400">
-            updated {new Date(data.provenance.fetchedAt).toLocaleTimeString()}
-          </span>
-        </div>
-      </div>
+  const readouts = [
+    { value: `${w.current.temperatureC.toFixed(1)}°`, label: "Temperature °C" },
+    { value: `${w.current.humidityPercent}%`, label: "Humidity" },
+    { value: `${w.current.windKmh.toFixed(0)}`, label: "Wind km/h" },
+  ];
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="flex items-center gap-2 rounded-lg bg-zinc-50 p-3">
-          <Thermometer size={16} className="text-zinc-500" aria-hidden />
-          <div>
-            <p className="text-lg font-semibold leading-none">{w.current.temperatureC.toFixed(1)}°C</p>
-            <p className="text-xs text-zinc-500">temperature</p>
+  return (
+    <section className="border-2 border-ink bg-white">
+      <header className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink bg-paper-dim px-4 py-1.5">
+        <span className="font-mono text-[10px] font-bold uppercase tracking-widest">
+          Weather — {w.location.talukaName}
+        </span>
+        <span className="flex items-center gap-2">
+          {freshnessBadge(data.freshness)}
+          <span className="font-mono text-[10px] uppercase text-ink-soft">
+            upd {new Date(data.provenance.fetchedAt).toLocaleTimeString()}
+          </span>
+        </span>
+      </header>
+
+      <dl className="grid grid-cols-3 divide-x divide-line border-b border-line">
+        {readouts.map((r) => (
+          <div key={r.label} className="px-3 py-3 md:px-5">
+            <dd className="font-display text-2xl leading-none sm:text-3xl md:text-5xl">{r.value}</dd>
+            <dt className="mt-1 font-mono text-[9px] uppercase tracking-widest text-ink-soft md:text-[10px]">
+              {r.label}
+            </dt>
           </div>
-        </div>
-        <div className="flex items-center gap-2 rounded-lg bg-zinc-50 p-3">
-          <Droplets size={16} className="text-zinc-500" aria-hidden />
-          <div>
-            <p className="text-lg font-semibold leading-none">{w.current.humidityPercent}%</p>
-            <p className="text-xs text-zinc-500">humidity</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 rounded-lg bg-zinc-50 p-3">
-          <Wind size={16} className="text-zinc-500" aria-hidden />
-          <div>
-            <p className="text-lg font-semibold leading-none">{w.current.windKmh.toFixed(0)} km/h</p>
-            <p className="text-xs text-zinc-500">wind</p>
-          </div>
-        </div>
-        <div className="flex flex-col justify-center rounded-lg bg-zinc-50 px-3 py-2">
-          <p className="text-xs font-medium text-zinc-700">
-            7-day: {data.provenance.forecastWindow?.from} → {data.provenance.forecastWindow?.to}
-          </p>
-          <p className="mt-0.5 text-[11px] text-zinc-400">
-            {data.provenance.dataSource} · {data.provenance.sourceClass}
-          </p>
-        </div>
-      </div>
+        ))}
+      </dl>
+
+      <p className="border-b border-line px-4 py-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-soft">
+        7-day window {data.provenance.forecastWindow?.from} →{" "}
+        {data.provenance.forecastWindow?.to} · {data.provenance.dataSource} ·{" "}
+        {data.provenance.sourceClass}
+      </p>
 
       {data.signals.length > 0 && (
-        <ul className="mt-4 space-y-2">
+        <ul>
           {data.signals.map((s) => (
-            <li key={s.type + s.validUntil} className={`rounded-lg border p-3 ${severityStyles[s.severity]}`}>
-              <p className="text-sm font-medium">
-                {s.severity === "low" ? (
-                  <ShieldCheck size={14} className="mr-1 inline" aria-hidden />
-                ) : (
-                  <AlertTriangle size={14} className="mr-1 inline" aria-hidden />
-                )}
-                {s.type.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
-                <span className="ml-2 rounded bg-white/70 px-1.5 py-0.5 text-[10px] uppercase">
-                  heuristic · confidence {s.confidence}
-                </span>
+            <li
+              key={s.type + s.validUntil}
+              className={`border-b border-line px-4 py-3 last:border-b-0 ${severityBar[s.severity]}`}
+            >
+              <p className="flex flex-wrap items-center gap-x-2 font-mono text-[10px] font-bold uppercase tracking-widest">
+                {s.type.replace(/-/g, " ")}
+                <Badge variant={s.severity === "low" ? "source" : s.severity === "moderate" ? "warning" : "danger"}>
+                  heuristic · conf {s.confidence}
+                </Badge>
               </p>
-              <p className="mt-1 text-sm">{s.reason}</p>
-              <p className="mt-1 text-xs opacity-80">{s.recommendedAction}</p>
+              <p className="mt-1.5 text-sm leading-relaxed">{s.reason}</p>
+              <p className="mt-1 font-mono text-[11px] uppercase leading-relaxed text-ink-soft">
+                → {s.recommendedAction}
+              </p>
             </li>
           ))}
         </ul>
       )}
-    </div>
+    </section>
   );
 }
