@@ -182,6 +182,7 @@ export function generateRecommendations(
     generatedAt: options.now ?? new Date().toISOString(),
     contextSummary: contextSummary(context),
     weightsUsed: weights as unknown as Record<string, number>,
+    ranked: eligible.map((c) => ({ cropId: c.cropId, overallScore: c.recommendation.suitability.overallScore })),
     primary: top?.recommendation ?? null,
     secondary: runnerUp?.recommendation ?? null,
     resilientAlternative,

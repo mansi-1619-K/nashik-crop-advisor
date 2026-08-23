@@ -1,0 +1,121 @@
+{
+  "meta": {
+    "id": "nashik-core-scenarios",
+    "name": "Nashik Engine Scenario Benchmarks",
+    "version": "0.1.0",
+    "updated": "2026-08-23",
+    "quality": "assumed",
+    "disclaimer": "Expectations are EXPERT-DEFINED desk judgements derived from the project's own knowledge base (zone profiles, crop constraint tables, monsoon substitution rule). They validate internal consistency and documented behaviour, not field-validated agronomy.",
+    "sources": [
+      {
+        "label": "Derived from data/zones, data/crops constraint tables and lib/agriculture/constraints.ts monsoon substitution rule",
+        "retrievedAt": "2026-08-23"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "heavy-rain-kharif-alluvial-rainfed",
+      "kind": "synthetic",
+      "description": "Western belt rainfed kharif on alluvial loam: monsoon substitution keeps paddy eligible, but the documented drought-weighting rule ranks hardy little millet first for a strictly rainfed farm.",
+      "context": { "zoneId": "heavy-rainfall", "seasonId": "kharif", "soilId": "alluvial-loam", "waterAvailability": "rainfed" },
+      "expectations": {
+        "mustBeEligible": ["paddy", "finger-millet", "little-millet"],
+        "mustBeExcluded": ["onion", "grape", "tomato"],
+        "expectedPrimary": "little-millet"
+      }
+    },
+    {
+      "id": "central-rabi-medium-black-assured",
+      "kind": "expert",
+      "description": "Flagship irrigated rabi case: onion leads on excellent soil + assured water.",
+      "context": { "zoneId": "central-irrigated", "seasonId": "rabi", "soilId": "medium-black", "waterAvailability": "assured" },
+      "expectations": {
+        "mustBeEligible": ["onion", "grape", "tomato"],
+        "mustBeExcluded": ["paddy", "soybean", "pearl-millet", "finger-millet", "little-millet", "guava", "pomegranate"],
+        "expectedPrimary": "onion"
+      }
+    },
+    {
+      "id": "arid-kharif-shallow-rainfed",
+      "kind": "expert",
+      "description": "Eastern dry belt rainfed kharif on shallow black: pearl millet's core niche.",
+      "context": { "zoneId": "arid-eastern", "seasonId": "kharif", "soilId": "shallow-black", "waterAvailability": "rainfed" },
+      "expectations": {
+        "mustBeEligible": ["pearl-millet", "little-millet", "pigeon-pea"],
+        "mustBeExcluded": ["paddy", "grape", "onion", "tomato", "soybean"],
+        "expectedPrimary": "pearl-millet"
+      }
+    },
+    {
+      "id": "grape-laterite-excluded",
+      "kind": "edge-case",
+      "description": "Unsuitable soil must hard-exclude grape regardless of assured irrigation.",
+      "context": { "zoneId": "central-irrigated", "seasonId": "rabi", "soilId": "laterite", "waterAvailability": "assured" },
+      "expectations": {
+        "mustBeExcluded": ["grape"],
+        "forbiddenPrimary": ["grape"]
+      }
+    },
+    {
+      "id": "central-rabi-rainfed-empty",
+      "kind": "edge-case",
+      "description": "Rainfed central rabi: every candidate is zone/season/water-blocked; engine must return an honest empty ranking.",
+      "context": { "zoneId": "central-irrigated", "seasonId": "rabi", "soilId": "medium-black", "waterAvailability": "rainfed" },
+      "expectations": {
+        "maxEligibleCount": 0,
+        "allowEmptyRanking": true
+      }
+    },
+    {
+      "id": "arid-summer-sandy-limited",
+      "kind": "synthetic",
+      "description": "Dry-belt summer sowing on sandy loam with limited water: hardy pearl millet over tomato.",
+      "context": { "zoneId": "arid-eastern", "seasonId": "summer", "soilId": "sandy-loam", "waterAvailability": "limited" },
+      "expectations": {
+        "mustBeEligible": ["pearl-millet", "tomato"],
+        "expectedPrimary": "pearl-millet"
+      }
+    },
+    {
+      "id": "perennial-orchard-deep-black-assured",
+      "kind": "expert",
+      "description": "Perennial orchard context: pomegranate, guava and grape all stay eligible.",
+      "context": { "zoneId": "central-irrigated", "seasonId": "perennial", "soilId": "deep-black", "waterAvailability": "assured" },
+      "expectations": {
+        "mustBeEligible": ["pomegranate", "guava", "grape"],
+        "mustBeExcluded": ["onion", "tomato", "soybean"]
+      }
+    },
+    {
+      "id": "monsoon-substitution-shallow-shallow",
+      "kind": "edge-case",
+      "description": "Monsoon substitution must rescue high/medium-demand kharif crops in the heavy-rainfall belt even on poor soils.",
+      "context": { "zoneId": "heavy-rainfall", "seasonId": "kharif", "soilId": "shallow-black", "waterAvailability": "rainfed" },
+      "expectations": {
+        "mustBeEligible": ["paddy", "finger-millet", "little-millet"]
+      }
+    },
+    {
+      "id": "arid-kharif-medium-black-limited",
+      "kind": "synthetic",
+      "description": "Limited water unlocks medium-demand crops; onion's excellent medium-black soil rating outweighs soybean's higher drought tolerance under the documented weights.",
+      "context": { "zoneId": "arid-eastern", "seasonId": "kharif", "soilId": "medium-black", "waterAvailability": "limited" },
+      "expectations": {
+        "mustBeEligible": ["soybean", "pearl-millet", "pigeon-pea", "little-millet", "onion"],
+        "mustBeExcluded": ["grape", "paddy"],
+        "expectedPrimary": "onion"
+      }
+    },
+    {
+      "id": "heavy-rainfall-wrong-season-empty",
+      "kind": "edge-case",
+      "description": "Heavy-rainfall belt in summer: no knowledge-base crop summers there under rainfed water.",
+      "context": { "zoneId": "heavy-rainfall", "seasonId": "summer", "soilId": "laterite", "waterAvailability": "rainfed" },
+      "expectations": {
+        "allowEmptyRanking": true,
+        "maxEligibleCount": 0
+      }
+    }
+  ]
+}

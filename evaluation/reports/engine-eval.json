@@ -1,0 +1,168 @@
+{
+  "engine": {
+    "scenarioCount": 10,
+    "expectationFailures": 0,
+    "totalExpectations": 49,
+    "constraintViolationRate": 1,
+    "primaryAccuracyMeasured": 1,
+    "primaryAccuracyNumerator": 5,
+    "primaryAccuracyDenominator": 5,
+    "latencyMsP50": 0.412,
+    "latencyMsP95": 23.45,
+    "perScenario": [
+      {
+        "id": "heavy-rain-kharif-alluvial-rainfed",
+        "kind": "synthetic",
+        "failures": [],
+        "latencyMs": 23.45
+      },
+      {
+        "id": "central-rabi-medium-black-assured",
+        "kind": "expert",
+        "failures": [],
+        "latencyMs": 0.65
+      },
+      {
+        "id": "arid-kharif-shallow-rainfed",
+        "kind": "expert",
+        "failures": [],
+        "latencyMs": 0.596
+      },
+      {
+        "id": "grape-laterite-excluded",
+        "kind": "edge-case",
+        "failures": [],
+        "latencyMs": 0.462
+      },
+      {
+        "id": "central-rabi-rainfed-empty",
+        "kind": "edge-case",
+        "failures": [],
+        "latencyMs": 0.195
+      },
+      {
+        "id": "arid-summer-sandy-limited",
+        "kind": "synthetic",
+        "failures": [],
+        "latencyMs": 0.412
+      },
+      {
+        "id": "perennial-orchard-deep-black-assured",
+        "kind": "expert",
+        "failures": [],
+        "latencyMs": 0.351
+      },
+      {
+        "id": "monsoon-substitution-shallow-shallow",
+        "kind": "edge-case",
+        "failures": [],
+        "latencyMs": 0.33
+      },
+      {
+        "id": "arid-kharif-medium-black-limited",
+        "kind": "synthetic",
+        "failures": [],
+        "latencyMs": 0.527
+      },
+      {
+        "id": "heavy-rainfall-wrong-season-empty",
+        "kind": "edge-case",
+        "failures": [],
+        "latencyMs": 0.199
+      }
+    ]
+  },
+  "stability": [
+    {
+      "baseScenarioId": "heavy-rain-kharif-alluvial-rainfed",
+      "perturbation": "water rainfed→limited",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 0.6667
+    },
+    {
+      "baseScenarioId": "heavy-rain-kharif-alluvial-rainfed",
+      "perturbation": "soil alluvial-loam→sandy-loam",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "central-rabi-medium-black-assured",
+      "perturbation": "water assured→moderate",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "central-rabi-medium-black-assured",
+      "perturbation": "soil medium-black→deep-black",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "central-rabi-medium-black-assured",
+      "perturbation": "soil medium-black→shallow-black",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "arid-kharif-shallow-rainfed",
+      "perturbation": "water rainfed→limited",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 0.6667
+    },
+    {
+      "baseScenarioId": "arid-kharif-shallow-rainfed",
+      "perturbation": "soil shallow-black→medium-black",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "arid-summer-sandy-limited",
+      "perturbation": "water limited→rainfed",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 0.5
+    },
+    {
+      "baseScenarioId": "arid-summer-sandy-limited",
+      "perturbation": "water limited→moderate",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "arid-summer-sandy-limited",
+      "perturbation": "soil sandy-loam→alluvial-loam",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "arid-kharif-medium-black-limited",
+      "perturbation": "water limited→rainfed",
+      "primaryPersisted": false,
+      "top3OverlapRatio": 0.6667
+    },
+    {
+      "baseScenarioId": "arid-kharif-medium-black-limited",
+      "perturbation": "water limited→moderate",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "arid-kharif-medium-black-limited",
+      "perturbation": "soil medium-black→deep-black",
+      "primaryPersisted": true,
+      "top3OverlapRatio": 1
+    },
+    {
+      "baseScenarioId": "arid-kharif-medium-black-limited",
+      "perturbation": "soil medium-black→shallow-black",
+      "primaryPersisted": false,
+      "top3OverlapRatio": 0.6667
+    }
+  ],
+  "retrieval": {
+    "queryCount": 14,
+    "precisionAt3": 0.9286,
+    "recallAt3": 1,
+    "mrr": 1,
+    "misses": []
+  }
+}

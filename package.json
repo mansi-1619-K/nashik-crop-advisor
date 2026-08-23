@@ -10,7 +10,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "evaluate": "tsx evaluation/scripts/run-engine-eval.ts",
+    "evaluate:ai": "tsx evaluation/scripts/run-ai-eval.ts"
   },
   "dependencies": {
     "@google/genai": "^2.18.0",
@@ -34,6 +36,7 @@
     "eslint-config-next": "16.3.2",
     "jsdom": "^30.0.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5",
     "vitest": "^4.1.11"
   }

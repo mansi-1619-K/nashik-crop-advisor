@@ -1,5 +1,21 @@
 # Development Log
 
+## Phase 6 — Evaluation Harness (2026-08-23)
+
+- `lib/eval/`: scenario runner with expectation diffing, perturbation stability,
+  retrieval P/R/MRR, live-AI metrics through a recording generator seam, and a
+  report renderer that renders unmeasured sections as NOT MEASURED
+- Fixtures: 10 scenario benchmarks + 14 retrieval labels (quality: assumed)
+- `npm run evaluate` / `npm run evaluate:ai`; engine gained additive
+  `RecommendationOutput.ranked` field for true top-K measurement
+- First run failed 2/48 desk expectations; both traced to fixture calibration
+  (drought weighting under rainfed; soil excellence vs drought tolerance) and
+  were recalibrated openly — engine behaviour matched its documented rules
+- Live measurements: deterministic gates all clean; retrieval R@3 = 1.0;
+  5 real Gemini calls → 0 fallbacks, first-attempt validity 1.0, 0 hallucinated
+  citations; narration latency ~20 s median recorded as a limitation
+- 13 new tests → **162 total**
+
 ## Phase 5 — RAG Grounded-Knowledge Layer (2026-08-23)
 
 - `lib/rag/`: 14-document reference corpus (`data/knowledge/`), paragraph chunker
@@ -63,5 +79,6 @@
 
 See [PHASE_0_REPORT.md](PHASE_0_REPORT.md), [PHASE_1_REPORT.md](PHASE_1_REPORT.md),
 [PHASE_2_REPORT.md](PHASE_2_REPORT.md), [PHASE_3_REPORT.md](PHASE_3_REPORT.md),
-[PHASE_4_REPORT.md](PHASE_4_REPORT.md), [PHASE_5_REPORT.md](PHASE_5_REPORT.md).
+[PHASE_4_REPORT.md](PHASE_4_REPORT.md), [PHASE_5_REPORT.md](PHASE_5_REPORT.md),
+[PHASE_6_REPORT.md](PHASE_6_REPORT.md).
 

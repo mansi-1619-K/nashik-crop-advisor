@@ -90,6 +90,8 @@ export interface RecommendationOutput {
   generatedAt: string;
   contextSummary: string;
   weightsUsed: Record<string, number>;
+  /** Full eligible ranking (best first), exposed for evaluation and analysis. */
+  ranked: Array<{ cropId: string; overallScore: number }>;
   primary: Recommendation | null;
   secondary: Recommendation | null;
   resilientAlternative: Recommendation | null;

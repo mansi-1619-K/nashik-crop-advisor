@@ -1,6 +1,6 @@
 # AI Design
 
-> Status: **implemented (Phase 4)** · SDK: `@google/genai` 2.18 · Model: `GEMINI_MODEL` env or `gemini-2.5-flash`
+> Status: **implemented (Phase 4)** · SDK: `@google/genai` 2.18 · Model: `GEMINI_MODEL` env or `gemini-3.6-flash` (default changed from `gemini-2.5-flash` in Phase 6 after Google retired it for new keys)
 
 ## Purpose
 

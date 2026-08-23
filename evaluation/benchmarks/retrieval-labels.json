@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "id": "retrieval-relevance-labels",
+    "name": "Retrieval Relevance Labels",
+    "version": "0.1.0",
+    "updated": "2026-08-23",
+    "quality": "assumed",
+    "disclaimer": "Query-to-document relevance judged at the desk against the seed handbook's own scope. Measures whether retrieval surfaces the right document, not real-world correctness of content.",
+    "sources": [
+      {
+        "label": "Desk-labelled against data/knowledge/nashik-agri-handbook.json document ids",
+        "retrievedAt": "2026-08-23"
+      }
+    ]
+  },
+  "labels": [
+    { "query": "how do I prevent powdery mildew in my vineyard", "relevant": ["grape-powdery-mildew-prevention"] },
+    { "query": "downy mildew risk after the first monsoon showers in grapes", "relevant": ["grape-downy-mildew-rain"] },
+    { "query": "silvery streaks on onion leaves thrips damage", "relevant": ["onion-thrips-control"] },
+    { "query": "purple blotch spreading on onions in humid foggy weather", "relevant": ["onion-purple-blotch-humidity"] },
+    { "query": "curing and storing onions so they keep longer in storage", "relevant": ["onion-curing-storage"] },
+    { "query": "blast pressure during cloudy spells when paddy is flowering", "relevant": ["paddy-blast-humidity"] },
+    { "query": "how often should I run my drip system for vegetables", "relevant": ["drip-scheduling-basics"] },
+    { "query": "using mulch to conserve soil moisture and suppress weeds", "relevant": ["mulch-soil-moisture"] },
+    { "query": "when and how to take a soil sample before sowing", "relevant": ["soil-testing-before-sowing"] },
+    { "query": "is seed treatment worth it for soybean planting", "relevant": ["seed-treatment-basics"] },
+    { "query": "spraying only when pest counts cross the threshold", "relevant": ["ipm-general-principles"] },
+    { "query": "monsoon arrived late what shorter duration crop can I still sow", "relevant": ["delayed-monsoon-contingency"] },
+    { "query": "pomegranate orchard sanitation against bacterial blight spread", "relevant": ["pomegranate-bacterial-blight-prevention"] },
+    { "query": "keeping tomatoes firm from field to market crates", "relevant": ["tomato-post-harvest-handling"] }
+  ]
+}

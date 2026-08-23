@@ -10,24 +10,30 @@ A portfolio-grade AI/ML engineering prototype combining:
 - **Gemini-powered explanations and Q&A** grounded in engine output and RAG evidence — never overriding deterministic results
 - **What-if simulation**, explainability, confidence metrics and an evaluation harness
 
-> ⚠️ **Status: Phase 0 — Foundation.** The domain models, datasets and UI shell exist;
-> engines arrive in Phase 1+. Nothing on screen computes recommendations yet.
+> ✅ **Status: complete (Phases 0–6).** Deterministic engine, weather intelligence,
+> economics, Gemini narration, RAG grounding and a measured evaluation harness are
+> all implemented. Latest run: 162/162 tests · 0/49 scenario expectation failures ·
+> live AI fallback rate 0 with 0 hallucinated citations. See
+> [docs/EVALUATION.md](docs/EVALUATION.md) and
+> [evaluation/reports/EVALUATION_REPORT.md](evaluation/reports/EVALUATION_REPORT.md).
 
 ## Quick start
 
 ```bash
 npm install
-cp .env.example .env.local   # optional until Phase 4
-npm run dev
+npm run dev                    # keyless: full deterministic experience + honest static fallbacks
+cp .env.example .env.local     # optional: add GEMINI_API_KEY for AI narration
 ```
 
-| Command         | Purpose                  |
-| --------------- | ------------------------ |
-| `npm run dev`   | Start the dev server     |
-| `npm run build` | Production build         |
-| `npm test`      | Vitest suite             |
-| `npm run lint`  | ESLint                   |
-| `npm run typecheck` | TypeScript strict check |
+| Command               | Purpose                                        |
+| --------------------- | ---------------------------------------------- |
+| `npm run dev`         | Start the dev server                           |
+| `npm run build`       | Production build                               |
+| `npm test`            | Vitest suite (162 tests)                       |
+| `npm run lint`        | ESLint                                         |
+| `npm run typecheck`   | TypeScript strict check                        |
+| `npm run evaluate`    | Deterministic evaluation suite → report        |
+| `npm run evaluate:ai` | Live-AI metrics (requires `GEMINI_API_KEY`)    |
 
 ## Documentation
 
