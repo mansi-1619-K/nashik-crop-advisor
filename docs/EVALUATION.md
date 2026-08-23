@@ -26,8 +26,13 @@ internal consistency and documented engine behaviour — not field-validated agr
 | Primary accuracy | scenarios where engine primary = declared expectation | same |
 | Latency p50/p95 | in-process wall time of `generateRecommendations` per scenario | same |
 | Primary persistence / top-3 overlap | before-vs-after water ±1 level and soil-neighbour perturbations | `lib/eval/stability.ts` |
-| Precision@3 / Recall@3 / MRR | lexical retriever vs desk-labelled relevant documents | `lib/eval/retrievalMetrics.ts` |
-| AI fallback rate, first-attempt schema validity, attempts, latency, citation emission/hallucination rate | real Gemini calls through production orchestrators; raw model output audited via a recording generator seam | `lib/eval/aiMetrics.ts` (`npm run evaluate:ai`) |
+| Precision@3 / Recall@3 / MRR | BM25 lexical retriever (with IDF-weighted phrase-adjacency bonus and crop/topic tag boosts) vs desk-labelled relevant documents | `lib/eval/retrievalMetrics.ts` |
+| AI fallback rate, first-attempt schema validity, attempts, latency, citation emission/hallucination rate | real Gemini calls through production orchestrators; raw model output audited via a recording generator seam; fallback reasons recorded per call | `lib/eval/aiMetrics.ts` (`npm run evaluate:ai`) |
+
+Run-count and pacing are configurable (`EVAL_AI_REPEATS`, `EVAL_AI_PACE_MS`) so
+large samples do not trip provider rate limits — burst calling produces 429-driven
+fallbacks that are measurement artefacts, not model behaviour, and each fallback's
+reason is now recorded in the report.
 
 ## Reproducibility
 
@@ -40,7 +45,7 @@ npm run evaluate:ai     # live AI calls → evaluation/reports/ai-eval.json (nee
 without it the AI section renders as NOT MEASURED rather than stale numbers.
 Exit code is non-zero when any scenario expectation fails.
 
-## Latest measured results (2026-08-23)
+## Latest measured results (2026-08-23, post-hardening run)
 
 Deterministic suite: constraint-violation rate **1.0** (0 failures), primary
 accuracy **5/5**, 0/49 total expectation failures, latency p50 **0.63 ms** /
@@ -49,14 +54,16 @@ p95 **23.7 ms**. Stability over 14 perturbations: primary persisted **12/14
 crosses a documented hard-requirement threshold (water demand tier, soil
 compatibility class), i.e. explainable regime changes, not noise.
 
-Retrieval (lexical RAG): P@3 **0.929**, R@3 **1.0**, MRR **1.0** — every labelled
-query retrieved its target document inside the top chunk.
+Retrieval (BM25 lexical over 25-document corpus): P@3 **0.929**, R@3 **1.0**,
+MRR **1.0** — every labelled query retrieves its target document at rank 1.
 
-Live AI layer (5 calls, `gemini-3.6-flash`): fallback rate **0**, first-attempt
-schema validity **1.0**, mean attempts **1.0**, citation emission rate **0.6**,
-hallucinated-citation calls **0**, latency p50 **19.9 s** / p95 **33.5 s**.
-The high narration latency is a real measured property of the current model
-choice and is tracked in [LIMITATIONS.md](LIMITATIONS.md).
+Live AI layer (`gemini-3.6-flash`): narration latency is now thinking-mode
+dependent by design. With `GEMINI_THINKING=low` (the default), successful calls
+measured **p50 ≈ 1.5–1.8 s** with first-attempt schema validity intact on probe
+runs; the earlier deep-reasoning mode measured p50 ≈ 19.9 s / p95 ≈ 33.5 s.
+A full 15-call statistical re-run is pending free-tier quota reset; the harness
+now records per-call fallback reasons so quota effects can never be mistaken
+for model regressions.
 
 ## Reporting rules
 

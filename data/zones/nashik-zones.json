@@ -2,8 +2,8 @@
   "meta": {
     "id": "nashik-zones",
     "name": "Nashik District Agricultural Macro-Zones",
-    "version": "0.1.0",
-    "updated": "2026-08-22",
+    "version": "0.2.0",
+    "updated": "2026-08-23",
     "quality": "assumed",
     "disclaimer": "Zone definitions, rainfall bands, and taluka coordinates are INITIAL DOMAIN ASSUMPTIONS for prototyping. They are not verified against official gazetteer or ICAR agro-ecological zoning. Taluka coordinates are approximate centroids suitable only for district-level weather lookups.",
     "sources": [
@@ -19,13 +19,40 @@
       "name": "Heavy Rainfall Belt",
       "description": "Western Ghats influenced belt with very high monsoon rainfall, high humidity and hilly terrain.",
       "talukas": [
-        { "id": "igatpuri", "name": "Igatpuri", "lat": 19.7, "lng": 73.56, "coordPrecision": "approximate" },
-        { "id": "trimbakeshwar", "name": "Trimbakeshwar", "lat": 19.93, "lng": 73.53, "coordPrecision": "approximate" },
-        { "id": "peth", "name": "Peth", "lat": 20.25, "lng": 73.54, "coordPrecision": "approximate" },
-        { "id": "surgana", "name": "Surgana", "lat": 20.32, "lng": 73.6, "coordPrecision": "approximate" }
+        {
+          "id": "igatpuri",
+          "name": "Igatpuri",
+          "lat": 19.695,
+          "lng": 73.562,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "trimbakeshwar",
+          "name": "Trimbakeshwar",
+          "lat": 19.939,
+          "lng": 73.529,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "peth",
+          "name": "Peth",
+          "lat": 20.256,
+          "lng": 73.532,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "surgana",
+          "name": "Surgana",
+          "lat": 20.335,
+          "lng": 73.583,
+          "coordPrecision": "approximate"
+        }
       ],
       "characteristics": {
-        "annualRainfallMm": { "min": 1800, "max": 3200 },
+        "annualRainfallMm": {
+          "min": 1800,
+          "max": 3200
+        },
         "humidity": "high",
         "terrain": "Hilly, forested Western Ghats escarpment with valley terraces",
         "irrigationAccess": "partial"
@@ -40,14 +67,47 @@
       "name": "Central / Irrigated Belt",
       "description": "Godavari basin plain with moderate rainfall, black and loamy soils, widespread well and canal irrigation supporting horticulture.",
       "talukas": [
-        { "id": "niphad", "name": "Niphad", "lat": 20.08, "lng": 74.11, "coordPrecision": "approximate" },
-        { "id": "dindori", "name": "Dindori", "lat": 20.21, "lng": 73.82, "coordPrecision": "approximate" },
-        { "id": "nashik", "name": "Nashik", "lat": 20.0, "lng": 73.79, "coordPrecision": "approximate" },
-        { "id": "sinnar", "name": "Sinnar", "lat": 19.85, "lng": 74.0, "coordPrecision": "approximate" },
-        { "id": "chandwad", "name": "Chandwad", "lat": 20.33, "lng": 74.24, "coordPrecision": "approximate" }
+        {
+          "id": "niphad",
+          "name": "Niphad",
+          "lat": 20.083,
+          "lng": 74.117,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "dindori",
+          "name": "Dindori",
+          "lat": 20.203,
+          "lng": 73.833,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "nashik",
+          "name": "Nashik",
+          "lat": 19.997,
+          "lng": 73.79,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "sinnar",
+          "name": "Sinnar",
+          "lat": 19.845,
+          "lng": 74.0,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "chandwad",
+          "name": "Chandwad",
+          "lat": 20.33,
+          "lng": 74.244,
+          "coordPrecision": "approximate"
+        }
       ],
       "characteristics": {
-        "annualRainfallMm": { "min": 550, "max": 800 },
+        "annualRainfallMm": {
+          "min": 550,
+          "max": 800
+        },
         "humidity": "medium",
         "terrain": "Gently undulating Godavari basin plain",
         "irrigationAccess": "widespread"
@@ -62,13 +122,40 @@
       "name": "Arid / Eastern Belt",
       "description": "Drier eastern plain with lower rainfall, higher summer temperatures and constrained water availability.",
       "talukas": [
-        { "id": "malegaon", "name": "Malegaon", "lat": 20.55, "lng": 74.52, "coordPrecision": "approximate" },
-        { "id": "nandgaon", "name": "Nandgaon", "lat": 20.32, "lng": 74.65, "coordPrecision": "approximate" },
-        { "id": "yeola", "name": "Yeola", "lat": 20.04, "lng": 74.48, "coordPrecision": "approximate" },
-        { "id": "deola", "name": "Deola", "lat": 20.41, "lng": 74.36, "coordPrecision": "approximate" }
+        {
+          "id": "malegaon",
+          "name": "Malegaon",
+          "lat": 20.552,
+          "lng": 74.525,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "nandgaon",
+          "name": "Nandgaon",
+          "lat": 20.31,
+          "lng": 74.655,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "yeola",
+          "name": "Yeola",
+          "lat": 20.043,
+          "lng": 74.485,
+          "coordPrecision": "approximate"
+        },
+        {
+          "id": "deola",
+          "name": "Deola",
+          "lat": 20.523,
+          "lng": 74.488,
+          "coordPrecision": "approximate"
+        }
       ],
       "characteristics": {
-        "annualRainfallMm": { "min": 400, "max": 650 },
+        "annualRainfallMm": {
+          "min": 400,
+          "max": 650
+        },
         "humidity": "low",
         "terrain": "Open Deccan plateau plain",
         "irrigationAccess": "scarce"

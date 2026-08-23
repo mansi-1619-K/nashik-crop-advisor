@@ -55,8 +55,10 @@ Tests assert prompts contain no credential material.
 | Permanent (400/401/403) | fail fast to fallback |
 | Schema-invalid content | retried like transient; final failure reports which paths failed |
 
-Every terminal failure returns a **deterministic fallback** built from the same
-engine output (`lib/ai/fallback.ts`) — the app cannot crash from Gemini.
+Thinking depth is env-controlled (`GEMINI_THINKING`): default `low` keeps
+narration latency near-instant (measured p50 ≈ 1.5–1.8 s vs ≈ 19.9 s at
+`high`). Every terminal failure returns a **deterministic fallback** built from
+the same engine output (`lib/ai/fallback.ts`) — the app cannot crash from Gemini.
 
 ## Contextual assistant rules (`lib/ai/chat.ts`)
 

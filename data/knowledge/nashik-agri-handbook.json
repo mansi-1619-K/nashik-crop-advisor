@@ -20,8 +20,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["grape"],
-      "topics": ["powdery-mildew", "fungal-pressure", "spray-window", "canopy-management"],
+      "crops": [
+        "grape"
+      ],
+      "topics": [
+        "powdery-mildew",
+        "fungal-pressure",
+        "spray-window",
+        "canopy-management"
+      ],
       "content": [
         {
           "heading": "Conditions that favour pressure",
@@ -45,8 +52,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["grape"],
-      "topics": ["downy-mildew", "fungal-pressure", "rainfall", "leaf-wetness"],
+      "crops": [
+        "grape"
+      ],
+      "topics": [
+        "downy-mildew",
+        "fungal-pressure",
+        "rainfall",
+        "leaf-wetness"
+      ],
       "content": [
         {
           "heading": "Weather triggers",
@@ -69,8 +83,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["onion"],
-      "topics": ["thrips", "pest-pressure", "monitoring", "blue-sticky-traps"],
+      "crops": [
+        "onion"
+      ],
+      "topics": [
+        "thrips",
+        "pest-pressure",
+        "monitoring",
+        "blue-sticky-traps"
+      ],
       "content": [
         {
           "heading": "Monitoring",
@@ -93,8 +114,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["onion"],
-      "topics": ["purple-blotch", "fungal-pressure", "humidity", "spray-window"],
+      "crops": [
+        "onion"
+      ],
+      "topics": [
+        "purple-blotch",
+        "fungal-pressure",
+        "humidity",
+        "spray-window"
+      ],
       "content": [
         {
           "heading": "Favourable conditions",
@@ -117,8 +145,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["onion"],
-      "topics": ["post-harvest", "curing", "storage-ventilation", "spoilage-losses"],
+      "crops": [
+        "onion"
+      ],
+      "topics": [
+        "post-harvest",
+        "curing",
+        "storage-ventilation",
+        "spoilage-losses"
+      ],
       "content": [
         {
           "heading": "Curing",
@@ -142,8 +177,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["paddy"],
-      "topics": ["blast", "fungal-pressure", "humidity", "growth-stage-timing"],
+      "crops": [
+        "paddy"
+      ],
+      "topics": [
+        "blast",
+        "fungal-pressure",
+        "humidity",
+        "growth-stage-timing"
+      ],
       "content": [
         {
           "heading": "Risk windows",
@@ -166,8 +208,18 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["tomato", "onion", "grape", "pomegranate"],
-      "topics": ["irrigation-scheduling", "water-use-efficiency", "fertigation", "moisture-monitoring"],
+      "crops": [
+        "tomato",
+        "onion",
+        "grape",
+        "pomegranate"
+      ],
+      "topics": [
+        "irrigation-scheduling",
+        "water-use-efficiency",
+        "fertigation",
+        "moisture-monitoring"
+      ],
       "content": [
         {
           "heading": "Scheduling principle",
@@ -191,8 +243,19 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["tomato", "onion", "pomegranate", "guava", "soybean"],
-      "topics": ["mulching", "soil-moisture", "weed-suppression", "soil-temperature"],
+      "crops": [
+        "tomato",
+        "onion",
+        "pomegranate",
+        "guava",
+        "soybean"
+      ],
+      "topics": [
+        "mulching",
+        "soil-moisture",
+        "weed-suppression",
+        "soil-temperature"
+      ],
       "content": [
         {
           "heading": "Benefits",
@@ -216,7 +279,12 @@
       "credibility": "internal",
       "updated": "2026-08-23",
       "crops": [],
-      "topics": ["soil-testing", "nutrient-management", "ph", "sampling"],
+      "topics": [
+        "soil-testing",
+        "nutrient-management",
+        "ph",
+        "sampling"
+      ],
       "content": [
         {
           "heading": "Sampling method",
@@ -239,8 +307,17 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["soybean", "pigeon-pea", "onion", "tomato"],
-      "topics": ["seed-treatment", "seedling-diseases", "planting-quality"],
+      "crops": [
+        "soybean",
+        "pigeon-pea",
+        "onion",
+        "tomato"
+      ],
+      "topics": [
+        "seed-treatment",
+        "seedling-diseases",
+        "planting-quality"
+      ],
       "content": [
         {
           "heading": "Why treat",
@@ -264,7 +341,12 @@
       "credibility": "internal",
       "updated": "2026-08-23",
       "crops": [],
-      "topics": ["ipm", "pest-pressure", "economic-threshold", "natural-enemies"],
+      "topics": [
+        "ipm",
+        "pest-pressure",
+        "economic-threshold",
+        "natural-enemies"
+      ],
       "content": [
         {
           "heading": "Decision ladder",
@@ -287,8 +369,19 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["pearl-millet", "soybean", "pigeon-pea", "finger-millet", "little-millet"],
-      "topics": ["delayed-monsoon", "contingency-plan", "drought", "variety-substitution"],
+      "crops": [
+        "pearl-millet",
+        "soybean",
+        "pigeon-pea",
+        "finger-millet",
+        "little-millet"
+      ],
+      "topics": [
+        "delayed-monsoon",
+        "contingency-plan",
+        "drought",
+        "variety-substitution"
+      ],
       "content": [
         {
           "heading": "If sowing slips two to three weeks",
@@ -312,8 +405,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["pomegranate"],
-      "topics": ["bacterial-blight", "orchard-sanitation", "wound-protection", "spray-window"],
+      "crops": [
+        "pomegranate"
+      ],
+      "topics": [
+        "bacterial-blight",
+        "orchard-sanitation",
+        "wound-protection",
+        "spray-window"
+      ],
       "content": [
         {
           "heading": "How it spreads",
@@ -336,8 +436,15 @@
       "organization": "NCAdvisor editorial synthesis",
       "credibility": "internal",
       "updated": "2026-08-23",
-      "crops": ["tomato"],
-      "topics": ["post-harvest", "grading", "transport-shock", "shelf-life"],
+      "crops": [
+        "tomato"
+      ],
+      "topics": [
+        "post-harvest",
+        "grading",
+        "transport-shock",
+        "shelf-life"
+      ],
       "content": [
         {
           "heading": "Harvest and grading",
@@ -350,6 +457,337 @@
           "heading": "Transport",
           "paragraphs": [
             "Most tomato quality loss between farm and market traces to compression and vibration in overpacked crates plus heat build-up in closed vehicles. Ventilated stacking with airflow gaps preserves firmness better than any treatment applied after arrival."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "soybean-water-pests",
+      "title": "Soybean moisture and pest watch points",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "soybean"
+      ],
+      "topics": [
+        "water-management",
+        "girdle-beetle",
+        "semilooper",
+        "moisture-stress"
+      ],
+      "content": [
+        {
+          "heading": "Moisture sensitivity",
+          "paragraphs": [
+            "Soybean dislikes both extremes: waterlogged fields within the first fortnight after sowing stunt nodulation, while flowering-stage moisture stress cuts pod set disproportionately. Drainage channels matter as much as irrigation timing.",
+            "A light irrigation at flowering if monsoon gaps exceed ten days protects pod fill better than late rescue watering after visible wilting."
+          ]
+        },
+        {
+          "heading": "Pest watch windows",
+          "paragraphs": [
+            "Girdle beetle activity shows as moist sawdust-like frass on stems; semiloopers skeletonise leaves in patches. Both respond early to scouting-driven decisions rather than calendar sprays, preserving natural enemies that suppress later outbreaks."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "guava-orchard-care",
+      "title": "Guava orchard management and fruit-fly discipline",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "guava"
+      ],
+      "topics": [
+        "fruit-fly",
+        "orchard-sanitation",
+        "bahi-rota",
+        "pruning"
+      ],
+      "content": [
+        {
+          "heading": "Fruit-fly suppression",
+          "paragraphs": [
+            "Fruit-fly stings cause the familiar maggy fruit drop in guava. Sanitation dominates: collect and destroy dropped fruit weekly, and deploy pheromone traps at low density from fruit-set onward rather than after sting damage appears.",
+            "Harvesting at mature-green stage before full ripeness on trees destined for market removes the most vulnerable window entirely."
+          ]
+        },
+        {
+          "heading": "Crop regulation",
+          "paragraphs": [
+            "Bahar treatment through root pruning and restricted watering shifts the single heavy monsoon flush toward a more profitable winter crop with lower pest pressure. Pruning cuts should be closed-season work in dry weather."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pearl-millet-agronomy",
+      "title": "Pearl millet agronomy under receding moisture",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "pearl-millet"
+      ],
+      "topics": [
+        "spacing",
+        "earhead-pest",
+        "drought-escape"
+      ],
+      "content": [
+        {
+          "heading": "Stand establishment",
+          "paragraphs": [
+            "Pearl millet establishes on minimal moisture; shallow sowing behind a rain pulse into dust-mulched soil outperforms deep drilling. Thinning to uniform hills at two leaves matters more than seed rate because tillering compensates poorly under stress.",
+            "Row spacing widened in low-rain years trades some peak yield for a deeper per-plant moisture share, flattening failure risk across the season."
+          ]
+        },
+        {
+          "heading": "Earhead pests and grain filling",
+          "paragraphs": [
+            "Grain smut and ergot risk concentrates around cloudy flowering stretches; timely sowing so that flowering avoids peak humidity weeks is the cheapest documented defence. Birds favour dense continuous blocks, so scaring effort concentrates at milk stage."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pigeon-pea-pod-borer",
+      "title": "Pigeon pea: pod-borer watch and companion cropping",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "pigeon-pea"
+      ],
+      "topics": [
+        "pod-borer",
+        "heliothis",
+        "intercropping",
+        "pheromone-traps"
+      ],
+      "content": [
+        {
+          "heading": "Pod borer dynamics",
+          "paragraphs": [
+            "Helicoverpa pressure builds as pods set; pheromone-trap catches give two to three weeks of warning before larval damage becomes visible. Bird perches and trap crops such as marigold on field edges support threshold-based decisions.",
+            "Once larvae bore into pods, contact protection largely fails, which is why the monitoring window before bloom ends carries most of the value."
+          ]
+        },
+        {
+          "heading": "System design",
+          "paragraphs": [
+            "Intercropping pigeon pea with short-duration cereals or soybean keeps ground covered, interrupts pest movement and spreads cash flow across the season without materially reducing long-duration yields in documented trials."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tomato-caterpillar-nematode",
+      "title": "Tomato: fruit-borer and root-health basics",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "tomato"
+      ],
+      "topics": [
+        "fruit-borer",
+        "root-knot",
+        "staking",
+        "sanitation"
+      ],
+      "content": [
+        {
+          "heading": "Borer entry points",
+          "paragraphs": [
+            "Tomato fruit borers enter near the calyx; damaged fruit with entry holes must leave the field rather than being dumped between rows, or populations recycle within the same block. Staking and mulching reduce fruit-to-soil contact losses separately from pest pressure."
+          ]
+        },
+        {
+          "heading": "Root health rotation",
+          "paragraphs": [
+            "Root-knot pressure in repeatedly cropped sandy loams shows as knotted galls and patchy vigour; documented responses come from rotation away from solanaceae and organic matter building rather than any single-season intervention."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "finger-millet-agronomy",
+      "title": "Finger millet agronomy for hill and plain plots",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "finger-millet"
+      ],
+      "topics": [
+        "transplanting",
+        "nursery",
+        "drainage",
+        "nutrition-splitting"
+      ],
+      "content": [
+        {
+          "heading": "Nursery and transplant window",
+          "paragraphs": [
+            "Transplanted finger millet from a three-week nursery stands better against early monsoon weeds than direct sowing on the same land. The transplant shock window needs soft, wet soil, so it suits the western belt's reliable onset more than arid districts."
+          ]
+        },
+        {
+          "heading": "Nutrient timing",
+          "paragraphs": [
+            "Nitrogen split between transplant establishment and tillering matches uptake better than a single basal dose; excess early nitrogen encourages lodging and blast-susceptible growth in humid spells."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "onion-irrigation-timing",
+      "title": "Onion irrigation scheduling across bulb development",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "onion"
+      ],
+      "topics": [
+        "irrigation-scheduling",
+        "bulbing",
+        "drip-interval",
+        "cracking"
+      ],
+      "content": [
+        {
+          "heading": "Stage-wise demand",
+          "paragraphs": [
+            "Onion roots are shallow and the crop is unforgiving: steady moisture through vegetative growth and bulbing produces even bulbs, while alternating flood-and-dry cycles cause splitting, double bulbs and thick necks that cure badly.",
+            "Tapering irrigation in the last two weeks before harvest signals maturity, tightens skins and directly extends storage life."
+          ]
+        },
+        {
+          "heading": "Drip intervals",
+          "paragraphs": [
+            "Dripped onion on medium black soils commonly runs short sets daily or alternate days in rabi afternoons; the practical check is topsoil feel at dawn, not calendar days, because dew fog and cloud change evaporation sharply week to week."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grape-harvest-thinning",
+      "title": "Table grape bunch management toward harvest",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "grape"
+      ],
+      "topics": [
+        "berry-thinning",
+        "harvest-timing",
+        "bunch-position",
+        "quality-grades"
+      ],
+      "content": [
+        {
+          "heading": "Bunch architecture",
+          "paragraphs": [
+            "Berry thinning and tip removal trade total tonnage for grade-out quality: open, well-spaced bunches colour evenly, dry faster after dew and take export-grade photographs. Overcrowded shoulders that touch each other bruise invisibly and spoil late."
+          ]
+        },
+        {
+          "heading": "Harvest decision",
+          "paragraphs": [
+            "Cutting decisions key off TSS readings and berry colour rather than days after pruning alone; morning harvest into shaded crates preserves berry turgor, and bunches cut wet from dew invite stem browning by arrival."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "farm-pond-water-harvesting",
+      "title": "Farm ponds and in-field water harvesting",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [],
+      "topics": [
+        "water-harvesting",
+        "farm-pond",
+        "runoff",
+        "protective-irrigation"
+      ],
+      "content": [
+        {
+          "heading": "Sizing and siting",
+          "paragraphs": [
+            "A farm pond sized to hold one protective irrigation for the largest plot it serves changes contingency math during monsoon breaks; siting on the lowest contour corner captures field runoff that would otherwise leave with the topsoil."
+          ]
+        },
+        {
+          "heading": "Keeping water in",
+          "paragraphs": [
+            "Seepage losses dominate small ponds; lining only the wetted zone or maintaining a clay seal plus a silt trap at the inlet preserves capacity between refills. Fencing and a washing pad keep livestock from destabilising bunds."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heat-stress-vegetables",
+      "title": "Managing heat stress in summer vegetables",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [
+        "tomato",
+        "onion"
+      ],
+      "topics": [
+        "heat-stress",
+        "summer-planting",
+        "shade",
+        "mulching"
+      ],
+      "content": [
+        {
+          "heading": "Physiology of the slump",
+          "paragraphs": [
+            "Above mid-thirties Celsius, tomato pollen fails and onion bulbing races ahead of leaf area, shrinking size grades. The documented levers are earlier planting dates, evening irrigation that cools the root zone overnight and light mulch that keeps surface temperatures down."
+          ]
+        },
+        {
+          "heading": "Shade strategy",
+          "paragraphs": [
+            "Thirty to forty per cent shade nets over nursery beds and young transplants cut transplant shock visibly in May-June; permanent shade over fruiting tomato usually costs more yield in light than it saves in heat, so it stays a nursery tool here."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windbreak-storm-preparedness",
+      "title": "Windbreaks and pre-storm field preparedness",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [],
+      "topics": [
+        "windbreak",
+        "storm",
+        "lodging",
+        "protection-belt"
+      ],
+      "content": [
+        {
+          "heading": "Structural wind protection",
+          "paragraphs": [
+            "Multi-row windbreaks of casuarina, subabul or even tall sorghum strips reduce mechanical lodging and flower drop across a protected distance of several times their height on the lee side. Gaps aligned with prevailing storm winds undo much of the effect."
+          ]
+        },
+        {
+          "heading": "Before the forecast turns red",
+          "paragraphs": [
+            "Pre-monsoon and pre-winter storm checklists are cheap: stake young orchard trees, drain standing water paths, harvest anything market-ready rather than risking it, and secure net houses and drip mains against lifting."
           ]
         }
       ]

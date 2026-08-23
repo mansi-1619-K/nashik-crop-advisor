@@ -3,6 +3,7 @@
 **Hyperlocal AI Decision Support for Climate-Aware Crop Planning** — Nashik District, Maharashtra.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white)
+![CI](https://github.com/mansi-1619-K/nashik-crop-advisor/actions/workflows/ci.yml/badge.svg)
 ![React](https://img.shields.io/badge/React-19-232129?logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)

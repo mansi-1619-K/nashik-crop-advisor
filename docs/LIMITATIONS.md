@@ -13,21 +13,28 @@
    the provider seam exists but no live price source is wired.
 4. **Approximate taluka coordinates**, unsuitable for field-level precision.
 5. **English-only UI**; Marathi labels exist in data but no localization yet.
-6. **High narration latency with the default model**: measured p50 ≈ 20 s /
-   p95 ≈ 33 s on `gemini-3.6-flash` (thinking model). Configurable via
-   `GEMINI_MODEL`; a faster non-thinking variant would trade depth for speed.
-7. **Retrieval is lexical, not semantic** — paraphrases outside the corpus
-   vocabulary can miss; measured R@3 = 1.0 applies to the committed label set
-   only, and the corpus itself is small (14 documents, English).
+6. **Narration latency is thinking-mode dependent.** Default `GEMINI_THINKING=low`
+   measures p50 ≈ 1.5–1.8 s; `GEMINI_THINKING=high` measures p50 ≈ 19.9 s /
+   p95 ≈ 33.5 s with deeper phrasing. Both modes are first-attempt schema-valid
+   in probe runs.
+7. **Retrieval is lexical, not semantic** — BM25 scoring with phrase-adjacency
+   bonuses over a 25-document corpus; paraphrase gaps outside the corpus
+   vocabulary can still miss. Measured R@3 = 1.0 / MRR = 1.0 applies to the
+   committed label set only.
 8. **Evaluation fixtures are desk judgements** (`quality: assumed`): metrics
    validate engineering consistency and documented behaviour, not field-validated
    agronomy or real farmer outcomes.
-9. **Chat history is ephemeral by design** (last 6 turns, no persistence) —
-   privacy-first choice, at the cost of continuity across sessions.
-10. **No CI pipeline**: tests and evaluation are developer-invoked commands.
-11. **Live Gemini behaviour was measured over 5 calls** — enough to validate the
-    contract (schema validity, fallback rate, citation honesty), not a statistical
-    study of model quality.
+9. **Chat history is ephemeral by default** (last 6 turns per request). Opt-in
+   transcript persistence stores only on the farmer's own device (localStorage),
+   never server-side.
+10. **Live Gemini behaviour was measured over small samples** — enough to
+    validate the contract (schema validity, fallback rate, citation honesty),
+    not a statistical study of model quality. `EVAL_AI_REPEATS` allows larger
+    runs, bounded by free-tier daily quota, which caps how many live calls a
+    day the evaluation harness itself can make.
+11. **No automated CI for live-AI metrics**: CI runs lint/typecheck/tests/build/
+    deterministic evaluation on every push; live-AI measurement stays manual by
+    design (quota + nondeterminism).
 
 ## Standing honesty rules
 

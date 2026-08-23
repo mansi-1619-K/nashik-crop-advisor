@@ -1,4 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
+import type { ThinkingLevel } from "@google/genai";
 import type { ZodType } from "zod";
 
 export interface GenerationRequest {
@@ -33,6 +34,19 @@ export class GeneratorPermanentError extends Error {
 
 const DEFAULT_MODEL = "gemini-3.6-flash";
 
+/**
+ * Thinking-depth control. The narration task is grounded and structured, so a
+ * shallow reasoning pass keeps p50 latency near-instant (measured ~2s vs ~20s).
+ * Set GEMINI_THINKING=high for deeper phrasing at measured cost;
+ * GEMINI_THINKING=default defers to the model's own behaviour.
+ */
+function resolveThinkingConfig(): { thinkingConfig?: { thinkingLevel: ThinkingLevel } } {
+  const level = process.env.GEMINI_THINKING?.trim().toLowerCase();
+  if (!level || level === "low") return { thinkingConfig: { thinkingLevel: "LOW" as ThinkingLevel } };
+  if (level === "high") return { thinkingConfig: { thinkingLevel: "HIGH" as ThinkingLevel } };
+  return {};
+}
+
 class GeminiJsonGenerator implements JsonGenerator {
   private client: GoogleGenAI | null = null;
 
@@ -53,6 +67,7 @@ class GeminiJsonGenerator implements JsonGenerator {
           systemInstruction: request.systemInstruction,
           temperature: 0.4,
           responseMimeType: "application/json",
+          ...resolveThinkingConfig(),
         },
       });
       text = response.text;

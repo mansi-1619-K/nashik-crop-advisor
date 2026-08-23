@@ -29,6 +29,10 @@ const CREDIBILITY_WEIGHT: Record<string, number> = {
   internal: 0,
 };
 
+/** Okapi BM25 parameters — k1 controls tf saturation, b length normalisation. */
+const BM25_K1 = 1.4;
+const BM25_B = 0.75;
+
 export interface EvidenceRetriever {
   retrieve(query: string, opts?: { topK?: number; minScore?: number }): EvidenceBundle;
 }
@@ -36,6 +40,8 @@ export interface EvidenceRetriever {
 interface IndexedChunk {
   chunk: KnowledgeChunk;
   tokens: Map<string, number>;
+  /** Ordered token stream used for phrase-adjacency bonuses. */
+  sequence: string[];
   length: number;
 }
 
@@ -48,7 +54,9 @@ interface IndexedChunk {
 export function createEvidenceRetriever(loadChunks: () => KnowledgeChunk[]): EvidenceRetriever {
   function retrieve(query: string, opts?: { topK?: number; minScore?: number }): EvidenceBundle {
     const topK = Math.max(1, opts?.topK ?? 3);
-    const minScore = opts?.minScore ?? 0.5;
+    // Epsilon floor: only queries whose tokens match NOTHING come back empty.
+    // BM25 magnitudes vary with corpus composition, so no absolute cutoff.
+    const minScore = opts?.minScore ?? Number.EPSILON;
     let chunks: KnowledgeChunk[];
     try {
       chunks = loadChunks();
@@ -61,21 +69,24 @@ export function createEvidenceRetriever(loadChunks: () => KnowledgeChunk[]): Evi
       return { chunks: [], citations: [], unavailable: false };
     }
 
+    // Index: term frequencies (tags count double — strongest intent signals)
+    // plus true document lengths for BM25 length normalisation.
     const indexed: IndexedChunk[] = chunks.map((chunk) => {
       const tokens = new Map<string, number>();
-      for (const token of [
-        ...tokenize(chunk.text),
-        ...chunk.topics.flatMap((t) => t.split("-")),
-        ...chunk.crops.flatMap((c) => c.split("-")),
-      ]) {
+      const bodyTokens = tokenize(chunk.text);
+      for (const token of bodyTokens) {
         tokens.set(token, (tokens.get(token) ?? 0) + 1);
       }
-      // Topic/crop tags count double — they are the strongest intent signals.
       for (const tag of [...chunk.topics.flatMap((t) => tokenize(t)), ...chunk.crops]) {
-        tokens.set(tag, (tokens.get(tag) ?? 0) + 1);
+        for (const part of tokenize(tag).length > 0 ? tokenize(tag) : [tag]) {
+          tokens.set(part, (tokens.get(part) ?? 0) + 2);
+        }
       }
-      return { chunk, tokens, length: Math.max(8, [...tokenize(chunk.text)].length) };
+      return { chunk, tokens, sequence: bodyTokens, length: Math.max(8, bodyTokens.length) };
     });
+
+    const N = indexed.length;
+    const avgdl = indexed.reduce((sum, e) => sum + e.length, 0) / N;
 
     const docFreq = new Map<string, number>();
     for (const token of queryTokens) {
@@ -85,14 +96,35 @@ export function createEvidenceRetriever(loadChunks: () => KnowledgeChunk[]): Evi
       docFreq.set(token, df);
     }
 
-    const scored = indexed.map(({ chunk, tokens, length }) => {
+    const idf = (df: number) => Math.log((N - df + 0.5) / (df + 0.5) + 1);
+
+    /** Count adjacent occurrences of a query bigram in the chunk token stream. */
+    const phraseCount = (sequence: string[], a: string, b: string): number => {
+      let count = 0;
+      for (let i = 0; i < sequence.length - 1; i++) {
+        if (sequence[i] === a && sequence[i + 1] === b) count++;
+      }
+      return count;
+    };
+
+    const scored = indexed.map(({ chunk, tokens, sequence, length }) => {
       let score = 0;
       for (const token of queryTokens) {
         const tf = tokens.get(token);
         if (!tf) continue;
-        const idf = Math.log(1 + indexed.length / (1 + (docFreq.get(token) ?? 0)));
-        score += (tf / length) * idf * 6;
+        const df = docFreq.get(token) ?? 0;
+        const norm = tf * (BM25_K1 + 1) / (tf + BM25_K1 * (1 - BM25_B + BM25_B * (length / avgdl)));
+        score += idf(df) * norm;
       }
+      // Phrase-adjacency bonus: multi-word concepts ("powdery mildew") that
+      // appear verbatim outrank incidental single-word mentions.
+      let bonus = 0;
+      for (let i = 0; i < queryTokens.length - 1; i++) {
+        const [a, b] = [queryTokens[i], queryTokens[i + 1]];
+        const df = docFreq.get(a) ?? 0;
+        bonus += 0.6 * Math.min(phraseCount(sequence, a, b), 3) * idf(df);
+      }
+      score += Math.min(bonus, 2.5);
       score += CREDIBILITY_WEIGHT[chunk.credibility] ?? 0;
       return { chunk, score };
     });

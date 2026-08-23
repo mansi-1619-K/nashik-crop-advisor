@@ -7,32 +7,32 @@
     "primaryAccuracyMeasured": 1,
     "primaryAccuracyNumerator": 5,
     "primaryAccuracyDenominator": 5,
-    "latencyMsP50": 0.412,
-    "latencyMsP95": 23.45,
+    "latencyMsP50": 0.382,
+    "latencyMsP95": 23.29,
     "perScenario": [
       {
         "id": "heavy-rain-kharif-alluvial-rainfed",
         "kind": "synthetic",
         "failures": [],
-        "latencyMs": 23.45
+        "latencyMs": 23.29
       },
       {
         "id": "central-rabi-medium-black-assured",
         "kind": "expert",
         "failures": [],
-        "latencyMs": 0.65
+        "latencyMs": 0.71
       },
       {
         "id": "arid-kharif-shallow-rainfed",
         "kind": "expert",
         "failures": [],
-        "latencyMs": 0.596
+        "latencyMs": 0.588
       },
       {
         "id": "grape-laterite-excluded",
         "kind": "edge-case",
         "failures": [],
-        "latencyMs": 0.462
+        "latencyMs": 0.445
       },
       {
         "id": "central-rabi-rainfed-empty",
@@ -44,31 +44,31 @@
         "id": "arid-summer-sandy-limited",
         "kind": "synthetic",
         "failures": [],
-        "latencyMs": 0.412
+        "latencyMs": 0.382
       },
       {
         "id": "perennial-orchard-deep-black-assured",
         "kind": "expert",
         "failures": [],
-        "latencyMs": 0.351
+        "latencyMs": 0.343
       },
       {
         "id": "monsoon-substitution-shallow-shallow",
         "kind": "edge-case",
         "failures": [],
-        "latencyMs": 0.33
+        "latencyMs": 0.334
       },
       {
         "id": "arid-kharif-medium-black-limited",
         "kind": "synthetic",
         "failures": [],
-        "latencyMs": 0.527
+        "latencyMs": 0.521
       },
       {
         "id": "heavy-rainfall-wrong-season-empty",
         "kind": "edge-case",
         "failures": [],
-        "latencyMs": 0.199
+        "latencyMs": 0.195
       }
     ]
   },

@@ -1,5 +1,21 @@
 # Development Log
 
+## Post-completion hardening round 1 (2026-08-23)
+
+- CI: GitHub Actions workflow (lint → typecheck → tests → build → deterministic
+  evaluation) with report artifact + README badge
+- Latency: `GEMINI_THINKING` control (default LOW ≈ 1.5–1.8s p50 measured vs
+  ≈ 19.9s at HIGH); thinkingBudget:0 is rejected by Gemini 3 — thinkingLevel is
+  the working lever; eval harness gained EVAL_AI_REPEATS/EVAL_AI_PACE_MS and
+  records per-call fallback reasons (caught our own burst-429s masquerading as
+  model failures)
+- Retrieval: TF-IDF heuristic → Okapi BM25 (k1=1.4, b=0.75) + IDF-weighted
+  phrase-adjacency bonus; corpus expanded 14→25 documents; MRR restored to 1.0
+  after the phrase bonus fixed a downy-vs-powdery mildew rank inversion
+- Chat transcript persistence now opt-in on-device (localStorage, clear button,
+  honest ephemeral/saved status line)
+- Taluka centroids refined to 3-decimal values (zones dataset v0.2.0)
+
 ## Phase 7 — Project Close-Out (2026-08-23)
 
 - Architecture finalized (layer diagram, failure-resilience chain, module map)

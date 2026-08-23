@@ -21,8 +21,12 @@ async function main() {
     { zoneId: "arid-eastern", seasonId: "kharif", soilId: "shallow-black", waterAvailability: "rainfed" },
   ] as const;
 
-  const cases = defaultAiCases(contexts.map((c) => ({ ...c })));
-  process.stdout.write(`Running ${cases.length} live AI calls (model ${process.env.GEMINI_MODEL ?? "default"})...\n`);
+  const repeats = Math.max(1, Number(process.env.EVAL_AI_REPEATS ?? "1") || 1);
+  const baseCases = defaultAiCases(contexts.map((c) => ({ ...c })));
+  const cases = Array.from({ length: repeats }, () => baseCases).flat();
+  process.stdout.write(
+    `Running ${cases.length} live AI calls (model ${process.env.GEMINI_MODEL ?? "default"}, thinking ${process.env.GEMINI_THINKING?.trim().toLowerCase() || "low"})...\n`,
+  );
 
   const summary = await evaluateAiLayer(cases);
 
@@ -35,9 +39,13 @@ async function main() {
       `First-attempt schema validity: ${summary.firstAttemptValidityRate}\n` +
       `Mean attempts: ${summary.meanAttempts}\n` +
       `Latency p50/p95: ${summary.latencyMsP50}/${summary.latencyMsP95} ms\n` +
-      `Citation emission rate: ${summary.citationEmissionRate}; calls with dropped hallucinated ids: ${summary.hallucinatedCitationCalls}\n` +
-      `Saved: evaluation/reports/ai-eval.json\n`,
+      `Citation emission rate: ${summary.citationEmissionRate}; calls with dropped hallucinated ids: ${summary.hallucinatedCitationCalls}\n`,
   );
+  if (summary.fallbackReasons && summary.fallbackReasons.length > 0) {
+    process.stdout.write("Fallback reasons:\n");
+    for (const reason of summary.fallbackReasons) process.stdout.write(`  - ${reason}\n`);
+  }
+  process.stdout.write(`Saved: evaluation/reports/ai-eval.json\n`);
 }
 
 void main();

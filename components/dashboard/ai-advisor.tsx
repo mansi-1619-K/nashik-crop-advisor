@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Loader2, Send } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Loader2, Send, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { AdvisoryResult } from "@/lib/ai/advisory";
 import type { ChatResult } from "@/lib/ai/chat";
@@ -22,6 +22,8 @@ interface ChatMessage {
   caveats?: string[];
   citations?: Citation[];
 }
+
+const TRANSCRIPT_KEY = "ncadvisor-transcript-v1";
 
 const SOURCE_BADGE = {
   ai_generated: { variant: "success" as const, label: "AI-GENERATED" },
@@ -67,6 +69,48 @@ export function AiAdvisorPanel({
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Opt-in only: nothing is written to this device until the farmer enables it.
+  const [keepTranscript, setKeepTranscript] = useState(false);
+
+  // Hydrate an opted-in transcript from this device after mount.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(`${TRANSCRIPT_KEY}-enabled`) !== "1") return;
+      const raw = localStorage.getItem(TRANSCRIPT_KEY);
+      queueMicrotask(() => {
+        setKeepTranscript(true);
+        if (raw) {
+          const parsed = JSON.parse(raw) as ChatMessage[];
+          if (Array.isArray(parsed)) setMessages(parsed);
+        }
+      });
+    } catch {
+      /* storage unavailable — ephemeral mode */
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (keepTranscript) {
+        localStorage.setItem(`${TRANSCRIPT_KEY}-enabled`, "1");
+        localStorage.setItem(TRANSCRIPT_KEY, JSON.stringify(messages.slice(-20)));
+      } else {
+        localStorage.removeItem(TRANSCRIPT_KEY);
+        localStorage.removeItem(`${TRANSCRIPT_KEY}-enabled`);
+      }
+    } catch {
+      /* storage unavailable — ephemeral mode */
+    }
+  }, [messages, keepTranscript]);
+
+  function clearTranscript() {
+    setMessages([]);
+    try {
+      localStorage.removeItem(TRANSCRIPT_KEY);
+    } catch {
+      /* noop */
+    }
+  }
 
   async function ask(question: string) {
     const trimmed = question.trim();
@@ -190,7 +234,21 @@ export function AiAdvisorPanel({
 
         <div className="mt-6 border-t-2 border-ink pt-4">
           {messages.length > 0 && (
-            <ul className="mb-3 max-h-80 space-y-3 overflow-y-auto pr-1">
+            <>
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <p className="font-mono text-[9px] uppercase tracking-widest text-ink-soft">
+                  {keepTranscript
+                    ? "Transcript saved on this device only"
+                    : "Ephemeral session — nothing stored"}
+                </p>
+                <button
+                  onClick={clearTranscript}
+                  className="flex items-center gap-1 border border-ink px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider transition-colors duration-75 hover:bg-alarm hover:text-paper"
+                >
+                  <Trash2 size={10} aria-hidden /> Clear
+                </button>
+              </div>
+              <ul className="mb-3 max-h-80 space-y-3 overflow-y-auto pr-1">
               {messages.map((m, i) =>
                 m.role === "user" ? (
                   <li
@@ -218,35 +276,43 @@ export function AiAdvisorPanel({
                   </li>
                 ),
               )}
-            </ul>
+              </ul>
+            </>
           )}
 
           <form
-            className="flex items-stretch gap-0"
-            onSubmit={(e) => {
-              e.preventDefault();
-              void ask(input);
-            }}
+            className="flex flex-wrap items-center justify-between gap-2"
           >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder='Ask about this analysis — e.g. "why onion?" or "what if prices fall?"'
-              maxLength={500}
-              className="min-w-0 flex-1 border-2 border-r-0 border-ink bg-white px-3 py-2 font-mono text-sm focus:border-acid-deep focus:outline-none"
-            />
-            <button
-              type="submit"
-              disabled={sending || input.trim().length === 0}
-              className="inline-flex shrink-0 items-center gap-1.5 border-2 border-ink bg-acid px-4 font-display text-sm uppercase transition-colors duration-75 hover:bg-ink hover:text-acid disabled:opacity-50"
-            >
-              {sending ? (
-                <Loader2 size={14} className="animate-spin" aria-hidden />
-              ) : (
-                <Send size={14} aria-hidden />
-              )}
-              Send →
-            </button>
+            <label className="flex cursor-pointer items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-ink-soft">
+              <input
+                type="checkbox"
+                checked={keepTranscript}
+                onChange={(e) => setKeepTranscript(e.target.checked)}
+                className="h-3 w-3 accent-acid-deep"
+              />
+              Keep transcript on this device
+            </label>
+            <div className="flex min-w-[240px] flex-1 items-stretch gap-0">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder='Ask about this analysis — e.g. "why onion?" or "what if prices fall?"'
+                maxLength={500}
+                className="min-w-0 flex-1 border-2 border-r-0 border-ink bg-white px-3 py-2 font-mono text-sm focus:border-acid-deep focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={sending || input.trim().length === 0}
+                className="inline-flex shrink-0 items-center gap-1.5 border-2 border-ink bg-acid px-4 font-display text-sm uppercase transition-colors duration-75 hover:bg-ink hover:text-acid disabled:opacity-50"
+              >
+                {sending ? (
+                  <Loader2 size={14} className="animate-spin" aria-hidden />
+                ) : (
+                  <Send size={14} aria-hidden />
+                )}
+                Send →
+              </button>
+            </div>
           </form>
           {error && (
             <p className="mt-2 border-l-8 border-alarm pl-2 font-mono text-[11px] uppercase text-alarm">

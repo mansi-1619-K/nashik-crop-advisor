@@ -122,6 +122,8 @@ export interface AiCallRecord {
   latencyMs: number;
   citationCount: number;
   hallucinatedCitations: number;
+  /** Failure reason when source === "static" (rate limit, schema, auth…). */
+  error?: string;
 }
 
 export interface AiEvalSummary {
@@ -138,4 +140,6 @@ export interface AiEvalSummary {
   citationEmissionRate: number;
   hallucinatedCitationCalls: number;
   note?: string;
+  /** Deduplicated failure reasons for calls that ended in static fallback. */
+  fallbackReasons?: string[];
 }

@@ -94,8 +94,16 @@ export async function evaluateAiLayer(cases: AiEvalCase[]): Promise<AiEvalSummar
 
   const recorded = new RecordingGenerator(generator);
   const records: AiCallRecord[] = [];
+  // Pace calls so measurement does not trip provider rate limits — a burst of
+  // unspaced requests produces 429-driven fallbacks that are OUR artefact,
+  // not the model's.
+  const paceMs = Number(process.env.EVAL_AI_PACE_MS ?? "1500") || 1500;
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+  let first = true;
   for (const testCase of cases) {
+    if (!first && paceMs > 0) await sleep(paceMs);
+    first = false;
     const engine = generateRecommendations(testCase.context);
     let evidence: EvidenceBundle | undefined;
     try {
@@ -138,6 +146,7 @@ export async function evaluateAiLayer(cases: AiEvalCase[]): Promise<AiEvalSummar
       latencyMs: Number(latencyMs.toFixed(1)),
       citationCount: result.citations?.length ?? 0,
       hallucinatedCitations: hallucinated.length,
+      ...(result.source === "static" && result.error ? { error: result.error } : {}),
     });
   }
 
@@ -161,5 +170,12 @@ export async function evaluateAiLayer(cases: AiEvalCase[]): Promise<AiEvalSummar
       (records.filter((r) => r.citationCount > 0).length / records.length).toFixed(4),
     ),
     hallucinatedCitationCalls: records.filter((r) => r.hallucinatedCitations > 0).length,
+    fallbackReasons: [
+      ...new Set(
+        records
+          .filter((r) => r.error)
+          .map((r) => `${r.task}/${r.scenarioId}: ${r.error?.slice(0, 140)}`),
+      ),
+    ],
   };
 }
