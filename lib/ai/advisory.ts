@@ -1,5 +1,7 @@
 import type { RecommendationOutput } from "@/lib/agriculture/results";
 import type { WeatherSignal } from "@/lib/agriculture/weatherRisk";
+import { resolveCitations } from "@/lib/rag/evidence";
+import type { Citation, EvidenceBundle } from "@/lib/rag/types";
 import {
   generateValidated,
   type JsonGenerator,
@@ -10,10 +12,22 @@ import { buildFallbackNarrative } from "./fallback";
 
 export interface AdvisoryResult {
   source: "ai_generated" | "static";
-  narrative: AdvisoryNarrative;
+  narrative: Omit<AdvisoryNarrative, "citationIds">;
+  citations?: Citation[];
   model?: string;
   attempts?: number;
   error?: string;
+}
+
+function splitCitations<T extends { citationIds?: string[] }>(
+  payload: T,
+  bundle: EvidenceBundle | undefined,
+): { cleaned: Omit<T, "citationIds">; citations: Citation[] } {
+  const { citationIds, ...cleaned } = payload;
+  return {
+    cleaned: cleaned as Omit<T, "citationIds">,
+    citations: resolveCitations(citationIds, bundle ?? { chunks: [], citations: [], unavailable: false }),
+  };
 }
 
 export function narrateRecommendation(input: {
@@ -21,6 +35,7 @@ export function narrateRecommendation(input: {
   contextSummary: string;
   weatherSignals?: WeatherSignal[];
   weatherFreshness?: string | null;
+  evidence?: EvidenceBundle;
   generator?: JsonGenerator | null;
 }): Promise<AdvisoryResult> {
   const prompt = buildAdvisoryPayload({
@@ -28,6 +43,7 @@ export function narrateRecommendation(input: {
     engine: input.engine,
     weatherSignals: input.weatherSignals,
     weatherFreshness: input.weatherFreshness ?? null,
+    evidence: input.evidence,
   });
 
   return generateValidated({
@@ -38,9 +54,11 @@ export function narrateRecommendation(input: {
     prompt,
   }).then((result): AdvisoryResult => {
     if (result.ok && result.data) {
+      const { cleaned, citations } = splitCitations(result.data, input.evidence);
       return {
         source: "ai_generated",
-        narrative: result.data,
+        narrative: cleaned,
+        ...(citations.length > 0 ? { citations } : {}),
         model: result.model,
         attempts: result.attempts,
       };

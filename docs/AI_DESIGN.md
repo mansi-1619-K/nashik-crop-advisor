@@ -29,7 +29,9 @@ labelled `STATIC FALLBACK` in the UI.
 
 Sent: zone / taluka / season / soil / water availability, engine scores, factor
 reasons, estimated economics *ranges*, constraint violations, weather-signal
-summaries.
+summaries, and (Phase 5) passages from the local reference handbook with their
+credibility tiers. Retrieved passages originate from our own corpus file — no
+farmer data enters retrieval.
 
 Never sent: names, contacts, coordinates more precise than taluka centroids, chat
 content beyond the current session's last 6 turns. No analytics on farmer input.

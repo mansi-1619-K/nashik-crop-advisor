@@ -1,0 +1,358 @@
+{
+  "meta": {
+    "id": "nashik-agri-handbook",
+    "name": "Nashik Agronomy Reference Handbook",
+    "version": "0.1.0",
+    "updated": "2026-08-23",
+    "quality": "assumed",
+    "disclaimer": "All passages are EDITORIAL SYNDHESES of widely documented agronomic practice, written by the NCAdvisor desk for retrieval grounding. They are not verbatim quotes from ICAR/university/department publications and carry credibility tier 'internal'. Validate every statement against official packages of practice before field use.",
+    "sources": [
+      {
+        "label": "NCAdvisor editorial synthesis of publicly documented practices - pending validation against ICAR crop guides, MPKV packages of practice and Maharashtra agriculture department advisories",
+        "retrievedAt": "2026-08-23"
+      }
+    ]
+  },
+  "documents": [
+    {
+      "id": "grape-powdery-mildew-prevention",
+      "title": "Preventive management of powdery mildew in table grapes",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["grape"],
+      "topics": ["powdery-mildew", "fungal-pressure", "spray-window", "canopy-management"],
+      "content": [
+        {
+          "heading": "Conditions that favour pressure",
+          "paragraphs": [
+            "Powdery mildew pressure in vineyards rises with warm days followed by humid nights, crowded canopies that trap moisture, and prolonged leaf wetness around dawn. Growers monitor these conditions rather than wait for visible symptoms.",
+            "Dense canopy shading reduces air movement and keeps berry surfaces humid for longer after dew events. Shoot positioning and leaf removal around fruit zones are standard preventive measures in the Nashik grape belt."
+          ]
+        },
+        {
+          "heading": "Preventive actions",
+          "paragraphs": [
+            "Protectant sprays are timed to forecast windows of high humidity rather than to visible infection, because once colonies establish they are difficult to reverse within the season. Spray intervals shorten during consecutive humid nights.",
+            "Keep spray records and respect pre-harvest intervals on every label. Rotating fungicide groups between windows slows resistance build-up, which is a documented concern in intensive grape districts."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grape-downy-mildew-rain",
+      "title": "Downy mildew risk windows in western Maharashtra vineyards",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["grape"],
+      "topics": ["downy-mildew", "fungal-pressure", "rainfall", "leaf-wetness"],
+      "content": [
+        {
+          "heading": "Weather triggers",
+          "paragraphs": [
+            "Downy mildew pressure follows rainfall or overhead wetting with temperatures roughly between 18 and 28 degrees Celsius, when leaves stay wet for several hours overnight. The risk window opens most strongly after the first monsoon showers.",
+            "Unlike powdery mildew, downy mildew needs free water on plant surfaces. Forecast rain therefore converts directly into a precaution window: protect before the rain event where the schedule allows."
+          ]
+        },
+        {
+          "heading": "Vineyard hygiene",
+          "paragraphs": [
+            "Removing fallen infected leaves and keeping the vineyard floor free of standing water reduces overseasoning inoculum. Drainage correction in low spots is a permanent structural measure against downy mildew cycles."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "onion-thrips-control",
+      "title": "Thrips management in onion fields",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["onion"],
+      "topics": ["thrips", "pest-pressure", "monitoring", "blue-sticky-traps"],
+      "content": [
+        {
+          "heading": "Monitoring",
+          "paragraphs": [
+            "Thrips numbers climb in dry, hot spells and hide inside leaf axils where contact coverage is poor. Counts on blue sticky traps plus weekly checks of three to five plants per patch give an early signal before silvery streaking becomes widespread.",
+            "Silvery-white patches along leaves that later dry from the tip indicate feeding damage is already significant; the goal of monitoring is to act before this stage."
+          ]
+        },
+        {
+          "heading": "Cultural measures",
+          "paragraphs": [
+            "Avoiding adjacent new and old onion blocks, destroying crop residue after harvest, and maintaining uniform moisture all reduce thrips carry-over between seasons. Overhead irrigation occasionally suppresses thrips but must be weighed against disease risk in the same crop."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "onion-purple-blotch-humidity",
+      "title": "Purple blotch prevention in onion under humid conditions",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["onion"],
+      "topics": ["purple-blotch", "fungal-pressure", "humidity", "spray-window"],
+      "content": [
+        {
+          "heading": "Favourable conditions",
+          "paragraphs": [
+            "Purple blotch advances when relative humidity stays high for consecutive days, especially between 20 and 30 degrees Celsius with persistent leaf wetness from dew, fog or drizzle. Fields that stayed wet into late morning are the ones to watch first.",
+            "Thrips feeding wounds act as entry points, so thrips control is part of purple blotch prevention rather than a separate problem."
+          ]
+        },
+        {
+          "heading": "Prevention",
+          "paragraphs": [
+            "Preventive protectant applications ahead of multi-day humid spells are more effective than curative spraying after lesions appear. Wider spacing and east-west row orientation improve drying and reduce the number of high-risk mornings."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "onion-curing-storage",
+      "title": "Onion curing and ventilated storage essentials",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["onion"],
+      "topics": ["post-harvest", "curing", "storage-ventilation", "spoilage-losses"],
+      "content": [
+        {
+          "heading": "Curing",
+          "paragraphs": [
+            "Field curing for three to five days in shade with good airflow seals necks and dries outer skins, which is the single biggest lever on storage life. Bulbs cured under direct harsh sun risk sunscald and uneven drying.",
+            "Necks that remain soft and thick after curing point to excess nitrogen or premature harvest and predict higher storage losses."
+          ]
+        },
+        {
+          "heading": "Storage",
+          "paragraphs": [
+            "Storage structures keep bulbs in single layers or shallow bins with continuous ventilation; stacked deep bags without airflow trap respiration heat and trigger rot. Periodic sorting out of sprouted or soft bulbs protects the remaining lot.",
+            "Storage losses above roughly twenty per cent usually trace back to poor curing, damaged bulbs going into store, or blocked ventilation rather than to any single late-season cause."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paddy-blast-humidity",
+      "title": "Blast watch conditions in transplanted paddy",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["paddy"],
+      "topics": ["blast", "fungal-pressure", "humidity", "growth-stage-timing"],
+      "content": [
+        {
+          "heading": "Risk windows",
+          "paragraphs": [
+            "Blast pressure peaks with long cloudy spells, high humidity and cool nights around panicle initiation and flowering. Continuous mist or drizzle over hills, typical of the western belt, extends leaf wetness well past dawn.",
+            "Excess nitrogen pushes lush growth that stays susceptible longer, so nitrogen scheduling interacts directly with blast exposure at heading."
+          ]
+        },
+        {
+          "heading": "Preventive stance",
+          "paragraphs": [
+            "Scouting focuses on the flag leaf and neck region during the two weeks around flowering because neck blast causes the largest yield hits. Protective fungicide decisions keyed to forecast humid-cloudy stretches beat waiting for eye-shaped leaf lesions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drip-scheduling-basics",
+      "title": "Drip irrigation scheduling fundamentals for vegetables and grapes",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["tomato", "onion", "grape", "pomegranate"],
+      "topics": ["irrigation-scheduling", "water-use-efficiency", "fertigation", "moisture-monitoring"],
+      "content": [
+        {
+          "heading": "Scheduling principle",
+          "paragraphs": [
+            "Irrigate to replace what the crop used, not to a fixed calendar: short frequent sets matched to evaporation demand keep root-zone moisture steadier than long infrequent flooding. Crop stage drives set length, weather drives frequency.",
+            "A simple hand-feel check at 15 to 20 centimetres depth twice a week calibrates any schedule; balling soil that crumbles later indicates adequate moisture in medium textures."
+          ]
+        },
+        {
+          "heading": "System care",
+          "paragraphs": [
+            "Flush laterals weekly and filter screens daily during peak use; emitters clog silently and create hidden dry strips that get diagnosed too late as uneven crop growth. Pressure gauges at head and tail reveal blockage trends early.",
+            "Fertigation splits nutrients into small doses with water, improving uptake efficiency, but only when the system applies water uniformly in the first place."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mulch-soil-moisture",
+      "title": "Mulching for moisture conservation and weed suppression",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["tomato", "onion", "pomegranate", "guava", "soybean"],
+      "topics": ["mulching", "soil-moisture", "weed-suppression", "soil-temperature"],
+      "content": [
+        {
+          "heading": "Benefits",
+          "paragraphs": [
+            "A mulch layer cuts evaporative losses from the top few centimetres, suppresses weed flushes, and buffers soil temperature swings; combined effect commonly stretches irrigation intervals meaningfully in hot months.",
+            "Organic mulches such as straw or sugarcane trash feed soil biology as they decompose but may harbour termites or rodents if applied excessively thick against stems."
+          ]
+        },
+        {
+          "heading": "Application notes",
+          "paragraphs": [
+            "Apply mulch onto moist soil after a soaking irrigation rather than onto dust, otherwise early rains or irrigation never wet the root zone properly. Plastic mulch warms winter soils for vegetables but needs drip underneath by design."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "soil-testing-before-sowing",
+      "title": "Soil testing before sowing: what to sample and when",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [],
+      "topics": ["soil-testing", "nutrient-management", "ph", "sampling"],
+      "content": [
+        {
+          "heading": "Sampling method",
+          "paragraphs": [
+            "Sample six to eight weeks before sowing, walking a zig-zag across the field and mixing 10 to 15 subsamples from the top 15 centimetres into one representative composite of about half a kilogram. Avoid spots near bunds, manure heaps, old compost pits and field edges.",
+            "Air-dry the composite in shade before bagging and label it clearly with field name and date; testing the same field at the same season each year builds a usable trend line."
+          ]
+        },
+        {
+          "heading": "Interpreting results",
+          "paragraphs": [
+            "Read pH and organic carbon first because both gate nutrient availability; recommendations built on NPK alone miss corrections like lime or gypsum that change the ceiling on everything else. Micronutrient tests matter most in continuously cropped irrigated plots."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "seed-treatment-basics",
+      "title": "Seed treatment as cheap early-season insurance",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["soybean", "pigeon-pea", "onion", "tomato"],
+      "topics": ["seed-treatment", "seedling-diseases", "planting-quality"],
+      "content": [
+        {
+          "heading": "Why treat",
+          "paragraphs": [
+            "Seed and soil-borne organisms attack during germination when the crop is most vulnerable; treated seed stands better in cold or wet soils and compensates partially for a slightly delayed sowing window.",
+            "Treatment cost per acre is a small fraction of replanting cost, which is why it is standard advice wherever seedling rot history exists."
+          ]
+        },
+        {
+          "heading": "Practical points",
+          "paragraphs": [
+            "Follow label doses exactly and use treated seed only for sowing, never for food or feed. Wherever bio-agents are used instead of chemicals, handle and store them away from direct sun and chemical residues."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ipm-general-principles",
+      "title": "Integrated pest management principles for district-level advisories",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": [],
+      "topics": ["ipm", "pest-pressure", "economic-threshold", "natural-enemies"],
+      "content": [
+        {
+          "heading": "Decision ladder",
+          "paragraphs": [
+            "IPM orders decisions: tolerate populations below economic thresholds, prefer cultural and mechanical controls next, conserve natural enemies, and reserve chemical intervention for breaches of threshold with the most selective option available.",
+            "Calendar spraying without thresholds selects resistant pest strains and kills predators that were providing free control; the documented result in several crops is resurgence of secondary pests."
+          ]
+        },
+        {
+          "heading": "Field practices",
+          "paragraphs": [
+            "Rotations, clean tillage between seasons, trap borders and light or pheromone traps all reduce starting populations cheaply. Spraying in evening hours when pollinators are less active and respecting buffer rows near flowering weeds protect beneficial insects."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delayed-monsoon-contingency",
+      "title": "Contingency responses to delayed or deficient monsoon onset",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["pearl-millet", "soybean", "pigeon-pea", "finger-millet", "little-millet"],
+      "topics": ["delayed-monsoon", "contingency-plan", "drought", "variety-substitution"],
+      "content": [
+        {
+          "heading": "If sowing slips two to three weeks",
+          "paragraphs": [
+            "Replace long-duration varieties with shorter-duration ones of the same crop rather than abandoning sowing, provided the window still covers the crop's heat-sensitive flowering period before terminal drought. Medium-short varieties of soybean and millets are the usual substitutions.",
+            "Seed priming, wider spacing to cut per-plant competition, and dust mulching between rows buy time under receding moisture."
+          ]
+        },
+        {
+          "heading": "If rains fail after sowing",
+          "paragraphs": [
+            "Thin excess plants early so remaining ones capture scarce moisture, and shift fertiliser splits toward whatever rain arrives instead of applying full basal dose into a drying profile. Fodder harvesting beats watching a grain crop fail outright when stress hits before flowering.",
+            "Contingency crop choice favours hardy millets and pulses over water-demanding cereals whenever reservoir levels and forecasts both stay weak."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pomegranate-bacterial-blight-prevention",
+      "title": "Preventive stance against bacterial blight in pomegranate orchards",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["pomegranate"],
+      "topics": ["bacterial-blight", "orchard-sanitation", "wound-protection", "spray-window"],
+      "content": [
+        {
+          "heading": "How it spreads",
+          "paragraphs": [
+            "Bacterial blight moves through wounds from pruning, hail or insect punctures, and travels on infected planting material and contaminated tools; splashing rain distributes it within canopies. Orchards with unpruned dead wood hold inoculum between seasons.",
+            "Once systemic inside a tree, cure is not realistic, so management is prevention: sanitation, wound protection and strict tool disinfection."
+          ]
+        },
+        {
+          "heading": "Orchard practices",
+          "paragraphs": [
+            "Prune in dry weather, remove and burn blighted twigs well outside the block, and disinfect tools between trees in affected plots. Avoid overhead wetting and keep nitrogen modest since succulent flushes are more susceptible."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tomato-post-harvest-handling",
+      "title": "Post-harvest handling of tomato for market quality",
+      "organization": "NCAdvisor editorial synthesis",
+      "credibility": "internal",
+      "updated": "2026-08-23",
+      "crops": ["tomato"],
+      "topics": ["post-harvest", "grading", "transport-shock", "shelf-life"],
+      "content": [
+        {
+          "heading": "Harvest and grading",
+          "paragraphs": [
+            "Pick at the colour stage the target market wants, grade in shade immediately, and never heap harvested fruit in direct sun while awaiting transport; even short exposure speeds softening and shrivel visibly by the next day.",
+            "Crack-resistant handling means shallow crates, no overfilling, and cutting rather than pulling fruit from vines to keep pedicel wounds minimal."
+          ]
+        },
+        {
+          "heading": "Transport",
+          "paragraphs": [
+            "Most tomato quality loss between farm and market traces to compression and vibration in overpacked crates plus heat build-up in closed vehicles. Ventilated stacking with airflow gaps preserves firmness better than any treatment applied after arrival."
+          ]
+        }
+      ]
+    }
+  ]
+}

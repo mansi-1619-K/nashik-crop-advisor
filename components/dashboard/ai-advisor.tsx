@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, MessageCircleQuestion, Send, Sparkles } from "lucide-react";
+import { BookOpen, Loader2, MessageCircleQuestion, Send, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { AdvisoryResult } from "@/lib/ai/advisory";
 import type { ChatResult } from "@/lib/ai/chat";
+import type { Citation } from "@/lib/rag/types";
 
 export interface AdvisorContext {
   zoneId: string;
@@ -19,12 +20,42 @@ interface ChatMessage {
   content: string;
   source?: ChatResult["source"];
   caveats?: string[];
+  citations?: Citation[];
 }
 
 const SOURCE_BADGE = {
   ai_generated: { variant: "success" as const, label: "AI-GENERATED" },
   static: { variant: "warning" as const, label: "STATIC FALLBACK" },
 };
+
+function CitationChips({ citations }: { citations: Citation[] }) {
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-1.5">
+      <BookOpen size={12} className="text-sky-600" aria-hidden />
+      {citations.map((c) =>
+        c.sourceUrl ? (
+          <a
+            key={c.chunkId}
+            href={c.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[11px] text-sky-700 hover:bg-sky-100"
+          >
+            {c.title} · {c.organization} · {c.credibility.toUpperCase()}
+          </a>
+        ) : (
+          <span
+            key={c.chunkId}
+            title={`${c.sectionHeading} (updated ${c.updated})`}
+            className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-[11px] text-sky-700"
+          >
+            {c.title} · {c.organization} · {c.credibility.toUpperCase()}
+          </span>
+        ),
+      )}
+    </div>
+  );
+}
 
 export function AiAdvisorPanel({
   context,
@@ -64,6 +95,7 @@ export function AiAdvisorPanel({
           content: json.answer.answer,
           source: json.source,
           caveats: json.answer.caveats,
+          citations: json.citations,
         },
       ]);
     } catch (e) {
@@ -123,6 +155,15 @@ export function AiAdvisorPanel({
             </ul>
           )}
 
+          {advisory.citations && advisory.citations.length > 0 && (
+            <div className="mt-3">
+              <p className="text-[11px] font-medium uppercase tracking-wide text-zinc-400">
+                Grounded reading
+              </p>
+              <CitationChips citations={advisory.citations} />
+            </div>
+          )}
+
           {messages.length === 0 && advisory.narrative.followUpQuestions.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-2">
               {advisory.narrative.followUpQuestions.map((q) => (
@@ -153,6 +194,9 @@ export function AiAdvisorPanel({
                   <p className="whitespace-pre-wrap text-sm text-zinc-800">{m.content}</p>
                   {m.caveats && m.caveats.length > 0 && (
                     <p className="mt-1 text-[11px] text-zinc-400">⚠ {m.caveats.join(" · ")}</p>
+                  )}
+                  {m.citations && m.citations.length > 0 && (
+                    <CitationChips citations={m.citations} />
                   )}
                   {m.source && (
                     <Badge variant={SOURCE_BADGE[m.source].variant} className="mt-1">

@@ -1,5 +1,19 @@
 # Development Log
 
+## Phase 5 — RAG Grounded-Knowledge Layer (2026-08-23)
+
+- `lib/rag/`: 14-document reference corpus (`data/knowledge/`), paragraph chunker
+  with stable ids, local lexical TF-IDF retriever with crop/topic tag boosts and
+  credibility tie-breaker — deterministic and keyless
+- Citation contract: prompts embed tier-labelled passages; models emit optional
+  `citationIds` which orchestrators resolve against the exact bundle, dropping
+  invented ids; raw ids never reach the client
+- UI citation chips with organization + credibility tier; "Grounded reading"
+  under the advisory card
+- Corpus failure degrades to no evidence, never a failed request; static
+  fallbacks carry no citations by design
+- 22 new tests → **149 total**; keyless live smoke shows honest static answers
+
 ## Phase 4 — Gemini Reasoning Layer (2026-08-22)
 
 - `@google/genai` 2.18 behind a DI `JsonGenerator` seam: JSON mode, Zod-validated
@@ -48,5 +62,6 @@
   honest empty states; docs skeleton
 
 See [PHASE_0_REPORT.md](PHASE_0_REPORT.md), [PHASE_1_REPORT.md](PHASE_1_REPORT.md),
-[PHASE_2_REPORT.md](PHASE_2_REPORT.md), [PHASE_3_REPORT.md](PHASE_3_REPORT.md).
+[PHASE_2_REPORT.md](PHASE_2_REPORT.md), [PHASE_3_REPORT.md](PHASE_3_REPORT.md),
+[PHASE_4_REPORT.md](PHASE_4_REPORT.md), [PHASE_5_REPORT.md](PHASE_5_REPORT.md).
 

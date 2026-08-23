@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { answerFarmQuestion, sanitizeQuestion } from "@/lib/ai/chat";
 import { runEngineForRequest, sanitizeHistory } from "@/lib/ai/request-context";
+import { getEvidenceRetriever } from "@/lib/rag/retrieve";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -25,12 +26,22 @@ export async function POST(request: Request) {
 
   const history = sanitizeHistory((body as { history?: unknown }).history);
 
+  // Retrieval is local and deterministic; failure degrades to no evidence,
+  // never to a failed request.
+  let evidence;
+  try {
+    evidence = getEvidenceRetriever().retrieve(question, { topK: 3 });
+  } catch {
+    evidence = undefined;
+  }
+
   const result = await answerFarmQuestion({
     question,
     history,
     engine: run.engine,
     contextSummary: run.contextSummary,
     weatherSignals: run.weatherSignals,
+    evidence,
   });
 
   return NextResponse.json({ ...result, question });
