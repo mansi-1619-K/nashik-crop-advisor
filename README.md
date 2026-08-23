@@ -37,6 +37,7 @@ cp .env.example .env.local     # optional: add GEMINI_API_KEY for AI narration
 
 ## Documentation
 
+- [Project Completion Report](docs/PROJECT_COMPLETION_REPORT.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Agricultural Model](docs/AGRICULTURAL_MODEL.md)
 - [Decision Engine](docs/DECISION_ENGINE.md)

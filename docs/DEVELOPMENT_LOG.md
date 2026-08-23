@@ -1,5 +1,15 @@
 # Development Log
 
+## Phase 7 — Project Close-Out (2026-08-23)
+
+- Architecture finalized (layer diagram, failure-resilience chain, module map)
+- Agricultural model documentation completed; limitations consolidated to 11 items
+- README updated from Phase 0 skeleton to completion status with measured numbers
+- Default Gemini model switched to `gemini-3.6-flash` after `gemini-2.5-flash`
+  retirement for new keys (caught by the live evaluation run)
+- Final gate: 162/162 tests · typecheck/lint/build clean · see
+  [PROJECT_COMPLETION_REPORT.md](PROJECT_COMPLETION_REPORT.md)
+
 ## Phase 6 — Evaluation Harness (2026-08-23)
 
 - `lib/eval/`: scenario runner with expectation diffing, perturbation stability,
@@ -80,5 +90,5 @@
 See [PHASE_0_REPORT.md](PHASE_0_REPORT.md), [PHASE_1_REPORT.md](PHASE_1_REPORT.md),
 [PHASE_2_REPORT.md](PHASE_2_REPORT.md), [PHASE_3_REPORT.md](PHASE_3_REPORT.md),
 [PHASE_4_REPORT.md](PHASE_4_REPORT.md), [PHASE_5_REPORT.md](PHASE_5_REPORT.md),
-[PHASE_6_REPORT.md](PHASE_6_REPORT.md).
+[PHASE_6_REPORT.md](PHASE_6_REPORT.md), [PROJECT_COMPLETION_REPORT.md](PROJECT_COMPLETION_REPORT.md).
 
