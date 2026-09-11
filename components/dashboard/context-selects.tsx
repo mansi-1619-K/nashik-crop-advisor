@@ -83,16 +83,16 @@ function Select({
   disabled?: boolean;
 }) {
   return (
-    <label className="flex flex-col gap-1">
-      <span className="flex items-baseline gap-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
-        <span className="text-acid-deep">{index}</span>
+    <label className="flex flex-col gap-1.5">
+      <span className="flex items-baseline gap-2 font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-ink-soft">
+        <span className="text-vermilion">{index}</span>
         {label}
       </span>
       <select
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        className="border-[1.5px] border-ink bg-white px-2 py-2 text-sm font-medium transition-colors duration-75 focus:border-acid-deep focus:outline-none disabled:opacity-50"
+        className="border border-line bg-white px-3 py-2.5 text-sm font-medium transition-colors duration-300 focus:border-ink focus:outline-none disabled:opacity-50"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -116,7 +116,7 @@ export function ContextSelects({
   const talukas = TALUKAS_BY_ZONE[form.zoneId] ?? [];
   const validTaluka = talukas.some((t) => t.id === form.talukaId);
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
       <Select
         index="01"
         label="Zone"

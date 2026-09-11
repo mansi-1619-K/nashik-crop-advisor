@@ -19,9 +19,9 @@ export interface WeatherResponse {
 }
 
 const severityBar: Record<WeatherSignal["severity"], string> = {
-  high: "border-l-8 border-l-alarm",
-  moderate: "border-l-8 border-l-caution",
-  low: "border-l-8 border-l-ink-soft",
+  high: "border-l-2 border-l-alarm",
+  moderate: "border-l-2 border-l-caution",
+  low: "border-l-2 border-l-ink-soft",
 };
 
 const freshnessBadge = (freshness: WeatherResponse["freshness"]) => {
@@ -39,14 +39,14 @@ export function WeatherStrip({ data }: { data: WeatherResponse }) {
   ];
 
   return (
-    <section className="border-2 border-ink bg-white">
-      <header className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink bg-paper-dim px-4 py-1.5">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-widest">
+    <section className="border border-line bg-white">
+      <header className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-5 py-2.5">
+        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.15em]">
           Weather — {w.location.talukaName}
         </span>
         <span className="flex items-center gap-2">
           {freshnessBadge(data.freshness)}
-          <span className="font-mono text-[10px] uppercase text-ink-soft">
+          <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-soft">
             upd {new Date(data.provenance.fetchedAt).toLocaleTimeString()}
           </span>
         </span>
@@ -54,16 +54,16 @@ export function WeatherStrip({ data }: { data: WeatherResponse }) {
 
       <dl className="grid grid-cols-3 divide-x divide-line border-b border-line">
         {readouts.map((r) => (
-          <div key={r.label} className="px-3 py-3 md:px-5">
-            <dd className="font-display text-2xl leading-none sm:text-3xl md:text-5xl">{r.value}</dd>
-            <dt className="mt-1 font-mono text-[9px] uppercase tracking-widest text-ink-soft md:text-[10px]">
+          <div key={r.label} className="px-4 py-4 md:px-6">
+            <dd className="font-display text-2xl font-light leading-none sm:text-3xl md:text-5xl">{r.value}</dd>
+            <dt className="mt-1.5 font-mono text-[8px] uppercase tracking-[0.15em] text-ink-soft md:text-[9px]">
               {r.label}
             </dt>
           </div>
         ))}
       </dl>
 
-      <p className="border-b border-line px-4 py-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-soft">
+      <p className="border-b border-line px-5 py-2 font-mono text-[9px] uppercase tracking-[0.12em] text-ink-soft">
         7-day window {data.provenance.forecastWindow?.from} →{" "}
         {data.provenance.forecastWindow?.to} · {data.provenance.dataSource} ·{" "}
         {data.provenance.sourceClass}
@@ -74,16 +74,16 @@ export function WeatherStrip({ data }: { data: WeatherResponse }) {
           {data.signals.map((s) => (
             <li
               key={s.type + s.validUntil}
-              className={`border-b border-line px-4 py-3 last:border-b-0 ${severityBar[s.severity]}`}
+              className={`border-b border-line px-5 py-3 last:border-b-0 ${severityBar[s.severity]}`}
             >
-              <p className="flex flex-wrap items-center gap-x-2 font-mono text-[10px] font-bold uppercase tracking-widest">
+              <p className="flex flex-wrap items-center gap-x-2 font-mono text-[9px] font-bold uppercase tracking-[0.12em]">
                 {s.type.replace(/-/g, " ")}
                 <Badge variant={s.severity === "low" ? "source" : s.severity === "moderate" ? "warning" : "danger"}>
                   heuristic · conf {s.confidence}
                 </Badge>
               </p>
-              <p className="mt-1.5 text-sm leading-relaxed">{s.reason}</p>
-              <p className="mt-1 font-mono text-[11px] uppercase leading-relaxed text-ink-soft">
+              <p className="mt-2 text-sm leading-[1.6]">{s.reason}</p>
+              <p className="mt-1.5 font-mono text-[10px] uppercase leading-[1.6] tracking-[0.05em] text-ink-soft">
                 → {s.recommendedAction}
               </p>
             </li>

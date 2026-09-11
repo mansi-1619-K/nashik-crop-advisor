@@ -40,7 +40,7 @@ function CitationChips({ citations }: { citations: Citation[] }) {
             href={c.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-ink bg-paper px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider transition-colors duration-75 hover:bg-ink hover:text-paper"
+            className="border border-line bg-paper px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.1em] transition-colors duration-300 hover:border-ink hover:text-ink"
           >
             ↗ {c.title} · {c.credibility.toUpperCase()}
           </a>
@@ -48,7 +48,7 @@ function CitationChips({ citations }: { citations: Citation[] }) {
           <span
             key={c.chunkId}
             title={`${c.sectionHeading} (updated ${c.updated})`}
-            className="border border-ink bg-paper px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider"
+            className="border border-line bg-paper px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.1em]"
           >
             {c.title} · {c.credibility.toUpperCase()}
           </span>
@@ -69,10 +69,8 @@ export function AiAdvisorPanel({
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // Opt-in only: nothing is written to this device until the farmer enables it.
   const [keepTranscript, setKeepTranscript] = useState(false);
 
-  // Hydrate an opted-in transcript from this device after mount.
   useEffect(() => {
     try {
       if (localStorage.getItem(`${TRANSCRIPT_KEY}-enabled`) !== "1") return;
@@ -151,45 +149,45 @@ export function AiAdvisorPanel({
   const badge = advisory ? SOURCE_BADGE[advisory.source] : null;
 
   return (
-    <section className="border-2 border-ink bg-white">
-      <header className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink bg-ink px-4 py-1.5">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-acid">
+    <section className="border border-line bg-white">
+      <header className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-paper-dim px-5 py-2.5">
+        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.15em]">
           AI Advisory Assistant
         </span>
         {badge && (
           <span className="flex items-center gap-2">
             <Badge variant={badge.variant}>{badge.label}</Badge>
             {advisory?.model && (
-              <span className="font-mono text-[9px] uppercase text-paper/60">{advisory.model}</span>
+              <span className="font-mono text-[8px] uppercase tracking-[0.1em] text-ink-soft">{advisory.model}</span>
             )}
           </span>
         )}
       </header>
 
-      <div className="p-4 md:p-5">
+      <div className="p-5 md:p-6">
         {!advisory ? (
-          <p className="font-mono text-xs uppercase leading-relaxed text-ink-soft">
+          <p className="font-mono text-[10px] uppercase leading-[1.8] tracking-[0.1em] text-ink-soft">
             Run an analysis to generate the advisory narration.
           </p>
         ) : (
           <>
             {advisory.error && (
-              <p className="mb-3 border-l-8 border-caution bg-white px-3 py-1.5 font-mono text-[10px] uppercase leading-relaxed text-ink-soft">
+              <p className="mb-4 border-l-2 border-caution bg-paper-dim px-4 py-2 font-mono text-[10px] uppercase leading-[1.6] tracking-[0.08em] text-ink-soft">
                 {advisory.error}
               </p>
             )}
-            <p className="text-base font-medium leading-relaxed md:text-lg">
+            <p className="font-display text-lg font-medium leading-[1.6] md:text-xl">
               {advisory.narrative.summary}
             </p>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink-soft">
+            <p className="mt-3 max-w-3xl text-sm leading-[1.7] text-ink-soft">
               {advisory.narrative.recommendationExplanation}
             </p>
 
             {advisory.narrative.actions.length > 0 && (
-              <ul className="mt-4 divide-y divide-line border-y border-line">
+              <ul className="mt-5 divide-y divide-line border-y border-line">
                 {advisory.narrative.actions.map((a, i) => (
-                  <li key={a} className="flex gap-3 py-1.5 text-sm first:pt-0 last:pb-0">
-                    <span aria-hidden className="font-mono text-xs font-bold text-acid-deep">
+                  <li key={a} className="flex gap-3 py-2 text-sm first:pt-0 last:pb-0">
+                    <span aria-hidden className="font-mono text-[10px] font-bold text-vermilion">
                       A{String(i + 1).padStart(2, "0")}
                     </span>
                     {a}
@@ -199,7 +197,7 @@ export function AiAdvisorPanel({
             )}
 
             {advisory.narrative.warnings.length > 0 && (
-              <ul className="mt-4 space-y-0.5 border-l-8 border-caution py-1 pl-3 font-mono text-[11px] uppercase leading-relaxed">
+              <ul className="mt-5 space-y-0.5 border-l-2 border-caution py-1.5 pl-4 font-mono text-[10px] uppercase leading-[1.7] tracking-[0.08em]">
                 {advisory.narrative.warnings.map((w) => (
                   <li key={w}>{w}</li>
                 ))}
@@ -207,8 +205,8 @@ export function AiAdvisorPanel({
             )}
 
             {advisory.citations && advisory.citations.length > 0 && (
-              <div className="mt-4">
-                <p className="mb-1 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
+              <div className="mt-5">
+                <p className="mb-2 font-mono text-[9px] font-bold uppercase tracking-[0.15em] text-ink-soft">
                   Grounded reading
                 </p>
                 <CitationChips citations={advisory.citations} />
@@ -216,13 +214,13 @@ export function AiAdvisorPanel({
             )}
 
             {messages.length === 0 && advisory.narrative.followUpQuestions.length > 0 && (
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {advisory.narrative.followUpQuestions.map((q) => (
                   <button
                     key={q}
                     onClick={() => void ask(q)}
                     disabled={sending}
-                    className="border border-ink px-2 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors duration-75 hover:bg-ink hover:text-paper disabled:opacity-50"
+                    className="border border-line px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.1em] text-ink-soft transition-all duration-300 hover:border-ink hover:text-ink disabled:opacity-50"
                   >
                     {q}
                   </button>
@@ -232,36 +230,36 @@ export function AiAdvisorPanel({
           </>
         )}
 
-        <div className="mt-6 border-t-2 border-ink pt-4">
+        <div className="mt-6 border-t border-line pt-5">
           {messages.length > 0 && (
             <>
-              <div className="mb-2 flex items-center justify-between gap-2">
-                <p className="font-mono text-[9px] uppercase tracking-widest text-ink-soft">
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <p className="font-mono text-[8px] uppercase tracking-[0.15em] text-ink-soft">
                   {keepTranscript
                     ? "Transcript saved on this device only"
                     : "Ephemeral session — nothing stored"}
                 </p>
                 <button
                   onClick={clearTranscript}
-                  className="flex items-center gap-1 border border-ink px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider transition-colors duration-75 hover:bg-alarm hover:text-paper"
+                  className="flex items-center gap-1 border border-line px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.1em] text-ink-soft transition-colors duration-300 hover:border-alarm hover:text-alarm"
                 >
                   <Trash2 size={10} aria-hidden /> Clear
                 </button>
               </div>
-              <ul className="mb-3 max-h-80 space-y-3 overflow-y-auto pr-1">
+              <ul className="mb-4 max-h-80 space-y-3 overflow-y-auto pr-1">
               {messages.map((m, i) =>
                 m.role === "user" ? (
                   <li
                     key={i}
-                    className="ml-auto w-fit max-w-[85%] border-2 border-ink bg-ink px-3 py-1.5 font-mono text-sm text-paper"
+                    className="ml-auto w-fit max-w-[85%] border border-ink bg-ink px-4 py-2 font-mono text-sm text-paper"
                   >
                     {m.content}
                   </li>
                 ) : (
-                  <li key={i} className="mr-auto max-w-[92%] border-2 border-ink bg-white px-3 py-2">
-                    <p className="whitespace-pre-wrap text-sm leading-relaxed">{m.content}</p>
+                  <li key={i} className="mr-auto max-w-[92%] border border-line bg-paper-dim px-4 py-3">
+                    <p className="whitespace-pre-wrap text-sm leading-[1.6]">{m.content}</p>
                     {m.caveats && m.caveats.length > 0 && (
-                      <p className="mt-1 font-mono text-[9px] uppercase leading-relaxed text-ink-soft">
+                      <p className="mt-1.5 font-mono text-[8px] uppercase leading-[1.6] tracking-[0.08em] text-ink-soft">
                         ⚠ {m.caveats.join(" · ")}
                       </p>
                     )}
@@ -269,7 +267,7 @@ export function AiAdvisorPanel({
                       <CitationChips citations={m.citations} />
                     )}
                     {m.source && (
-                      <Badge variant={SOURCE_BADGE[m.source].variant} className="mt-1.5">
+                      <Badge variant={SOURCE_BADGE[m.source].variant} className="mt-2">
                         {SOURCE_BADGE[m.source].label}
                       </Badge>
                     )}
@@ -283,12 +281,12 @@ export function AiAdvisorPanel({
           <form
             className="flex flex-wrap items-center justify-between gap-2"
           >
-            <label className="flex cursor-pointer items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-ink-soft">
+            <label className="flex cursor-pointer items-center gap-1.5 font-mono text-[8px] uppercase tracking-[0.12em] text-ink-soft">
               <input
                 type="checkbox"
                 checked={keepTranscript}
                 onChange={(e) => setKeepTranscript(e.target.checked)}
-                className="h-3 w-3 accent-acid-deep"
+                className="h-3 w-3 accent-vermilion"
               />
               Keep transcript on this device
             </label>
@@ -298,12 +296,12 @@ export function AiAdvisorPanel({
                 onChange={(e) => setInput(e.target.value)}
                 placeholder='Ask about this analysis — e.g. "why onion?" or "what if prices fall?"'
                 maxLength={500}
-                className="min-w-0 flex-1 border-2 border-r-0 border-ink bg-white px-3 py-2 font-mono text-sm focus:border-acid-deep focus:outline-none"
+                className="min-w-0 flex-1 border border-r-0 border-line bg-white px-4 py-2.5 font-mono text-sm focus:border-ink focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={sending || input.trim().length === 0}
-                className="inline-flex shrink-0 items-center gap-1.5 border-2 border-ink bg-acid px-4 font-display text-sm uppercase transition-colors duration-75 hover:bg-ink hover:text-acid disabled:opacity-50"
+                className="inline-flex shrink-0 items-center gap-1.5 border border-ink bg-ink px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.1em] text-paper transition-colors duration-300 hover:bg-vermilion hover:border-vermilion disabled:opacity-50"
               >
                 {sending ? (
                   <Loader2 size={14} className="animate-spin" aria-hidden />
@@ -315,8 +313,8 @@ export function AiAdvisorPanel({
             </div>
           </form>
           {error && (
-            <p className="mt-2 border-l-8 border-alarm pl-2 font-mono text-[11px] uppercase text-alarm">
-              ERROR // {error}
+            <p className="mt-3 border-l-2 border-alarm pl-3 font-mono text-[10px] uppercase tracking-[0.08em] text-alarm">
+              ERROR — {error}
             </p>
           )}
         </div>

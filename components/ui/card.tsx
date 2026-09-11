@@ -15,18 +15,18 @@ export function Card({
   children: ReactNode;
 }) {
   return (
-    <section className={cn("border-2 border-ink bg-white", className)}>
+    <section className={cn("border border-line bg-white", className)}>
       {label && (
-        <header className="flex items-center justify-between gap-3 border-b-2 border-ink px-4 py-1.5">
-          <span className="font-mono text-[10px] font-bold uppercase tracking-widest">{label}</span>
+        <header className="flex items-center justify-between gap-3 border-b border-line px-5 py-2">
+          <span className="font-mono text-[9px] font-bold uppercase tracking-[0.15em]">{label}</span>
           {index && (
-            <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">
+            <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-ink-soft">
               {index}
             </span>
           )}
         </header>
       )}
-      <div className={cn("p-4 md:p-5", bodyClassName)}>{children}</div>
+      <div className={cn("p-5 md:p-6", bodyClassName)}>{children}</div>
     </section>
   );
 }

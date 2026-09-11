@@ -4,12 +4,12 @@ import type { DataSourceClass } from "@/lib/types/common";
 type Variant = "neutral" | "phase" | "success" | "warning" | "danger" | "source";
 
 const variantClasses: Record<Variant, string> = {
-  neutral: "border-ink bg-transparent text-ink",
+  neutral: "border-line bg-transparent text-ink",
   phase: "border-ink bg-ink text-paper",
-  success: "border-ink bg-acid text-ink",
-  warning: "border-ink bg-caution text-ink",
-  danger: "border-ink bg-alarm text-paper",
-  source: "border-ink bg-white text-ink",
+  success: "border-vermilion bg-vermilion text-paper",
+  warning: "border-caution bg-caution text-ink",
+  danger: "border-alarm bg-alarm text-paper",
+  source: "border-line bg-paper text-ink",
 };
 
 export function Badge({
@@ -24,7 +24,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 border px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider whitespace-nowrap",
+        "inline-flex items-center gap-1 border px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-[0.12em] whitespace-nowrap",
         variantClasses[variant],
         className,
       )}
@@ -54,7 +54,7 @@ export function DataSourceBadge({ valueClass }: { valueClass: DataSourceClass })
           : "source";
   return (
     <Badge variant={variant}>
-      <span aria-hidden className="inline-block h-1.5 w-1.5 bg-current" />
+      <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
       {sourceLabels[valueClass]}
     </Badge>
   );

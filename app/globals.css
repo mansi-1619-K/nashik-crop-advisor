@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-display: var(--font-anton);
+  --font-display: var(--font-cormorant);
   --font-sans: var(--font-space-grotesk);
   --font-mono: var(--font-space-mono);
 }
 
 @theme {
-  --color-paper: #f2efe6;
-  --color-paper-dim: #e7e3d5;
-  --color-ink: #16150f;
-  --color-ink-soft: #55534a;
-  --color-line: #c9c4b2;
-  --color-acid: #c7f32e;
-  --color-acid-deep: #8fbe00;
-  --color-alarm: #e23b22;
-  --color-caution: #f2b90c;
+  --color-paper: #f5f2eb;
+  --color-paper-dim: #ece8de;
+  --color-ink: #1a1915;
+  --color-ink-soft: #6b6860;
+  --color-line: #d4cfc4;
+  --color-vermilion: #b94230;
+  --color-vermilion-deep: #8c3224;
+  --color-alarm: #c44230;
+  --color-caution: #c9a227;
 }
 
 /* ————————————————— base ————————————————— */
@@ -28,11 +28,11 @@ body {
 
 ::selection {
   background: var(--color-ink);
-  color: var(--color-acid);
+  color: var(--color-paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 1px solid var(--color-ink);
   outline-offset: 2px;
 }
 
@@ -40,37 +40,117 @@ input[type="range"] {
   accent-color: var(--color-ink);
 }
 
-/* ————————————————— brutalist utilities ————————————————— */
+/* ————————————————— editorial utilities ————————————————— */
 
-.hard-shadow {
-  box-shadow: 6px 6px 0 0 var(--color-ink);
+.editorial-rule {
+  border-top: 1px solid var(--color-line);
 }
 
-.hard-shadow-sm {
-  box-shadow: 4px 4px 0 0 var(--color-ink);
+.editorial-rule-dark {
+  border-top: 1px solid var(--color-ink);
 }
 
-.text-stroke {
-  -webkit-text-stroke: 2px var(--color-ink);
-  color: transparent;
+.editorial-dot::after {
+  content: "·";
+  color: var(--color-vermilion);
 }
 
-.text-stroke-thin {
-  -webkit-text-stroke: 1px currentColor;
-  color: transparent;
+/* subtle paper grain texture */
+.paper-texture {
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
 }
 
-.stripes-acid {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--color-ink) 0,
-    var(--color-ink) 1.5px,
-    transparent 1.5px,
-    transparent 6px
-  );
+/* vertical text accent */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
-.dotgrid {
-  background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
-  background-size: 14px 14px;
+/* editorial accent bar */
+.accent-bar {
+  width: 3px;
+  background-color: var(--color-vermilion);
+}
+
+/* subtle reveal animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+/* stagger children animations */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+
+/* hover underline expansion */
+.hover-underline {
+  background-image: linear-gradient(var(--color-ink), var(--color-ink));
+  background-size: 0% 1px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.hover-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* ————————————————— reduced motion ————————————————— */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ————————————————— scrollbar ————————————————— */
+
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-soft);
 }

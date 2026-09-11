@@ -65,7 +65,7 @@ const INDEX = [
 
 const figures = assetsManifest.images.map((img, i) => ({
   src: img.file,
-  alt: `${img.title.replace(/^File:|\.[a-z]+$/g, "")} — raw concrete reference`,
+  alt: `${img.title.replace(/^File:|\.[a-z]+$/g, "")} — agriculture reference`,
   width: img.width,
   height: img.height,
   license: img.license,
@@ -77,9 +77,9 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* notice strip */}
-      <div className="border-x-2 border-b-2 border-ink bg-ink px-4 py-2 md:px-8">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-paper md:text-xs">
-          <span className="bg-alarm px-1 font-bold">Notice</span>{" "}
+      <div className="mb-10 border-l-2 border-vermilion bg-paper-dim px-5 py-3 md:px-8">
+        <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-ink-soft md:text-[10px]">
+          <span className="font-bold text-vermilion">Notice</span>{" "}
           Decision-support prototype — deterministic engine over documented
           assumptions. Economics are estimates. Weather is live from Open-Meteo.
           Not agronomic advice.
@@ -87,23 +87,26 @@ export default function Home() {
       </div>
 
       {/* hero */}
-      <section className="grid grid-cols-12 gap-6 pb-10 pt-8 md:pt-12">
-        <div className="col-span-12 lg:col-span-9">
-          <h2 className="font-display text-[clamp(3rem,10vw,8.25rem)] uppercase leading-[0.88] tracking-tight">
-            Raw data<span className="text-acid-deep">.</span> Hard limits
-            <span className="text-acid-deep">.</span>
+      <section className="grid grid-cols-12 gap-8 pb-16 pt-4 md:pt-8">
+        <div className="col-span-12 lg:col-span-8">
+          <h2 className="font-display text-[clamp(2.75rem,9vw,7.5rem)] font-light uppercase leading-[0.88] tracking-tight">
+            Raw data<span className="text-vermilion">.</span> Hard limits
+            <span className="text-vermilion">.</span>
             <br />
-            No guesswork<span className="text-acid-deep">.</span>
+            No guesswork<span className="text-vermilion">.</span>
           </h2>
-          <p className="mt-6 max-w-2xl border-l-4 border-ink pl-4 text-base leading-relaxed text-ink-soft md:text-lg">
-            A deterministic engine ranks eleven crops against hard agronomic
-            constraints for your zone, season, soil and water. Weather signals
-            are heuristic. AI narrates the results —{" "}
-            <strong className="text-ink">it never decides</strong>.
-          </p>
+          <div className="mt-8 flex gap-6">
+            <div className="accent-bar shrink-0 self-stretch" />
+            <p className="max-w-xl text-base leading-[1.7] text-ink-soft md:text-lg">
+              A deterministic engine ranks eleven crops against hard agronomic
+              constraints for your zone, season, soil and water. Weather signals
+              are heuristic. AI narrates the results —{" "}
+              <strong className="text-ink">it never decides</strong>.
+            </p>
+          </div>
         </div>
-        <aside className="col-span-12 self-end lg:col-span-3">
-          <dl className="divide-y divide-ink border-2 border-ink bg-white font-mono text-[10px] uppercase leading-relaxed">
+        <aside className="col-span-12 self-end lg:col-span-4">
+          <dl className="divide-y divide-line border-t border-b border-line font-mono text-[9px] uppercase leading-[2] tracking-[0.12em]">
             {[
               ["Status", "Operational"],
               ["Datasets", "6 validated"],
@@ -111,39 +114,38 @@ export default function Home() {
               ["Last evaluation", "2026-08-23"],
               ["API keys required", "None"],
             ].map(([k, v]) => (
-              <div key={k} className="flex justify-between gap-2 px-2.5 py-1.5">
+              <div key={k} className="flex justify-between gap-2 px-1 py-1.5">
                 <dt className="text-ink-soft">{k}</dt>
-                <dd className="font-bold">{v}</dd>
+                <dd className="font-bold text-ink">{v}</dd>
               </div>
             ))}
           </dl>
         </aside>
       </section>
 
-      {/* concrete figure band */}
-      <section aria-label="Reference textures" className="border-y-2 border-ink">
-        <p className="border-b border-line px-1 pt-3 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
-          Reference texture — raw concrete / raw data · Wikimedia Commons · CC0
-          or Public domain
+      {/* agriculture figure band */}
+      <section aria-label="Agriculture references" className="border-y border-line">
+        <p className="border-b border-line px-1 pt-3 font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft">
+          Nashik agriculture — vineyards, orchards, crop fields · Pexels / Wikimedia Commons
         </p>
-        <ul className="flex snap-x snap-mandatory gap-0 overflow-x-auto divide-x-2 divide-ink">
+        <ul className="flex snap-x snap-mandatory gap-0 overflow-x-auto">
           {figures.map((f) => (
-            <li key={f.fig} className="w-[300px] shrink-0 snap-start md:w-[420px]">
+            <li key={f.fig} className="w-[280px] shrink-0 snap-start md:w-[380px]">
               <figure>
                 <Image
                   src={f.src}
                   alt={f.alt}
                   width={f.width}
                   height={f.height}
-                  sizes="(max-width: 768px) 300px, 420px"
-                  className="h-56 w-full object-cover grayscale contrast-125 md:h-80"
+                  sizes="(max-width: 768px) 280px, 380px"
+                  className="h-52 w-full object-cover contrast-[1.05] brightness-[0.98] md:h-72"
                 />
-                <figcaption className="flex items-baseline justify-between gap-2 border-t-2 border-ink px-2 py-1 font-mono text-[9px] uppercase leading-snug text-ink-soft">
+                <figcaption className="flex items-baseline justify-between gap-2 border-t border-line px-2 py-1.5 font-mono text-[8px] uppercase tracking-[0.15em] text-ink-soft">
                   <span>
-                    <span className="font-bold text-ink">FIG.{f.fig}</span>{" "}
+                    <span className="font-bold text-ink">Fig. {f.fig}</span>{" "}
                     {f.alt.split(" — ")[0]}
                   </span>
-                  <span>{f.license}</span>
+                  <span className="shrink-0">{f.license}</span>
                 </figcaption>
               </figure>
             </li>
@@ -152,15 +154,15 @@ export default function Home() {
       </section>
 
       {/* SEC.01 — the working tool */}
-      <section id="input" className="scroll-mt-24 pt-12">
+      <section id="input" className="scroll-mt-24 pt-16">
         <SecHeader no="01" title="Field Input & Analysis" meta="Form-01 / Engine v1.0.0" />
         <Workspace />
       </section>
 
       {/* SEC.02 — system index */}
-      <section id="index" className="scroll-mt-24 pt-16">
+      <section id="index" className="scroll-mt-24 pt-20">
         <SecHeader no="02" title="System Index" meta="Six subsystems / all measured" />
-        <div className="grid grid-cols-1 gap-px border-2 border-ink bg-ink md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-px border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
           {INDEX.map((entry) => (
             <IndexEntry key={entry.no} {...entry} />
           ))}
@@ -168,29 +170,29 @@ export default function Home() {
       </section>
 
       {/* SEC.03 — honesty contract */}
-      <section id="contract" className="scroll-mt-24 pt-16">
+      <section id="contract" className="scroll-mt-24 pt-20 pb-16">
         <SecHeader no="03" title="Data Honesty Contract" meta="Every value carries exactly one label" />
-        <div className="overflow-x-auto border-2 border-ink bg-white">
+        <div className="overflow-x-auto border border-line bg-white">
           <table className="w-full min-w-[640px] border-collapse text-left">
             <thead>
-              <tr className="border-b-2 border-ink font-mono text-[10px] uppercase tracking-widest text-ink-soft">
-                <th className="px-3 py-2 font-normal">Label</th>
-                <th className="px-3 py-2 font-normal">Meaning</th>
+              <tr className="border-b border-line font-mono text-[9px] uppercase tracking-[0.15em] text-ink-soft">
+                <th className="px-4 py-2.5 font-normal">Label</th>
+                <th className="px-4 py-2.5 font-normal">Meaning</th>
               </tr>
             </thead>
             <tbody className="text-sm">
               {SOURCE_CONTRACT.map((row) => (
                 <tr key={row.cls} className="border-b border-line last:border-b-0">
-                  <td className="w-[170px] px-3 py-2 align-top">
+                  <td className="w-[170px] px-4 py-2.5 align-top">
                     <DataSourceBadge valueClass={row.cls} />
                   </td>
-                  <td className="px-3 py-2 align-top text-ink-soft">{row.meaning}</td>
+                  <td className="px-4 py-2.5 align-top text-ink-soft">{row.meaning}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-3 max-w-3xl font-mono text-xs uppercase leading-relaxed text-ink-soft">
+        <p className="mt-4 max-w-3xl font-mono text-[10px] uppercase leading-[1.8] tracking-[0.1em] text-ink-soft">
           This is decision support, not an oracle. It will never claim guaranteed
           yields, profits or disease detection.
         </p>

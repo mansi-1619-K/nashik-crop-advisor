@@ -13,23 +13,23 @@ export function IndexEntry({
 }) {
   return (
     <article
-      className={`group relative flex flex-col bg-paper p-4 transition-colors duration-75 hover:bg-acid md:p-5 ${
+      className={`group relative flex flex-col bg-paper p-5 transition-colors duration-300 hover:bg-paper-dim md:p-6 ${
         wide ? "md:col-span-2" : ""
       }`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-display text-xl uppercase leading-tight md:text-2xl">{title}</h3>
+      <div className="flex items-start justify-between gap-4">
+        <h3 className="font-display text-xl font-light uppercase leading-tight tracking-tight md:text-2xl">{title}</h3>
         <span
           aria-hidden
-          className="text-stroke-thin select-none font-display text-4xl leading-none md:text-6xl"
+          className="select-none font-mono text-[10px] font-bold tracking-[0.15em] text-line transition-colors duration-300 group-hover:text-vermilion"
         >
           {no}
         </span>
       </div>
-      <p className="mt-2 max-w-prose text-sm leading-relaxed text-ink-soft group-hover:text-ink">
+      <p className="mt-3 max-w-prose text-sm leading-[1.6] text-ink-soft group-hover:text-ink">
         {description}
       </p>
-      <p className="mt-auto pt-3 font-mono text-[10px] font-bold uppercase tracking-wider">
+      <p className="mt-auto pt-4 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-ink-soft">
         → {stat}
       </p>
     </article>
