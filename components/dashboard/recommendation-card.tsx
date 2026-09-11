@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Badge, DataSourceBadge } from "@/components/ui/badge";
 import { ScoreBar, scoreTone } from "@/components/ui/bar";
 import type { Recommendation } from "@/lib/agriculture/results";
@@ -40,7 +41,7 @@ export function FactorBars({ recommendation }: { recommendation: Recommendation 
   );
 }
 
-export function RecommendationCard({
+export const RecommendationCard = memo(function RecommendationCard({
   rec,
   featured = false,
 }: {
@@ -166,7 +167,7 @@ export function RecommendationCard({
       </div>
     </article>
   );
-}
+});
 
 const CROP_NAMES: Record<string, string> = {
   paddy: "Paddy (Rice)",

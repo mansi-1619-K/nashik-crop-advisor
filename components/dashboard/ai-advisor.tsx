@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Loader2, Send, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { AdvisoryResult } from "@/lib/ai/advisory";
@@ -72,10 +72,12 @@ export function AiAdvisorPanel({
   const [keepTranscript, setKeepTranscript] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
     try {
       if (localStorage.getItem(`${TRANSCRIPT_KEY}-enabled`) !== "1") return;
       const raw = localStorage.getItem(TRANSCRIPT_KEY);
       queueMicrotask(() => {
+        if (cancelled) return;
         setKeepTranscript(true);
         if (raw) {
           const parsed = JSON.parse(raw) as ChatMessage[];
@@ -85,20 +87,24 @@ export function AiAdvisorPanel({
     } catch {
       /* storage unavailable — ephemeral mode */
     }
+    return () => { cancelled = true; };
   }, []);
 
   useEffect(() => {
-    try {
-      if (keepTranscript) {
-        localStorage.setItem(`${TRANSCRIPT_KEY}-enabled`, "1");
-        localStorage.setItem(TRANSCRIPT_KEY, JSON.stringify(messages.slice(-20)));
-      } else {
-        localStorage.removeItem(TRANSCRIPT_KEY);
-        localStorage.removeItem(`${TRANSCRIPT_KEY}-enabled`);
+    const timeout = setTimeout(() => {
+      try {
+        if (keepTranscript) {
+          localStorage.setItem(`${TRANSCRIPT_KEY}-enabled`, "1");
+          localStorage.setItem(TRANSCRIPT_KEY, JSON.stringify(messages.slice(-20)));
+        } else {
+          localStorage.removeItem(TRANSCRIPT_KEY);
+          localStorage.removeItem(`${TRANSCRIPT_KEY}-enabled`);
+        }
+      } catch {
+        /* storage unavailable — ephemeral mode */
       }
-    } catch {
-      /* storage unavailable — ephemeral mode */
-    }
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [messages, keepTranscript]);
 
   function clearTranscript() {
@@ -110,7 +116,7 @@ export function AiAdvisorPanel({
     }
   }
 
-  async function ask(question: string) {
+  const ask = useCallback(async (question: string) => {
     const trimmed = question.trim();
     if (!trimmed || sending) return;
     setSending(true);
@@ -144,7 +150,7 @@ export function AiAdvisorPanel({
     } finally {
       setSending(false);
     }
-  }
+  }, [context, messages, sending]);
 
   const badge = advisory ? SOURCE_BADGE[advisory.source] : null;
 

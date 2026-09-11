@@ -129,7 +129,7 @@ export default function Home() {
           Nashik agriculture — vineyards, orchards, crop fields · Pexels / Wikimedia Commons
         </p>
         <ul className="flex snap-x snap-mandatory gap-0 overflow-x-auto">
-          {figures.map((f) => (
+          {figures.map((f, i) => (
             <li key={f.fig} className="w-[280px] shrink-0 snap-start md:w-[380px]">
               <figure>
                 <Image
@@ -139,6 +139,7 @@ export default function Home() {
                   height={f.height}
                   sizes="(max-width: 768px) 280px, 380px"
                   className="h-52 w-full object-cover contrast-[1.05] brightness-[0.98] md:h-72"
+                  {...(i === 0 ? { priority: true } : { loading: "lazy" })}
                 />
                 <figcaption className="flex items-baseline justify-between gap-2 border-t border-line px-2 py-1.5 font-mono text-[8px] uppercase tracking-[0.15em] text-ink-soft">
                   <span>

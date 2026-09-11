@@ -3,7 +3,7 @@ import { Cormorant_Garamond, Space_Grotesk, Space_Mono } from "next/font/google"
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "700"],
   variable: "--font-cormorant",
   subsets: ["latin"],
 });

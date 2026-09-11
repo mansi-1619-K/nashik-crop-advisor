@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Play, Loader2, Sprout, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ContextSelects, type FormState, PRESET_DEMOS } from "@/components/dashboard/context-selects";
@@ -32,8 +32,13 @@ export function Workspace() {
   const [advisory, setAdvisory] = useState<AdvisoryResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
-  async function analyze(context: FormState = form) {
+  const analyze = useCallback(async (context: FormState = form) => {
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     setLoading(true);
     setError(null);
     try {
@@ -41,10 +46,12 @@ export function Workspace() {
         ...context,
         talukaId: context.talukaId || undefined,
       };
+
       const res = await fetch("/api/recommend", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ context: payloadContext }),
+        signal: controller.signal,
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
@@ -53,36 +60,55 @@ export function Workspace() {
       const data: RecommendResponse = await res.json();
       setRecs(data);
 
-      if (context.talukaId) {
-        const wRes = await fetch(`/api/weather?taluka=${encodeURIComponent(context.talukaId)}`);
-        if (wRes.ok) setWeather(await wRes.json());
-        else setWeather(null);
-      }
+      const [weatherResult, simResult, advisoryResult] = await Promise.allSettled([
+        context.talukaId
+          ? fetch(`/api/weather?taluka=${encodeURIComponent(context.talukaId)}`, { signal: controller.signal })
+              .then((r) => (r.ok ? r.json() : null))
+              .catch(() => null)
+          : Promise.resolve(null),
+        fetch("/api/simulate", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ context: payloadContext }),
+          signal: controller.signal,
+        })
+          .then((r) => (r.ok ? r.json() : null))
+          .catch(() => null),
+        fetch("/api/advisory", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ context: payloadContext }),
+          signal: controller.signal,
+        })
+          .then((r) => (r.ok ? r.json().then((j) => j.advisory as AdvisoryResult) : null))
+          .catch(() => null),
+      ]);
 
-      const simRes = await fetch("/api/simulate", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ context: payloadContext }),
-      });
-      if (simRes.ok) setSim(await simRes.json());
-
-      const advisoryRes = await fetch("/api/advisory", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ context: payloadContext }),
-      });
-      if (advisoryRes.ok) {
-        const json = await advisoryRes.json();
-        setAdvisory(json.advisory as AdvisoryResult);
-      } else {
-        setAdvisory(null);
-      }
+      setWeather(weatherResult.status === "fulfilled" ? weatherResult.value : null);
+      setSim(simResult.status === "fulfilled" ? simResult.value : null);
+      setAdvisory(advisoryResult.status === "fulfilled" ? advisoryResult.value : null);
     } catch (e) {
+      if (e instanceof DOMException && e.name === "AbortError") return;
       setError(e instanceof Error ? e.message : "Something went wrong.");
     } finally {
       setLoading(false);
     }
-  }
+  }, [form]);
+
+  const aiContext = useMemo(() => ({
+    zoneId: form.zoneId,
+    seasonId: form.seasonId,
+    soilId: form.soilId,
+    waterAvailability: form.waterAvailability,
+    talukaId: form.talukaId || undefined,
+  }), [form.zoneId, form.seasonId, form.soilId, form.waterAvailability, form.talukaId]);
+
+  const simContext = useMemo(() => ({
+    zoneId: form.zoneId,
+    seasonId: form.seasonId,
+    soilId: form.soilId,
+    waterAvailability: form.waterAvailability,
+  }), [form.zoneId, form.seasonId, form.soilId, form.waterAvailability]);
 
   return (
     <div className="space-y-8">
@@ -153,13 +179,7 @@ export function Workspace() {
       {recs && (
         <>
           <AiAdvisorPanel
-            context={{
-              zoneId: form.zoneId,
-              seasonId: form.seasonId,
-              soilId: form.soilId,
-              waterAvailability: form.waterAvailability,
-              talukaId: form.talukaId || undefined,
-            }}
+            context={aiContext}
             advisory={advisory}
           />
 
@@ -204,12 +224,7 @@ export function Workspace() {
           )}
 
           <WhatIfSimulator
-            context={{
-              zoneId: form.zoneId,
-              seasonId: form.seasonId,
-              soilId: form.soilId,
-              waterAvailability: form.waterAvailability,
-            }}
+            context={simContext}
             report={sim}
           />
         </>

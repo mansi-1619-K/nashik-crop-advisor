@@ -37,6 +37,7 @@ export function WeatherStrip({ data }: { data: WeatherResponse }) {
     { value: `${w.current.humidityPercent}%`, label: "Humidity" },
     { value: `${w.current.windKmh.toFixed(0)}`, label: "Wind km/h" },
   ];
+  const formattedTime = new Date(data.provenance.fetchedAt).toLocaleTimeString();
 
   return (
     <section className="border border-line bg-white">
@@ -47,7 +48,7 @@ export function WeatherStrip({ data }: { data: WeatherResponse }) {
         <span className="flex items-center gap-2">
           {freshnessBadge(data.freshness)}
           <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-soft">
-            upd {new Date(data.provenance.fetchedAt).toLocaleTimeString()}
+            upd {formattedTime}
           </span>
         </span>
       </header>

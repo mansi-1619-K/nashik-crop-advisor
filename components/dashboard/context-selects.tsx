@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { ZONE_IDS } from "@/lib/agriculture/zone";
 import { SOIL_IDS } from "@/lib/agriculture/soil";
 import { SEASON_IDS } from "@/lib/agriculture/season";
@@ -113,15 +114,21 @@ export function ContextSelects({
   onChange: (f: FormState) => void;
   disabled?: boolean;
 }) {
-  const talukas = TALUKAS_BY_ZONE[form.zoneId] ?? [];
+  const talukas = useMemo(() => TALUKAS_BY_ZONE[form.zoneId] ?? [], [form.zoneId]);
   const validTaluka = talukas.some((t) => t.id === form.talukaId);
+
+  const zoneOptions = useMemo(() => ZONE_IDS.map((z) => ({ value: z, label: zoneLabels[z] ?? z })), []);
+  const seasonOptions = useMemo(() => SEASON_IDS.map((s) => ({ value: s, label: seasonLabels[s] ?? s })), []);
+  const soilOptions = useMemo(() => SOIL_IDS.map((s) => ({ value: s, label: soilLabels[s] ?? s })), []);
+  const waterOptions = useMemo(() => WATER_AVAILABILITY_LEVELS.map((w) => ({ value: w, label: waterLabels[w] })), []);
+  const talukaOptions = useMemo(() => [{ value: "", label: "District-level" }, ...talukas.map((t) => ({ value: t.id, label: t.name }))], [talukas]);
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
       <Select
         index="01"
         label="Zone"
         value={form.zoneId}
-        options={ZONE_IDS.map((z) => ({ value: z, label: zoneLabels[z] ?? z }))}
+        options={zoneOptions}
         onChange={(v) =>
           onChange({
             ...form,
@@ -135,7 +142,7 @@ export function ContextSelects({
         index="02"
         label="Taluka"
         value={validTaluka ? form.talukaId : ""}
-        options={[{ value: "", label: "District-level" }, ...talukas.map((t) => ({ value: t.id, label: t.name }))]}
+        options={talukaOptions}
         onChange={(v) => onChange({ ...form, talukaId: v })}
         disabled={disabled}
       />
@@ -143,7 +150,7 @@ export function ContextSelects({
         index="03"
         label="Season"
         value={form.seasonId}
-        options={SEASON_IDS.map((s) => ({ value: s, label: seasonLabels[s] ?? s }))}
+        options={seasonOptions}
         onChange={(v) => onChange({ ...form, seasonId: v })}
         disabled={disabled}
       />
@@ -151,7 +158,7 @@ export function ContextSelects({
         index="04"
         label="Soil"
         value={form.soilId}
-        options={SOIL_IDS.map((s) => ({ value: s, label: soilLabels[s] ?? s }))}
+        options={soilOptions}
         onChange={(v) => onChange({ ...form, soilId: v })}
         disabled={disabled}
       />
@@ -159,7 +166,7 @@ export function ContextSelects({
         index="05"
         label="Water"
         value={form.waterAvailability}
-        options={WATER_AVAILABILITY_LEVELS.map((w) => ({ value: w, label: waterLabels[w] }))}
+        options={waterOptions}
         onChange={(v) => onChange({ ...form, waterAvailability: v as WaterAvailability })}
         disabled={disabled}
       />

@@ -121,7 +121,7 @@ export function WhatIfSimulator({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ context, scenarios: payloadScenarios }),
       });
-      if (!res.ok) throw new Error((await res.json()).error ?? "Simulation failed");
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "Simulation failed");
       const json = (await res.json()) as SensitivityReport;
       setScenario(json.rows.find((r) => r.id === "custom") ?? null);
     } catch (e) {
