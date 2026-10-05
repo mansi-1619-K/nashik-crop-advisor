@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright-mcp session artifacts (keep baseline regression screenshots)
+.playwright-mcp/*
+!.playwright-mcp/baseline/

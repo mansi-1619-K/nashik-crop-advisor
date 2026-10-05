@@ -1,0 +1,167 @@
+/* Phase 5.4 — hover-img adapted for the rec-card.
+   The registry defaults assumed a standalone light page (100vh, own bg,
+   Raleway, a `.dark` class toggle); this theme is a token-flipped dark
+   canvas with no `.dark` class, so the block inherits the card's type and
+   colors and only keeps the interaction chrome. */
+
+.hover-img-container {
+  --hi-text: var(--ink);
+  --hi-text-muted: var(--ink-muted);
+  --hi-border: var(--border);
+
+  width: 100%;
+  color: var(--hi-text);
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-img-projects {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.hover-img-project {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 2rem 4rem;
+  border-top: 1px solid var(--hi-border);
+  transition: opacity 0.5s ease;
+}
+
+.hover-img-project:last-child {
+  border-bottom: 1px solid var(--hi-border);
+}
+
+.hover-img-project h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: transform 0.5s ease;
+  margin: 0;
+}
+
+.hover-img-project p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--hi-text-muted);
+  transition: transform 0.5s ease;
+  margin: 0;
+}
+
+.hover-img-project:hover {
+  opacity: 0.5;
+}
+
+.hover-img-project:hover h2 {
+  transform: translateX(-15px);
+}
+
+.hover-img-project:hover p {
+  transform: translateX(15px);
+}
+
+.hover-img-thumbnail-wrapper {
+  position: fixed;
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  /* Hidden at rest so SSR / first paint (before hydration runs gsap.set)
+     can't flash the whole stack at the viewport's top-left corner. GSAP
+     overwrites this inline transform on mount with the same scale 0. */
+  transform: scale(0);
+  transform-origin: center center;
+  z-index: 100;
+  border: 1px solid var(--hi-border);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--shadow-3);
+}
+
+.hover-img-thumbnail {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.hover-img-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No hover on touch — keep the rows, drop the floating preview. */
+@media (max-width: 768px) {
+  .hover-img-project {
+    padding: 1.5rem 2rem;
+  }
+
+  .hover-img-project h2 {
+    font-size: 1.75rem;
+  }
+
+  .hover-img-project p {
+    font-size: 0.875rem;
+  }
+
+  .hover-img-thumbnail-wrapper {
+    display: none;
+  }
+}
+
+.hover-img-compact {
+  min-height: auto;
+  padding: 0;
+}
+
+.hover-img-compact .hover-img-project {
+  padding: 0.75rem 1rem;
+}
+
+.hover-img-compact .hover-img-project h2 {
+  font-size: 1.125rem;
+}
+
+.hover-img-compact .hover-img-project p {
+  font-size: 0.7rem;
+}
+
+/* Compact rows are short — the registry's ±15px slide would push text past
+   the row padding, so halve it. */
+.hover-img-compact .hover-img-project:hover h2 {
+  transform: translateX(-6px);
+}
+
+.hover-img-compact .hover-img-project:hover p {
+  transform: translateX(6px);
+}
+
+.hover-img-compact .hover-img-thumbnail-wrapper {
+  width: 160px;
+  height: 100px;
+  box-shadow: var(--shadow-2);
+}
+
+/* The gallery is a screen-only index — paper gets PrintSummary — and the
+   row slide/hover states are decorative motion. */
+@media print {
+  .hover-img-container {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-img-project,
+  .hover-img-project h2,
+  .hover-img-project p {
+    transition: none;
+  }
+}

@@ -1,0 +1,448 @@
+@import "tailwindcss";
+/* animate-in/out utilities for Radix Dialog/Toaster data-state animations */
+@import "tw-animate-css";
+
+/* Phase 7 — light "retro paper" theme. The `dark:` variant stays bound to
+   the (now absent) html.dark class so ObsidianUI primitives never fall
+   through to OS-dark styling: the app is deterministically light. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Native controls (checkboxes, inputs, scrollbars) render light */
+  color-scheme: light;
+  /* Warm paper ramp — meets OpenSourceUI's Arc Bands backdrop, whose base
+     is #FFFCF7 → #FFF8F0; cards sit on it as pure-white paper sheets. */
+  --background: #fffcf7;
+  --foreground: #1f1d1a;
+  --canvas: #fffcf7;
+  --canvas-warm: #f6f1e7;
+  --canvas-deep: #ece5d6;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --ink: #1f1d1a;
+  --ink-secondary: #4c4841;
+  --ink-muted: #6e6a62;
+  --border: #e2dbcb;
+  --border-light: #ede7da;
+  /* Accents: moss → primary action green (deepened for paper canvas —
+     every ink/accent pair below clears WCAG AA on cream and on white) */
+  --moss: #35602a;
+  --moss-light: #e9f0e5;
+  --moss-deep: #2c5123;
+  --sage: #5e6b52;
+  --sage-light: #eaede4;
+  --terracotta: #a4552d;
+  --terracotta-light: #f7e9e2;
+  --clay: #8a6a44;
+  --clay-light: #f1e8dc;
+  --stone: #6b655e;
+  --olive: #5d6b34;
+  --olive-light: #eef1e6;
+
+  /* Motion scale (plan 6.1) — CSS twin of the numeric tokens exported by
+     src/lib/motion.ts for framer sites; keep the values in sync */
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.35, 1);
+  --duration-fast: 0.25s;
+  --duration-base: 0.3s;
+  --duration-slow: 0.35s;
+  --duration-emphasis: 0.5s;
+}
+
+@theme inline {
+  /* Radius scale — 4 tokens replace 7 ad-hoc px values */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Elevation ladder — soft warm shadows for paper canvas (light theme
+     wants lift, not the heavy black pools a dark canvas needed) */
+  --shadow-1:
+    0 1px 2px rgba(31, 29, 26, 0.07), 0 1px 4px rgba(31, 29, 26, 0.05);
+  --shadow-2:
+    0 4px 12px rgba(31, 29, 26, 0.1), 0 1px 3px rgba(31, 29, 26, 0.06);
+  --shadow-3:
+    0 16px 48px rgba(31, 29, 26, 0.16), 0 4px 12px rgba(31, 29, 26, 0.08);
+  --shadow-glow: 0 0 6px rgba(53, 96, 42, 0.35);
+
+  /* Type scale — real size contrast (was: everything text-xs/sm) */
+  --text-display: 2.5rem;
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.02em;
+  --text-h1: 1.875rem;
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h2: 1.375rem;
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.35;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.45;
+
+  /* Display face: Source Serif 4 for headings (font-display utility) */
+  --font-display: var(--font-source-serif), Georgia, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* shadcn token bridge (ObsidianUI primitives expect these) */
+  --color-primary: var(--moss);
+  --color-primary-foreground: var(--background);
+  --color-secondary: var(--canvas-deep);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--canvas-warm);
+  --color-muted-foreground: var(--ink-muted);
+  --color-accent: var(--canvas-deep);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--terracotta);
+  --color-destructive-foreground: var(--background);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface-elevated);
+  --color-popover-foreground: var(--ink);
+  --color-input: var(--border);
+  --color-ring: var(--moss);
+
+  --color-canvas: var(--canvas);
+  --color-canvas-warm: var(--canvas-warm);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-moss: var(--moss);
+  --color-moss-light: var(--moss-light);
+  --color-moss-deep: var(--moss-deep);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-light: var(--terracotta-light);
+  --color-clay: var(--clay);
+  --color-clay-light: var(--clay-light);
+  --color-stone: var(--stone);
+  --color-olive: var(--olive);
+  --color-olive-light: var(--olive-light);
+  /* leaf / harvest scales — light-first ramps (50 = pale wash … 900 =
+     deep ink). Pairings across the app are always pale-bg + deep-text,
+     so the flip keeps every badge/chip contrast relationship intact. */
+  --color-leaf-50: #f1f7ee;
+  --color-leaf-100: #e1efda;
+  --color-leaf-200: #c5e0bb;
+  --color-leaf-300: #a0cb92;
+  --color-leaf-400: #7bb567;
+  --color-leaf-500: #5c9a48;
+  --color-leaf-600: #477b37;
+  --color-leaf-700: #35602a;
+  --color-leaf-800: #2a4b22;
+  --color-leaf-900: #1e3618;
+  --color-harvest-50: #fdf6e7;
+  --color-harvest-100: #faebcb;
+  --color-harvest-200: #f4d89b;
+  --color-harvest-300: #ecc266;
+  --color-harvest-400: #dea63c;
+  --color-harvest-500: #a97420;
+  --color-harvest-600: #96671c;
+  --color-harvest-700: #85591b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--stone);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::selection {
+  background: var(--moss-light);
+  color: var(--moss-deep);
+}
+
+.print-only {
+  display: none;
+}
+
+@keyframes organic-drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(0.5deg);
+  }
+  50% {
+    transform: translateY(-1px) rotate(-0.3deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(0.2deg);
+  }
+}
+
+@keyframes gentle-breathe {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes grain-shimmer {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-1%, -1%);
+  }
+  20% {
+    transform: translate(1%, 0);
+  }
+  30% {
+    transform: translate(0, 1%);
+  }
+  40% {
+    transform: translate(-1%, 1%);
+  }
+  50% {
+    transform: translate(1%, -1%);
+  }
+  60% {
+    transform: translate(0, 0);
+  }
+  70% {
+    transform: translate(-1%, 0);
+  }
+  80% {
+    transform: translate(1%, 1%);
+  }
+  90% {
+    transform: translate(0, -1%);
+  }
+}
+
+/* --- Phase 5.3: flip-text (ObsidianUI block) --------------------------
+   The registry ships the component but no companion stylesheet; this
+   defines the contract its inline custom properties describe
+   (--flip-duration / --flip-delay / --flip-iteration). Each char spins
+   one rotateX loop: the front face is the glyph in ink, a ::before back
+   face (same glyph via attr(data-char), pre-rotated 180deg) is moss — so
+   mid-flip the travelling wave reads ink → moss → ink. The component
+   staggers --flip-delay per char on a sine curve, which turns isolated
+   spins into a wave across the word. */
+.flip-char {
+  animation: flip-char-spin var(--flip-duration, 2.2s) var(--ease-in-out)
+    var(--flip-delay, 0s) var(--flip-iteration, infinite);
+  backface-visibility: hidden;
+}
+
+.flip-char::before {
+  content: attr(data-char);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--moss);
+  transform: rotateX(180deg);
+  backface-visibility: hidden;
+}
+
+@keyframes flip-char-spin {
+  0%,
+  35% {
+    transform: rotateX(0deg);
+  }
+  75%,
+  100% {
+    transform: rotateX(-360deg);
+  }
+}
+
+/* A half-rotated glyph must never reach paper — the crop headline prints
+   inside CropDetails — so pin every char to its upright front face. */
+@media print {
+  .flip-char {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .flip-char::before {
+    content: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-char {
+    animation: none;
+  }
+}
+
+/* Phase 4.3 — reduced-motion guard for glass surfaces. The lens and the
+   AmbientBackdrop are static by design (no loops, no `live` re-raster), so
+   the only motion a glass shell can carry is a caller-added transition on
+   its own box — kill those under `prefers-reduced-motion`. */
+@media (prefers-reduced-motion: reduce) {
+  .glass-surface {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Phase 7.5/7.7 — scroll-time lens downgrade, CHIPS ONLY.
+   The material's refraction (`backdrop-filter: ... url(#lg-...)`) is an
+   SVG displacement pass that the compositor re-runs for EVERY surface on
+   every scroll frame — measured at ~110ms/frame (≈9fps) across the six
+   chrome shells, versus a locked 16.6ms once the `url()` is dropped (the
+   plain blur/saturate part stays compositor-accelerated); the six pills
+   alone accounted for ~78ms of it. So while the page is in motion
+   (`.is-scrolling` toggled by SmoothScroll) the CHIPS degrade to a cheap
+   frost and their full refraction returns ~150ms after the scroll
+   settles.
+
+   The header bar opts out via `.glass-bar` (Phase 7.7): the user
+   rejected the visible lens→blur→lens pop on the top bar ("when I stop
+   the scroll it glitches back to liq glass", "don't remove liq glass,
+   I want it there all the time"), so the bar's lens runs at every
+   moment — its per-frame cost was tuned down instead (glass.ts: map
+   back to 512, dispersion 0, bend 0.9; verified with perf-probe-gpu:
+   scroll 17.0ms avg / p95 17 = locked 60fps on hardware GL, 35ms
+   software-raster fallback).
+
+   Same override mechanism as the print block: `!important` in the author
+   stylesheet beats the inline styles the lens mounts at runtime. Only the
+   UNPREFIXED property may be declared (see the note in the print block). */
+.is-scrolling .glass-surface:not(.glass-bar) {
+  filter: none !important;
+  backdrop-filter: blur(8px) saturate(1.1) !important;
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  /* --- Phase 4.6: paper palette --------------------------------------
+     The screen ramp (Phase 7) is already light-on-cream; print pins the
+     base to pure #ffffff and swaps the warm inks for neutral print-safe
+     ones so ink density on paper is exact. Every `text-*`/`bg-*`
+     utility resolves through these vars, so one override fixes all. */
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #14171a;
+    --canvas: #ffffff;
+    --canvas-warm: #f6f4f0;
+    --canvas-deep: #ebe9e4;
+    --surface: #ffffff;
+    --surface-elevated: #ffffff;
+    --ink: #14171a;
+    --ink-secondary: #42474c;
+    --ink-muted: #6d737a;
+    --border: #d5d8dc;
+    --border-light: #e4e7ea;
+    --moss: #35602a;
+    --moss-light: #e9f0e5;
+    --moss-deep: #2c5123;
+    --sage: #5e6b52;
+    --sage-light: #eaede4;
+    --terracotta: #a4552d;
+    --terracotta-light: #f7e9e2;
+    --clay: #8a6a44;
+    --clay-light: #f1e8dc;
+    --stone: #6b655e;
+    --olive: #5d6b34;
+    --olive-light: #eef1e6;
+  }
+
+  /* --- Phase 4.6: glass never reaches paper --------------------------
+     `!important` in an author stylesheet beats the inline `filter:
+     url(#lg-...)` / `backdrop-filter: blur(...) saturate(...) url(...)`
+     styles the lens mounts at runtime. The element keeps its box and
+     content; only the material is dropped, so cards print as solid
+     panels and PrintSummary stays opaque. AmbientBackdrop is
+     `print:hidden` at the source; this is the second line of defence.
+
+     Only the UNPREFIXED `backdrop-filter` may be declared: when the
+     hand-written `-webkit-` twin sits next to it, the bundler's prefix
+     pass collapses the pair to the prefixed form alone — and current
+     Chromium dropped the `-webkit-backdrop-filter` alias, so the
+     declaration would be parsed out of existence (verified via CSSOM). */
+  .glass-surface {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Sonner's portal never belongs on paper — a toast queued right before
+     print() would otherwise snapshot into the first page. */
+  [data-sonner-toaster],
+  [data-sonner-toast] {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-block {
+    display: block !important;
+  }
+
+  .print-break {
+    break-inside: avoid;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+}
